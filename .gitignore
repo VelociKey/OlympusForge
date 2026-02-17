@@ -1,0 +1,48 @@
+# AntigravitySpace: OlympusForge Strict Exclusion Registry
+
+# 1. Platform Tools & Huge Binaries
+# Managed by ForgeToolManager - NEVER COMMIT
+C0400-Artifacts/
+Tools/
+bin/
+pkg/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# 2. Large Archives & Models
+*.zip
+*.7z
+*.tar
+*.gz
+*.iso
+*.bin
+*.weights
+*.onnx
+
+# 3. Workspace Execution & Configuration (C-Prefixed)
+# These contain local state and should remain in the workspace only.
+C0100-Config/
+C0200-Execution/
+C0500-Agent-Out/
+C0700-System-Work/
+C0990-Scratch/
+
+# 4. OS & IDE Noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+*.lpsv
+
+# 5. Go Workspace
+go.work.sum
+
+# Large local databases
+trivy.db
+
+90000-Enablement-Labs/000-Tools/000-dart/.pub-cache
+90000-Enablement-Labs/000-Tools/000-infrastructure/000-trivy-cache/000-db/trivy.db

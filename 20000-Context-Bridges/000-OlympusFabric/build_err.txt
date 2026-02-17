@@ -1,0 +1,4 @@
+# github.com/VelociKey/OlympusFabric/20000-MCP-Servers/OlympusFabric/pkg/orchestrator
+pkg\orchestrator\loop.go:52:68: too many arguments in call to sm.sc.Log
+	have (string, string, string, string, string)
+	want (string, string, string, string)

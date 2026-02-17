@@ -1,0 +1,30 @@
+# OlympusForge: Tool Manifest (Cycle 10)
+
+Authoring {
+  Tool buf { version = "v1.34.0"; bin = "C0400-Artifacts/Tools/authoring/buf.exe" }
+  Tool air { version = "v1.52.2"; bin = "C0400-Artifacts/Tools/authoring/air.exe" }
+  Tool protoc_gen_connect { version = "v1.16.2"; bin = "C0400-Artifacts/Tools/authoring/protoc-gen-connect-go.exe" }
+}
+
+Validation {
+  Tool golangci_lint { version = "v1.59.1"; bin = "C0400-Artifacts/Tools/authoring/golangci-lint.exe" }
+  Tool gosec { version = "v2.20.0"; bin = "C0400-Artifacts/Tools/validation/gosec.exe" }
+  Tool nuclei { version = "v3.2.9"; bin = "C0400-Artifacts/Tools/validation/nuclei.exe" }
+}
+
+Infrastructure {
+  Tool gcloud { 
+    type = "external"; 
+    install_cmd = "powershell -ExecutionPolicy Bypass -Command "(New-Object Net.WebClient).DownloadFile('https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk-windows-x86_64-bundled-python.zip', 'gcloud.zip')"" 
+  }
+  Tool firebase { type = "npm"; package = "firebase-tools" }
+}
+
+Intelligence {
+  Tool ollama { 
+    type = "external"; 
+    install_url = "https://ollama.com/download/OllamaSetup.exe" 
+  }
+  Model gemma2_2b { provider = "ollama"; name = "gemma2:2b" }
+  Model gemma2_9b { provider = "ollama"; name = "gemma2:9b" }
+}

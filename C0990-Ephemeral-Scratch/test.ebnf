@@ -1,0 +1,4 @@
+stmt = assignment | expression ;
+assignment = id "=" expr ;
+expression = term | factor ;
+id = "a" | "b" | "c" ;
