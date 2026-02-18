@@ -4,10 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/VelociKey/OlympusFabric/20000-MCP-Servers/OlympusFabric/pkg/ir"
+	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
 )
 
-// PEGGenerator produces PEG/Pigeon compatible grammar files
 type PEGGenerator struct{}
 
 func NewPEGGenerator() *PEGGenerator {
@@ -19,7 +18,7 @@ func (g *PEGGenerator) FormatName() string {
 }
 
 func (g *PEGGenerator) FileExtension() string {
-	return ".peg"
+	return "peg"
 }
 
 func (g *PEGGenerator) Generate(node *ir.Node) (string, error) {
@@ -44,74 +43,78 @@ func (g *PEGGenerator) Generate(node *ir.Node) (string, error) {
 	return sb.String(), nil
 }
 
-func (g *PEGGenerator) generateRule(n *ir.Node) (string, error) {
-	name := n.GetAttributeString("name")
-	if len(n.Children) == 0 {
-		return "", fmt.Errorf("rule %s has no body", name)
+func (g *PEGGenerator) generateRule(node *ir.Node) (string, error) {
+	if node.Type != ir.NodeRule {
+		return "", fmt.Errorf("expected rule node, got %s", node.Type)
 	}
 
-	body, err := g.generateExpression(n.Children[0])
-	if err != nil {
-		return "", err
+	ruleName, _ := node.Attributes["name"].(string)
+	var expressions []string
+
+	for _, child := range node.Children {
+		expr, err := g.generateExpression(child)
+		if err != nil {
+			return "", err
+		}
+		expressions = append(expressions, expr)
 	}
 
-	return fmt.Sprintf("%s <- %s", name, body), nil
+	return fmt.Sprintf("%s = %s", ruleName, strings.Join(expressions, " / ")), nil
 }
 
-func (g *PEGGenerator) generateExpression(n *ir.Node) (string, error) {
-	switch n.Type {
+func (g *PEGGenerator) generateExpression(node *ir.Node) (string, error) {
+	switch node.Type {
 	case ir.NodeChoice:
 		var parts []string
-		for _, child := range n.Children {
-			c, err := g.generateExpression(child)
+		for _, child := range node.Children {
+			part, err := g.generateExpression(child)
 			if err != nil {
 				return "", err
 			}
-			parts = append(parts, c)
+			parts = append(parts, part)
 		}
-		// In PEG, choice is ALWAYS ordered (/)
 		return strings.Join(parts, " / "), nil
 
 	case ir.NodeSequence:
 		var parts []string
-		for _, child := range n.Children {
-			c, err := g.generateExpression(child)
+		for _, child := range node.Children {
+			part, err := g.generateExpression(child)
 			if err != nil {
 				return "", err
 			}
-			parts = append(parts, c)
+			parts = append(parts, part)
 		}
 		return strings.Join(parts, " "), nil
 
-	case ir.NodeReference:
-		return n.GetAttributeString("name"), nil
-
 	case ir.NodeLiteral:
-		val := n.GetAttributeString("value")
-		// Detect range
-		if to, ok := n.GetAttribute("range_to"); ok {
-			return fmt.Sprintf("[%s-%s]", val, to), nil
-		}
-		return fmt.Sprintf(`"%s"`, val), nil
+		val, _ := node.Attributes["value"].(string)
+		return fmt.Sprintf("\"%s\"", val), nil
+
+	case ir.NodeReference:
+		name, _ := node.Attributes["name"].(string)
+		return name, nil
 
 	case ir.NodeOptional:
-		inner, err := g.generateExpression(n.Children[0])
+		if len(node.Children) != 1 {
+			return "", fmt.Errorf("optional node must have exactly one child")
+		}
+		child, err := g.generateExpression(node.Children[0])
 		if err != nil {
 			return "", err
 		}
-		return fmt.Sprintf("(%s)?", inner), nil
+		return fmt.Sprintf("(%s)?", child), nil
 
 	case ir.NodeRepeat:
-		inner, err := g.generateExpression(n.Children[0])
+		if len(node.Children) != 1 {
+			return "", fmt.Errorf("repeat node must have exactly one child")
+		}
+		child, err := g.generateExpression(node.Children[0])
 		if err != nil {
 			return "", err
 		}
-		if n.GetAttributeString("at_least_one") == "true" {
-			return fmt.Sprintf("(%s)+", inner), nil
-		}
-		return fmt.Sprintf("(%s)*", inner), nil
+		return fmt.Sprintf("(%s)*", child), nil
 
 	default:
-		return "", fmt.Errorf("unknown node type in PEG generator: %s", n.Type)
+		return "", fmt.Errorf("unsupported IR node type for PEG: %s", node.Type)
 	}
 }

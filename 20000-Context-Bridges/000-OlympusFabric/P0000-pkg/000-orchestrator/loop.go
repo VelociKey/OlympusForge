@@ -27,7 +27,7 @@ func (sm *StateMachine) RunTask(ctx context.Context, taskName string, fn func() 
 		// 1. Proactive Quota Check (Reduce 429 Surprise)
 		if sm.shouldCheckQuota(state) {
 			if lowQuota := sm.checkQuota(ctx); lowQuota {
-				sm.sc.Log("QuotaCheck", "Proactive Rotation", state.String(), "Rotating due to low stats")
+				sm.sc.Log("QuotaCheck", "Proactive Rotation", state.String(), "Rotating due to low stats", 0)
 				sm.rotateIdentity()
 				if err := sm.SyncIdentity(sm.getPersonalIdentity()); err != nil {
 					return err
@@ -43,19 +43,19 @@ func (sm *StateMachine) RunTask(ctx context.Context, taskName string, fn func() 
 		// Execute the logic
 		err := fn()
 		if err == nil {
-			sm.sc.Log("TaskExecution", "Success", taskName, "Task completed successfully")
+			sm.sc.Log("TaskExecution", "Success", taskName, "Task completed successfully", 0)
 			return nil
 		}
 
 		// Handle Failures (Identity rotation or Audit/Structural errors)
 		if sm.isRateLimit(err) || state == StateAudit || state == StateValidation {
-			sm.sc.Log("TaskExecution", "Failure", taskName, fmt.Sprintf("State: %s | Error: %s", state.String(), err.Error()))
+			sm.sc.Log("TaskExecution", "Failure", taskName, fmt.Sprintf("State: %s | Error: %s", state.String(), err.Error()), 0)
 
 			sm.Transition(ctx, StateRecovery)
 
 			// 1. Rollback the workspace to the last known-good checkpoint
 			// This represents the call to Materializer.Rollback()
-			sm.sc.Log("TaskExecution", "Rollback", taskName, "Reverting to last mini-state")
+			sm.sc.Log("TaskExecution", "Rollback", taskName, "Reverting to last mini-state", 0)
 
 			// 2. Adjust identity if it was a rate limit
 			if sm.isRateLimit(err) {
@@ -87,7 +87,7 @@ func (sm *StateMachine) rotateIdentity() {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 	sm.identityIndex++
-	sm.sc.Log("IdentityRotation", "Index", "PersonalPool", fmt.Sprintf("%d", sm.identityIndex))
+	sm.sc.Log("IdentityRotation", "Index", "PersonalPool", fmt.Sprintf("%d", sm.identityIndex), 0)
 }
 
 func (sm *StateMachine) isRateLimit(err error) bool {
@@ -102,13 +102,13 @@ func (sm *StateMachine) shouldCheckQuota(state State) bool {
 }
 
 func (sm *StateMachine) checkQuota(ctx context.Context) bool {
-	sm.sc.Log("QuotaCheck", "ActiveCheck", "/stats", "Executing gemini /stats")
+	sm.sc.Log("QuotaCheck", "ActiveCheck", "/stats", "Executing gemini /stats", 0)
 
 	// os/exec call to gemini-cli (non-interactive)
 	cmd := exec.CommandContext(ctx, "gemini", "-p", "/stats")
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		sm.sc.Log("QuotaCheck", "Failure", "/stats", err.Error())
+		sm.sc.Log("QuotaCheck", "Failure", "/stats", err.Error(), 0)
 		return false // Fail-open: continue and let 429 handler take over if needed
 	}
 

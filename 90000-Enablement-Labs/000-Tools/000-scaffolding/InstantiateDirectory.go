@@ -55,57 +55,57 @@ func main() {
 	// 4. Define the Protocol Handshake & Primary Domains
 	structure := []string{
 		".well-known",
-		"00000-Identity/010-vision",
-		"00000-Identity/020-blueprints",
-		"00000-Identity/030-usage",
-		"00000-Identity/040-decisions",
-		"10000-Agents/110-architect",
-		"10000-Agents/120-builder",
-		"10000-Agents/150-inference-compute",
-		"10000-Agents/160-mesh-negotiation",
-		"20000-MCP-Servers/210-git-mcp",
-		"20000-MCP-Servers/220-cloud-mcp",
-		"20000-MCP-Servers/240-async-primitives",
-		"30000-Services/310-core",
-		"30000-Services/320-pkg/010-telemetry",
-		"30000-Services/320-pkg/020-crypto",
-		"30000-Services/330-workers",
-		"40000-Interfaces/430-grpc-definitions",
-		"40000-Interfaces/440-cli-automation",
-		"40000-Interfaces/460-agent-gateway",
-		"40000-Interfaces/470-economic-surface",
-		"50000-Intelligence/510-grammars",
-		"50000-Intelligence/520-prompts",
-		"50000-Intelligence/530-ontologies",
-		"60000-Data-Storage/610-schemas",
-		"60000-Data-Storage/630-semantic-telemetry",
-		"70000-Environment/710-opentofu-infra/010-workstation",
-		"70000-Environment/710-opentofu-infra/020-gcp",
-		"70000-Environment/720-dagger-modules/010-build",
-		"70000-Environment/720-dagger-modules/020-deploy",
-		"70000-Environment/730-provisioning",
-		"80000-Governance/810-policies",
-		"80000-Governance/820-visual-ui",
-		"80000-Governance/830-testing",
-		"80000-Governance/840-sovereign-audit",
-		"80000-Governance/850-trust-registries",
-		"80000-Governance/860-sdlc-process",
-		"90000-Enablement/910-benchmarks",
-		"90000-Enablement/920-labs",
+		"Olympus2/00000-Identity/010-vision",
+		"Olympus2/00000-Identity/020-blueprints",
+		"Olympus2/00000-Identity/030-usage",
+		"Olympus2/00000-Identity/040-decisions",
+		"Olympus2/10000-Agents/110-architect",
+		"Olympus2/10000-Agents/120-builder",
+		"Olympus2/10000-Agents/150-inference-compute",
+		"Olympus2/10000-Agents/160-mesh-negotiation",
+		"Olympus2/20000-MCP-Servers/210-git-mcp",
+		"Olympus2/20000-MCP-Servers/220-cloud-mcp",
+		"Olympus2/20000-MCP-Servers/240-async-primitives",
+		"Olympus2/30000-Services/310-core",
+		"Olympus2/30000-Services/320-pkg/010-telemetry",
+		"Olympus2/30000-Services/320-pkg/020-crypto",
+		"Olympus2/30000-Services/330-workers",
+		"Olympus2/40000-Interfaces/430-grpc-definitions",
+		"Olympus2/40000-Interfaces/440-cli-automation",
+		"Olympus2/40000-Interfaces/460-agent-gateway",
+		"Olympus2/40000-Interfaces/470-economic-surface",
+		"Olympus2/50000-Intelligence/510-grammars",
+		"Olympus2/50000-Intelligence/520-prompts",
+		"Olympus2/50000-Intelligence/530-ontologies",
+		"Olympus2/60000-Data-Storage/610-schemas",
+		"Olympus2/60000-Data-Storage/630-semantic-telemetry",
+		"Olympus2/70000-Environment/710-opentofu-infra/010-workstation",
+		"Olympus2/70000-Environment/710-opentofu-infra/020-gcp",
+		"Olympus2/70000-Environment/720-dagger-modules/010-build",
+		"Olympus2/70000-Environment/720-dagger-modules/020-deploy",
+		"Olympus2/70000-Environment/730-provisioning",
+		"Olympus2/80000-Governance/810-policies",
+		"Olympus2/80000-Governance/820-visual-ui",
+		"Olympus2/80000-Governance/830-testing",
+		"Olympus2/80000-Governance/840-audit",
+		"Olympus2/80000-Governance/850-trust-registries",
+		"Olympus2/80000-Governance/860-sdlc-process",
+		"Olympus2/90000-Enablement/910-benchmarks",
+		"Olympus2/90000-Enablement/920-labs",
 	}
 
 	// 5. Define the Cognizant Operational Layer
 	cognizant := []string{
-		"C0100-Config/.antigravity",
-		"C0200-Execution/100-campaigns",
-		"C0200-Execution/200-dagger-runs",
-		"C0400-Artifacts/100-oci-images",
-		"C0400-Artifacts/200-binaries",
-		"C0400-Artifacts/400-changesets",
-		"C0500-Agent-Out/100-reasoning",
-		"C0500-Agent-Out/200-dialogue",
-		"C0700-System-Work/100-sockets",
-		"C0990-Scratch",
+		"Olympus2/C0100-Config/.antigravity",
+		"Olympus2/C0200-Execution/100-campaigns",
+		"Olympus2/C0200-Execution/200-dagger-runs",
+		"Olympus2/C0400-Artifacts/100-oci-images",
+		"Olympus2/C0400-Artifacts/200-binaries",
+		"Olympus2/C0400-Artifacts/400-changesets",
+		"Olympus2/C0500-Agent-Out/100-reasoning",
+		"Olympus2/C0500-Agent-Out/200-dialogue",
+		"Olympus2/C0700-System-Work/100-sockets",
+		"Olympus2/C0990-Scratch",
 	}
 
 	// Create Primary Silos
@@ -128,7 +128,7 @@ func main() {
 		fmt.Println("\n✅ Dry run complete. No changes made.")
 	} else {
 		fmt.Println("\n✅ Scaffolding Complete. Symantec Web 1 Node is anchored.")
-		fmt.Printf("🚀 Next: Define your vision in %s\n", filepath.Join(absPath, "00000-Identity", "010-vision"))
+		fmt.Printf("Olympus2/🚀 Next: Define your vision in %s\n", filepath.Join(absPath, "Olympus2/00000-Identity", "Olympus2/010-vision"))
 	}
 }
 
@@ -162,7 +162,7 @@ func initAgentCard(root, name string, dryRun bool) {
 }
 
 func initNodeManifest(root, name string, dryRun bool) {
-	path := filepath.Join(root, "00000-Identity", "020-blueprints", "node-manifest.dsl")
+	path := filepath.Join(root, "Olympus2/00000-Identity", "Olympus2/020-blueprints", "Olympus2/node-manifest.dsl")
 	content := fmt.Sprintf("// Symantec Web 1 - Node Manifest\n// Node: %s\n\nnode_capability {\n  type = \"sovereign-hub\"\n  protocols = [\"mcp\", \"a2a\", \"anp\"]\n  mesh_role = \"arbiter\"\n}\n", name)
 
 	if dryRun {
@@ -173,7 +173,7 @@ func initNodeManifest(root, name string, dryRun bool) {
 }
 
 func initAntigravity(root string, dryRun bool) {
-	path := filepath.Join(root, "C0100-Config", ".antigravity", "workspace.json")
+	path := filepath.Join(root, "Olympus2/C0100-Config", "Olympus2/.antigravity", "Olympus2/workspace.json")
 	config := map[string]string{
 		"managed_by": "antigravity",
 		"taxonomy":   "symantec-web-1.2",

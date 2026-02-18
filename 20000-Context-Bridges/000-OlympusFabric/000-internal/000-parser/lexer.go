@@ -2,6 +2,7 @@ package parser
 
 import (
 	"fmt"
+
 	"unicode"
 )
 
@@ -124,11 +125,14 @@ func (l *Lexer) NextToken() Token {
 		if l.peekChar() == '.' {
 			l.readChar()
 			tok.Type = TokenRange
+
 			tok.Literal = ".."
 		} else {
 			tok.Type = TokenError
+
 			tok.Literal = "."
 		}
+
 	case '"', '\'':
 		tok.Type = TokenLiteral
 		tok.Literal = l.readLiteral(l.ch)
@@ -213,6 +217,7 @@ func isLetter(ch rune) bool {
 }
 
 func (t Token) String() string {
+
 	return fmt.Sprintf("Token(%d, %q, line %d, pos %d)", t.Type, t.Literal, t.Line, t.Pos)
 }
 

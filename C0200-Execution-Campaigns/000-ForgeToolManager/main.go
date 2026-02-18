@@ -17,7 +17,7 @@ type Tool struct {
 }
 
 var ToolStack = []Tool{
-	{Name: "buf", Type: "bin", Path: "C0400-Artifacts/Tools/authoring/buf.exe"},
+	{Name: "Olympus2/buf", Type: "Olympus2/bin", Path: "Olympus2/C0400-Artifacts/Tools/authoring/buf.exe"},
 	{Name: "gcloud", Type: "external", InstallCmd: "gcloud components update --quiet"},
 	{Name: "firebase", Type: "npm", InstallCmd: "npm install -g firebase-tools"},
 	{Name: "ollama-models", Type: "model", InstallCmd: "ollama pull gemma2:2b"},
@@ -46,14 +46,16 @@ func syncPlatformTool(t Tool) error {
 		slog.Info("✅ Forge: Binary verified", "name", t.Name)
 	case "external", "npm", "model":
 		slog.Info("🔄 Forge: Syncing platform component", "name", t.Name, "cmd", t.InstallCmd)
-		
+
 		parts := strings.Fields(t.InstallCmd)
-		if len(parts) == 0 { return nil }
-		
+		if len(parts) == 0 {
+			return nil
+		}
+
 		cmd := exec.Command(parts[0], parts[1:]...)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
-		
+
 		if err := cmd.Run(); err != nil {
 			return fmt.Errorf("command execution failed: %w", err)
 		}

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/VelociKey/Olympus2/pkg/whisper"
+	"Olympus2/90000-Enablement-Labs/P0000-pkg/000-whisper"
 )
 
 // StateMachine manages the Sovereign Node advancement lifecycle.
@@ -49,7 +49,7 @@ func (sm *StateMachine) Transition(ctx context.Context, next State) error {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 
-	sm.sc.Log("StateTransition", "Attempt", sm.currentState.String(), next.String())
+	sm.sc.Log("StateTransition", "Attempt", sm.currentState.String(), next.String(), 0)
 
 	if !sm.isValidTransition(sm.currentState, next) {
 		return &OrchestratorError{

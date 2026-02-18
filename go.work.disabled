@@ -1,0 +1,18 @@
+go 1.25.7
+
+use (
+	./10000-Autonomous-Actors/000-ForgeToolManager
+	./20000-Context-Bridges/000-OlympusFabric/000-cmd/000-fabric
+	./20000-Context-Bridges/000-OlympusFabric/000-internal/000-parser
+	./20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-engine
+	./20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-generator
+	./20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir
+	./20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-llm
+	./20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-orchestrator
+	./20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-transformer
+	./90000-Enablement-Labs/000-Tools/000-intelligence/940-Jules-Assistant
+	./90000-Enablement-Labs/000-Tools/000-scaffolding
+	./90000-Enablement-Labs/000-Tools/000-tree
+	./90000-Enablement-Labs/930-System-Enablers
+	./C0200-Execution-Campaigns/000-ForgeToolManager
+)

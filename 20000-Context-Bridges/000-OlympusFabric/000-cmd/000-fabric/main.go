@@ -13,11 +13,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/VelociKey/OlympusFabric/20000-MCP-Servers/OlympusFabric/internal/parser"
-	"github.com/VelociKey/OlympusFabric/20000-MCP-Servers/OlympusFabric/pkg/engine"
-	"github.com/VelociKey/OlympusFabric/20000-MCP-Servers/OlympusFabric/pkg/generator"
-	"github.com/VelociKey/OlympusFabric/20000-MCP-Servers/OlympusFabric/pkg/llm" // Added llm import
-	"github.com/VelociKey/OlympusFabric/20000-MCP-Servers/OlympusFabric/pkg/transformer"
+	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/000-internal/000-parser"
+	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-engine"
+	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-generator"
+	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-llm" // Added llm import
+	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-transformer"
 )
 
 func main() {
@@ -240,3 +240,6 @@ func runAssist(args []string) {
 
 	fmt.Println(response)
 }
+
+
+

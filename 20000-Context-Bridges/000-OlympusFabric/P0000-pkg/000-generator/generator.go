@@ -1,7 +1,7 @@
 package generator
 
 import (
-	"github.com/VelociKey/OlympusFabric/20000-MCP-Servers/OlympusFabric/pkg/ir"
+	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
 )
 
 // Generator is the interface that all output formatters must implement

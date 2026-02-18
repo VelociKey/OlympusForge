@@ -1,2 +1,3 @@
 @echo off
-"C:\Users\josep\AppData\Roaming\npm\firebase.cmd" %*
+rem Local Firebase CLI shim for Antigravity-Olympus-Fleet
+"%~dp0firebase-bin\firebase.cmd" %*

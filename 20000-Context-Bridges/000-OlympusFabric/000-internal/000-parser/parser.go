@@ -3,7 +3,7 @@ package parser
 import (
 	"fmt"
 
-	"github.com/VelociKey/OlympusFabric/20000-MCP-Servers/OlympusFabric/pkg/ir"
+	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
 )
 
 type Parser struct {

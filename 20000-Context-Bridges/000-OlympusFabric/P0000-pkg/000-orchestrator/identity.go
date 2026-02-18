@@ -14,7 +14,7 @@ func (sm *StateMachine) SyncIdentity(required Identity) error {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 
-	sm.sc.Log("IdentitySync", "Context", string(required), "Aligning OS config")
+	sm.sc.Log("IdentitySync", "Context", string(required), "Aligning OS config", 0)
 
 	// Set OS environment variable
 	if err := os.Setenv(ConfigEnv, string(required)); err != nil {
@@ -34,7 +34,7 @@ func (sm *StateMachine) SyncIdentity(required Identity) error {
 	}
 
 	sm.identity = required
-	sm.sc.Log("IdentitySync", "Synchronized", active, "OS reports required identity")
+	sm.sc.Log("IdentitySync", "Synchronized", active, "OS reports required identity", 0)
 	return nil
 }
 
