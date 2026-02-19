@@ -21,13 +21,11 @@ func FindGoModules(root string) ([]Module, error) {
 		if strings.HasPrefix(name, ".") || name == "node_modules" || name == "data" || name == "dist" {
 			return filepath.SkipDir
 		}
-		matches, _ := filepath.Glob(filepath.Join(path, "*.go"))
-		if len(matches) > 0 {
+		// Check for go.mod instead of .go files to identify modules accurately
+		if _, err := os.Stat(filepath.Join(path, "go.mod")); err == nil {
 			rel, _ := filepath.Rel(root, path)
 			modName := filepath.ToSlash(rel)
-			if modName == "." { modName = "fleet-root" }
-			if strings.HasSuffix(modName, "/v1") { modName += "x" }
-			if strings.HasSuffix(modName, "/v2") { modName += "x" }
+			if modName == "." { return nil } // Skip root as we handled its removal
 			modules = append(modules, Module{
 				Name: modName,
 				Path: path,
@@ -58,7 +56,9 @@ func SyncGoMod(mod Module, allModules []Module, root string) error {
 	for _, s := range sovereigns {
 		target := s
 		if s == "gopkg.in/check.v1" { target = "check.v1" }
-		rel, _ := filepath.Rel(mod.Path, filepath.Join(root, target))
+		// Libraries are now in Olympus2/00000-Identity-Foundations/P0000-pkg/
+		libPath := filepath.Join(root, "Olympus2", "00000-Identity-Foundations", "P0000-pkg", target)
+		rel, _ := filepath.Rel(mod.Path, libPath)
 		relPath := filepath.ToSlash(rel)
 		if !strings.HasPrefix(relPath, ".") { relPath = "./" + relPath }
 		sb.WriteString(fmt.Sprintf("replace %s => %s\n", s, relPath))
@@ -69,10 +69,40 @@ func SyncGoMod(mod Module, allModules []Module, root string) error {
 func SyncGoWork(root string, modules []Module) error {
 	var sb strings.Builder
 	sb.WriteString("go 1.25.7\n\nuse (\n")
+	
+	// Sort modules for deterministic output
+	sort.Slice(modules, func(i, j int) bool {
+		return modules[i].Path < modules[j].Path
+	})
+
 	for _, m := range modules {
 		rel, _ := filepath.Rel(root, m.Path)
 		sb.WriteString(fmt.Sprintf("\t./%s\n", filepath.ToSlash(rel)))
 	}
 	sb.WriteString(")\n")
 	return os.WriteFile(filepath.Join(root, "go.work"), []byte(sb.String()), 0644)
+}
+
+func MigrateImports(root, oldPath, newPath string) error {
+	return filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		if err != nil { return err }
+		if info.IsDir() {
+			name := info.Name()
+			if strings.HasPrefix(name, ".") || name == "node_modules" || name == "data" || name == "dist" || name == "vendor" {
+				return filepath.SkipDir
+			}
+			return nil
+		}
+		ext := filepath.Ext(path)
+		if ext == ".go" || info.Name() == "go.mod" {
+			content, err := os.ReadFile(path)
+			if err != nil { return err }
+			newContent := strings.ReplaceAll(string(content), oldPath, newPath)
+			if newContent != string(content) {
+				fmt.Printf("Updating %s\n", path)
+				return os.WriteFile(path, []byte(newContent), info.Mode())
+			}
+		}
+		return nil
+	})
 }

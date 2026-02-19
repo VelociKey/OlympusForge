@@ -1,4 +1,4 @@
-module OlympusForge/90000-Enablement-Labs/930-System-Enablers/fleet-mapper
+module OlympusForge/00000-Identity-Foundations/P0000-pkg/000-fleet
 
 go 1.25.7
 
@@ -99,8 +99,6 @@ replace OlympusAtelier/10000-Autonomous-Actors/000-StyleGuard => ../../../../Oly
 
 replace OlympusAtelier/90000-Enablement-Labs/930-System-Enablers/000-NomenclatureStabilizer => ../../../../OlympusAtelier/90000-Enablement-Labs/930-System-Enablers/000-NomenclatureStabilizer
 
-replace OlympusForge/00000-Identity-Foundations/P0000-pkg/000-fleet => ../../../00000-Identity-Foundations/P0000-pkg/000-fleet
-
 replace OlympusForge/10000-Autonomous-Actors/000-ForgeToolManager => ../../../10000-Autonomous-Actors/000-ForgeToolManager
 
 replace OlympusForge/20000-Context-Bridges/000-OlympusFabric/000-cmd/000-fabric => ../../../20000-Context-Bridges/000-OlympusFabric/000-cmd/000-fabric
@@ -119,17 +117,19 @@ replace OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-orche
 
 replace OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-transformer => ../../../20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-transformer
 
-replace OlympusForge/90000-Enablement-Labs/000-Tools/000-intelligence/940-Jules-Assistant => ../../000-Tools/000-intelligence/940-Jules-Assistant
+replace OlympusForge/90000-Enablement-Labs/000-Tools/000-intelligence/940-Jules-Assistant => ../../../90000-Enablement-Labs/000-Tools/000-intelligence/940-Jules-Assistant
 
-replace OlympusForge/90000-Enablement-Labs/000-Tools/000-scaffolding => ../../000-Tools/000-scaffolding
+replace OlympusForge/90000-Enablement-Labs/000-Tools/000-scaffolding => ../../../90000-Enablement-Labs/000-Tools/000-scaffolding
 
-replace OlympusForge/90000-Enablement-Labs/000-Tools/000-tree => ../../000-Tools/000-tree
+replace OlympusForge/90000-Enablement-Labs/000-Tools/000-tree => ../../../90000-Enablement-Labs/000-Tools/000-tree
 
-replace OlympusForge/90000-Enablement-Labs/930-System-Enablers => ..
+replace OlympusForge/90000-Enablement-Labs/930-System-Enablers => ../../../90000-Enablement-Labs/930-System-Enablers
 
-replace OlympusForge/90000-Enablement-Labs/930-System-Enablers/fleet-indexer => ../fleet-indexer
+replace OlympusForge/90000-Enablement-Labs/930-System-Enablers/fleet-indexer => ../../../90000-Enablement-Labs/930-System-Enablers/fleet-indexer
 
-replace OlympusForge/90000-Enablement-Labs/930-System-Enablers/fleet-manager => ../fleet-manager
+replace OlympusForge/90000-Enablement-Labs/930-System-Enablers/fleet-manager => ../../../90000-Enablement-Labs/930-System-Enablers/fleet-manager
+
+replace OlympusForge/90000-Enablement-Labs/930-System-Enablers/fleet-mapper => ../../../90000-Enablement-Labs/930-System-Enablers/fleet-mapper
 
 replace OlympusForge/C0200-Execution-Campaigns/000-ForgeToolManager => ../../../C0200-Execution-Campaigns/000-ForgeToolManager
 
