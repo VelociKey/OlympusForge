@@ -65,3 +65,4 @@ message CppFeatures {
     edition_defaults = { edition: EDITION_2024, value: "true" }
   ];
 }
+

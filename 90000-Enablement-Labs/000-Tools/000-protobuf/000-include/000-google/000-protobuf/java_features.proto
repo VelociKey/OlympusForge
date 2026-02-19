@@ -130,3 +130,4 @@ message JavaFeatures {
 
   reserved 6;  // field `mutable_nest_in_file_class` removed.
 }
+

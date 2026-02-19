@@ -75,12 +75,15 @@ func SyncGoWork(root string, modules []Module) error {
 		return modules[i].Path < modules[j].Path
 	})
 
+	// Olympus2 is the product root. go.work should live in Olympus2/
+	targetRoot := filepath.Join(root, "Olympus2")
+
 	for _, m := range modules {
-		rel, _ := filepath.Rel(root, m.Path)
+		rel, _ := filepath.Rel(targetRoot, m.Path)
 		sb.WriteString(fmt.Sprintf("\t./%s\n", filepath.ToSlash(rel)))
 	}
 	sb.WriteString(")\n")
-	return os.WriteFile(filepath.Join(root, "go.work"), []byte(sb.String()), 0644)
+	return os.WriteFile(filepath.Join(targetRoot, "go.work"), []byte(sb.String()), 0644)
 }
 
 func MigrateImports(root, oldPath, newPath string) error {

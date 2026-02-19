@@ -215,3 +215,4 @@ enum Syntax {
   // Syntax `editions`.
   SYNTAX_EDITIONS = 2;
 }
+
