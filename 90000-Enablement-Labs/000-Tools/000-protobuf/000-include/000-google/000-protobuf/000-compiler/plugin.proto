@@ -27,7 +27,7 @@ option java_outer_classname = "PluginProtos";
 import "google/protobuf/descriptor.proto";
 
 option csharp_namespace = "Google.Protobuf.Compiler";
-option go_package = "google.golang.org/protobuf/types/pluginpb";
+option go_package = "OlympusForge/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympusforge/v1x;olympusforgev1";
 
 // The version number of protocol compiler.
 message Version {

@@ -40,7 +40,7 @@ option java_outer_classname = "ApiProto";
 option java_multiple_files = true;
 option objc_class_prefix = "GPB";
 option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "google.golang.org/protobuf/types/known/apipb";
+option go_package = "OlympusForge/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympusforge/v1x;olympusforgev1";
 
 // Api is a light-weight descriptor for an API Interface.
 //
