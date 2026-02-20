@@ -1,2 +1,2 @@
 @echo off
-"%~dp0..\validation\nuclei.exe" %*
+"%~dp0..\000-validation\nuclei.exe" %*

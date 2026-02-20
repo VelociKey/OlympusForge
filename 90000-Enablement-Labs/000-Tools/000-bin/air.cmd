@@ -1,2 +1,2 @@
 @echo off
-"%~dp0..\authoring\air.exe" %*
+"%~dp0..\000-authoring\air.exe" %*

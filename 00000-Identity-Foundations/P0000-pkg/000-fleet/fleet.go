@@ -16,15 +16,35 @@ type Module struct {
 func FindGoModules(root string) ([]Module, error) {
 	var modules []Module
 	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		if err != nil || !info.IsDir() { return nil }
+		if err != nil || !info.IsDir() {
+			return nil
+		}
 		name := info.Name()
+		// We allow ZC directories because they contain sovereign source modules (like MCP)
 		if strings.HasPrefix(name, ".") || name == "node_modules" || name == "data" || name == "dist" {
 			return filepath.SkipDir
 		}
 		if _, err := os.Stat(filepath.Join(path, "go.mod")); err == nil {
 			rel, _ := filepath.Rel(root, path)
 			modName := filepath.ToSlash(rel)
-			if modName == "." { return nil }
+			if modName == "." {
+				// We still want to include the root module if it exists
+				// but let's check its name from go.mod first
+				return nil
+			}
+
+			// Detect module name from go.mod file
+			modContent, err := os.ReadFile(filepath.Join(path, "go.mod"))
+			if err == nil {
+				lines := strings.Split(string(modContent), "\n")
+				for _, line := range lines {
+					if strings.HasPrefix(line, "module ") {
+						modName = strings.TrimSpace(strings.TrimPrefix(line, "module "))
+						break
+					}
+				}
+			}
+
 			modules = append(modules, Module{
 				Name: modName,
 				Path: path,
@@ -37,55 +57,112 @@ func FindGoModules(root string) ([]Module, error) {
 
 func SyncGoMod(mod Module, allModules []Module, root string) error {
 	modPath := filepath.Join(mod.Path, "go.mod")
-	content := fmt.Sprintf("module %s\n\ngo 1.25.7\n", mod.Name)
+	fmt.Printf("DEBUG: Syncing %s\n", modPath)
+
+	var existingRequires string
+	if content, err := os.ReadFile(modPath); err == nil {
+		sContent := string(content)
+		// Look for 'require'
+		idx := strings.Index(sContent, "require")
+		if idx != -1 {
+			existingRequires = "\n" + sContent[idx:]
+		} else {
+			fmt.Printf("DEBUG: No require block found in %s (len: %d)\n", mod.Name, len(sContent))
+		}
+	} else {
+		fmt.Printf("DEBUG: Error reading %s: %v\n", modPath, err)
+	}
+
 	var sb strings.Builder
-	sb.WriteString(content)
+	sb.WriteString(fmt.Sprintf("module %s\n\ngo 1.25.7\n", mod.Name))
 	sb.WriteString("\n// Local Resolution\n")
-	
+
 	sort.Slice(allModules, func(i, j int) bool {
 		return allModules[i].Name < allModules[j].Name
 	})
 
 	for _, m := range allModules {
-		if m.Name == mod.Name { continue }
+		if m.Name == mod.Name || m.Name == "." {
+			continue
+		}
 		rel, _ := filepath.Rel(mod.Path, m.Path)
 		relPath := filepath.ToSlash(rel)
-		if !strings.HasPrefix(relPath, ".") { relPath = "./" + relPath }
+		if !strings.HasPrefix(relPath, ".") {
+			relPath = "./" + relPath
+		}
 		sb.WriteString(fmt.Sprintf("replace %s => %s\n", m.Name, relPath))
 	}
-	
-	sovereigns := []string{"text", "pretty", "go-internal", "check.v1", "gopkg.in/check.v1"}
+
+	sovereigns := []string{"text", "pretty", "go-internal", "check.v1", "gopkg.in/check.v1", "github.com/mark3labs/mcp-go"}
 	for _, s := range sovereigns {
+		alreadyHandled := false
+		for _, m := range allModules {
+			if m.Name == s {
+				alreadyHandled = true
+				break
+			}
+		}
+		if alreadyHandled {
+			continue
+		}
+
 		target := s
-		if s == "gopkg.in/check.v1" { target = "check.v1" }
-		libPath := filepath.Join(root, "Olympus2", "00000-Identity-Foundations", "P0000-pkg", target)
-		if _, err := os.Stat(libPath); err != nil { continue }
+		if s == "gopkg.in/check.v1" {
+			target = "check.v1"
+		}
+
+		var libPath string
+		if s == "github.com/mark3labs/mcp-go" {
+			libPath = filepath.Join(root, "OlympusForge", "ZC0400-Sovereign-Source", "mcp-go")
+		} else {
+			libPath = filepath.Join(root, "Olympus2", "00000-Identity-Foundations", "P0000-pkg", target)
+		}
+
+		if _, err := os.Stat(libPath); err != nil {
+			continue
+		}
 		rel, _ := filepath.Rel(mod.Path, libPath)
 		relPath := filepath.ToSlash(rel)
-		if !strings.HasPrefix(relPath, ".") { relPath = "./" + relPath }
+		if !strings.HasPrefix(relPath, ".") {
+			relPath = "./" + relPath
+		}
 		sb.WriteString(fmt.Sprintf("replace %s => %s\n", s, relPath))
 	}
+
+	if existingRequires != "" {
+		sb.WriteString(existingRequires)
+	}
+
 	return os.WriteFile(modPath, []byte(sb.String()), 0644)
 }
 
 func SyncGoWork(root string, modules []Module) error {
 	var sb strings.Builder
 	sb.WriteString("go 1.25.7\n\nuse (\n")
+
+	// Sort by path for deterministic output
 	sort.Slice(modules, func(i, j int) bool {
 		return modules[i].Path < modules[j].Path
 	})
-	targetRoot := filepath.Join(root, "Olympus2")
+
 	for _, m := range modules {
-		rel, _ := filepath.Rel(targetRoot, m.Path)
+		rel, err := filepath.Rel(root, m.Path)
+		if err != nil {
+			continue
+		}
 		sb.WriteString(fmt.Sprintf("\t./%s\n", filepath.ToSlash(rel)))
 	}
 	sb.WriteString(")\n")
-	return os.WriteFile(filepath.Join(targetRoot, "go.work"), []byte(sb.String()), 0644)
+
+	// Ensure we write to the Fleet Root
+	return os.WriteFile(filepath.Join(root, "go.work"), []byte(sb.String()), 0644)
 }
 
 func MigrateImports(root, oldPath, newPath string) error {
 	return filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		if err != nil { return err }
+		if err != nil {
+			return err
+		}
 		if info.IsDir() {
 			name := info.Name()
 			if strings.HasPrefix(name, ".") || name == "node_modules" || name == "data" || name == "dist" || name == "vendor" {
@@ -96,7 +173,9 @@ func MigrateImports(root, oldPath, newPath string) error {
 		ext := filepath.Ext(path)
 		if ext == ".go" || info.Name() == "go.mod" {
 			content, err := os.ReadFile(path)
-			if err != nil { return err }
+			if err != nil {
+				return err
+			}
 			newContent := strings.ReplaceAll(string(content), oldPath, newPath)
 			if newContent != string(content) {
 				return os.WriteFile(path, []byte(newContent), info.Mode())
@@ -104,4 +183,127 @@ func MigrateImports(root, oldPath, newPath string) error {
 		}
 		return nil
 	})
+}
+
+func ScaffoldModule(root, moduleName string) error {
+	modPath := filepath.Join(root, moduleName)
+	if _, err := os.Stat(modPath); err == nil {
+		return fmt.Errorf("module directory already exists: %s", modPath)
+	}
+
+	fmt.Printf("🏗️ Scaffolding Module: %s\n", moduleName)
+
+	// 1. Create Directory Taxonomy
+	dirs := []string{
+		"00000-Identity-Foundations/P0000-pkg",
+		"10000-Autonomous-Actors",
+		"20000-Context-Bridges",
+		"30000-Federated-Services",
+		"40000-Communication-Contracts/430-Protocol-Definitions/000-gen",
+		"50000-Intelligence-Framework",
+		"60000-Information-Storage",
+		"70000-Environmental-Harness/dagger",
+		"80000-System-Governance",
+		"90000-Enablement-Labs",
+		"C0100-Configuration-Registry",
+		"C0400-Artifact-Repository",
+		"C0500-Agent-Intelligence-Outputs",
+		"C0700-System-Operations",
+		"C0990-Ephemeral-Scratch",
+		"K0000-KnowledgeAnchor",
+	}
+
+	for _, d := range dirs {
+		if err := os.MkdirAll(filepath.Join(modPath, d), 0755); err != nil {
+			return err
+		}
+	}
+
+	// 2. Initialize go.mod
+	goModContent := fmt.Sprintf("module %s\n\ngo 1.25.7\n", moduleName)
+	if err := os.WriteFile(filepath.Join(modPath, "go.mod"), []byte(goModContent), 0644); err != nil {
+		return err
+	}
+
+	// 3. Add placeholders
+	readme := fmt.Sprintf("# %s\n\nOlympus Sovereign Module\n", moduleName)
+	os.WriteFile(filepath.Join(modPath, "README.md"), []byte(readme), 0644)
+
+	daggerJson := `{
+    "sdk": "go",
+    "source": "70000-Environmental-Harness/dagger"
+}`
+	os.WriteFile(filepath.Join(modPath, "dagger.json"), []byte(daggerJson), 0644)
+	os.WriteFile(filepath.Join(modPath, "70000-Environmental-Harness/dagger/main.go"), []byte("package main\n"), 0644)
+
+	return nil
+}
+
+func VerifyFleet(root string) error {
+	fmt.Println("🔍 Verifying Fleet Integrity...")
+
+	modules, err := FindGoModules(root)
+	if err != nil {
+		return err
+	}
+
+	var issues []string
+
+	// 1. Check for go.work consistency
+	workPath := filepath.Join(root, "go.work")
+	workContent, err := os.ReadFile(workPath)
+	if err != nil {
+		issues = append(issues, "Missing root go.work file")
+	} else {
+		for _, m := range modules {
+			rel, _ := filepath.Rel(root, m.Path)
+			relPath := filepath.ToSlash(rel)
+			if !strings.Contains(string(workContent), "./"+relPath) {
+				issues = append(issues, fmt.Sprintf("Module %s not registered in go.work", m.Name))
+			}
+		}
+	}
+
+	// 2. Check Module Consistency
+	for _, mod := range modules {
+		modPath := filepath.Join(mod.Path, "go.mod")
+		content, err := os.ReadFile(modPath)
+		if err != nil {
+			issues = append(issues, fmt.Sprintf("Missing go.mod in %s", mod.Name))
+			continue
+		}
+
+		// Check Go Version
+		if !strings.Contains(string(content), "go 1.25.7") {
+			issues = append(issues, fmt.Sprintf("Module %s uses incorrect Go version", mod.Name))
+		}
+
+		// Check local replacements exist
+		lines := strings.Split(string(content), "\n")
+		for _, line := range lines {
+			if strings.HasPrefix(line, "replace ") {
+				parts := strings.Fields(line)
+				if len(parts) >= 4 {
+					target := parts[3]
+					if strings.HasPrefix(target, "..") {
+						absTarget := filepath.Join(mod.Path, target)
+						if _, err := os.Stat(absTarget); err != nil {
+							issues = append(issues, fmt.Sprintf("Module %s has broken replacement: %s", mod.Name, target))
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if len(issues) > 0 {
+		fmt.Printf("❌ Found %d issues during fleet verification:\n", len(issues))
+		for _, issue := range issues {
+			fmt.Printf("  - %s\n", issue)
+		}
+		return fmt.Errorf("fleet verification failed")
+	}
+
+	fmt.Println("✅ Fleet integrity verified. All structures are valid.")
+	return nil
 }

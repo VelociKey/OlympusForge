@@ -1,2 +1,2 @@
 @echo off
-"%~dp0..\intelligence\dlv.exe" %*
+"%~dp0..\000-intelligence\dlv.exe" %*

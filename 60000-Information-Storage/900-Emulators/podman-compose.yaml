@@ -1,0 +1,68 @@
+version: "3.8"
+
+services:
+  # Pub/Sub (Released)
+  pubsub:
+    image: google/cloud-sdk:emulators
+    ports:
+      - "8085:8085"
+    command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085
+
+  # Datastore (Released)
+  datastore:
+    image: google/cloud-sdk:emulators
+    ports:
+      - "8090:8090"
+    command: gcloud beta emulators datastore start --host-port=0.0.0.0:8090 --project=olympus-project
+
+  # Bigtable (Released)
+  bigtable:
+    image: google/cloud-sdk:emulators
+    ports:
+      - "8086:8086"
+    command: gcloud beta emulators bigtable start --host-port=0.0.0.0:8086
+
+  # Firestore (Beta)
+  firestore:
+    image: google/cloud-sdk:emulators
+    ports:
+      - "8081:8081"
+    command: gcloud beta emulators firestore start --host-port=0.0.0.0:8081
+
+  # Spanner (Beta)
+  spanner:
+    image: gcr.io/cloud-spanner-emulator/emulator
+    ports:
+      - "9010:9010" # gRPC
+      - "9020:9020" # HTTP
+    environment:
+      SPANNER_EMULATOR_HOST: "0.0.0.0:9010"
+
+  # Cloud Storage (Workstation Mock - fake-gcs-server)
+  storage:
+    image: fsouza/fake-gcs-server
+    ports:
+      - "4443:4443"
+    command: -scheme http
+
+  # Secret Manager Substrate (HashiCorp Vault)
+  vault:
+    image: hashicorp/vault:latest
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: "root"
+      VAULT_ADDR: "http://0.0.0.0:8200"
+    cap_add:
+      - IPC_LOCK
+
+  # Vertex AI / Intelligence Substrate (Ollama)
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  ollama_data:

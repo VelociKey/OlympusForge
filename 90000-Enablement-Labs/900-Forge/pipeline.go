@@ -1,0 +1,128 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	"path/filepath"
+
+	"dagger.io/dagger"
+)
+
+// AihubForge is the central Sovereign Factory for the Olympus2 fleet.
+// It provides deterministic build pipelines for workstation-native, containerized, and cloud-native targets.
+type AihubForge struct{}
+
+// Build triggers the build pipeline with the specified target and workspace.
+// Targets: native (workstation), podman (local OCI), gcp (Google Artifact Registry)
+func (m *AihubForge) Build(ctx context.Context, target string, workspace string) error {
+	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
+	if err != nil {
+		return fmt.Errorf("failed to connect to dagger: %v", err)
+	}
+	defer client.Close()
+
+	// 1. Acquire Source from Fleet Root (relative to Forge location)
+	src := client.Host().Directory("../../../..", dagger.HostDirectoryOpts{
+		Exclude: []string{"C0400-Artifacts", "C0990-Scratch", ".git", "node_modules", ".gemini/tmp"},
+	})
+
+	// 2. Maturity Assessment (Athena)
+	if err := validateAgentMaturity(ctx, client, src); err != nil {
+		return fmt.Errorf("assessment failed: %v", err)
+	}
+
+	// 3. Dispatch to Target Strategy
+	switch target {
+	case "native":
+		return m.buildNative(ctx, client, src, workspace)
+	case "podman":
+		return m.buildPodman(ctx, client, src, workspace)
+	case "gcp":
+		return m.buildGCP(ctx, client, src, workspace)
+	case "all":
+		return m.BuildAllClusters(ctx, "podman") // Default to local OCI for all
+	default:
+		return fmt.Errorf("invalid target: %s. Options: native, podman, gcp, all", target)
+	}
+}
+
+// BuildAllClusters iterates over all 10 GCP clusters and builds them for the specified target.
+func (m *AihubForge) BuildAllClusters(ctx context.Context, target string) error {
+	clusters := []string{
+		"OlympusGCP-Compute",
+		"OlympusGCP-Data",
+		"OlympusGCP-Events",
+		"OlympusGCP-FinOps",
+		"OlympusGCP-Firebase",
+		"OlympusGCP-Intelligence",
+		"OlympusGCP-Messaging",
+		"OlympusGCP-Observability",
+		"OlympusGCP-Storage",
+		"OlympusGCP-Vault",
+	}
+	for _, cluster := range clusters {
+		if err := m.Build(ctx, target, cluster); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// buildNative builds binaries directly on the host or in a host-mirrored environment
+func (m *AihubForge) buildNative(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) error {
+	fmt.Printf("⚒️ Forge: Native Build [%s]\n", workspace)
+	
+	// Build for host OS/Arch
+	builder := client.Container().From("golang:1.24").
+		WithDirectory("/src", src).
+		WithWorkdir(filepath.Join("/src", workspace)).
+		WithExec([]string{"go", "build", "-o", "bin/service", "main.go"})
+
+	// Export binary back to host
+	_, err := builder.Directory("bin").Export(ctx, filepath.Join(workspace, "bin"))
+	return err
+}
+
+// buildPodman builds OCI images for local Podman Desktop execution
+func (m *AihubForge) buildPodman(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) error {
+	fmt.Printf("⚒️ Forge: Podman Image Build [%s]\n", workspace)
+	
+	image := m.sealedImage(client, src, workspace)
+	
+	// Tag for local Podman
+	tag := fmt.Sprintf("localhost/%s:latest", workspace)
+	_, err := image.Publish(ctx, tag)
+	return err
+}
+
+// buildGCP builds and publishes images to Google Artifact Registry
+func (m *AihubForge) buildGCP(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) error {
+	projectID := os.Getenv("GCP_PROJECT_ID")
+	if projectID == "" {
+		projectID = "olympus-project"
+	}
+	garRegion := os.Getenv("GCP_GAR_REGION")
+	if garRegion == "" {
+		garRegion = "us-central1"
+	}
+	
+	fmt.Printf("⚒️ Forge: GCP Cloud Run Build [%s] -> %s\n", workspace, projectID)
+	
+	image := m.sealedImage(client, src, workspace)
+	
+	// Tag for GAR
+	tag := fmt.Sprintf("%s-docker.pkg.dev/%s/olympus-fleet/%s:latest", garRegion, projectID, workspace)
+	_, err := image.Publish(ctx, tag)
+	return err
+}
+
+// sealedImage creates a deterministic, attestation-ready OCI image
+func (m *AihubForge) sealedImage(client *dagger.Client, src *dagger.Directory, workspace string) *dagger.Container {
+	return client.Container().From("debian:trixie-slim").
+		WithDirectory("/app", src.Directory(workspace)).
+		WithWorkdir("/app").
+		WithExec([]string{"apt-get", "update"}).
+		WithExec([]string{"apt-get", "install", "-y", "ca-certificates"}).
+		WithEntrypoint([]string{"./bin/service"})
+}

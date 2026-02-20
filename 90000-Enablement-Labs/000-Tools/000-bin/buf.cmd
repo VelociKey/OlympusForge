@@ -1,2 +1,2 @@
 @echo off
-"%~dp0..\authoring\buf.exe" %*
+"%~dp0..\000-authoring\buf.exe" %*

@@ -1,1 +1,2 @@
-@echo off & "..\foundation\gcloud.cmd" %*
+@echo off
+gcloud %*

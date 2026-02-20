@@ -1,0 +1,5 @@
+{
+  "name": "aihub-forge",
+  "sdk": "go",
+  "source": "."
+}

@@ -1,2 +1,2 @@
 @echo off
-"%~dp0..\validation\gosec.exe" %*
+"%~dp0..\000-validation\gosec.exe" %*
