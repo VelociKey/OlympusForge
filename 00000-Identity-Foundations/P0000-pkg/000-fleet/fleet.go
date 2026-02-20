@@ -59,78 +59,32 @@ func SyncGoMod(mod Module, allModules []Module, root string) error {
 	modPath := filepath.Join(mod.Path, "go.mod")
 	fmt.Printf("DEBUG: Syncing %s\n", modPath)
 
-	var existingRequires string
-	if content, err := os.ReadFile(modPath); err == nil {
-		sContent := string(content)
-		// Look for 'require'
-		idx := strings.Index(sContent, "require")
-		if idx != -1 {
-			existingRequires = "\n" + sContent[idx:]
-		} else {
-			fmt.Printf("DEBUG: No require block found in %s (len: %d)\n", mod.Name, len(sContent))
-		}
-	} else {
-		fmt.Printf("DEBUG: Error reading %s: %v\n", modPath, err)
+	content, err := os.ReadFile(modPath)
+	if err != nil {
+		return fmt.Errorf("failed to read go.mod: %v", err)
 	}
 
+	lines := strings.Split(string(content), "\n")
 	var sb strings.Builder
 	sb.WriteString(fmt.Sprintf("module %s\n\ngo 1.25.7\n", mod.Name))
-	sb.WriteString("\n// Local Resolution\n")
 
-	sort.Slice(allModules, func(i, j int) bool {
-		return allModules[i].Name < allModules[j].Name
-	})
+	// Project Mandate: Local cross-module dependency resolution MUST be handled exclusively via the root go.work file.
+	// We explicitly DO NOT add 'replace' directives here.
 
-	for _, m := range allModules {
-		if m.Name == mod.Name || m.Name == "." {
+	inRequire := false
+	for _, line := range lines {
+		trimmed := strings.TrimSpace(line)
+		if strings.HasPrefix(trimmed, "require") {
+			inRequire = true
+			sb.WriteString("\n" + line + "\n")
 			continue
 		}
-		rel, _ := filepath.Rel(mod.Path, m.Path)
-		relPath := filepath.ToSlash(rel)
-		if !strings.HasPrefix(relPath, ".") {
-			relPath = "./" + relPath
-		}
-		sb.WriteString(fmt.Sprintf("replace %s => %s\n", m.Name, relPath))
-	}
-
-	sovereigns := []string{"text", "pretty", "go-internal", "check.v1", "gopkg.in/check.v1", "github.com/mark3labs/mcp-go"}
-	for _, s := range sovereigns {
-		alreadyHandled := false
-		for _, m := range allModules {
-			if m.Name == s {
-				alreadyHandled = true
-				break
+		if inRequire {
+			sb.WriteString(line + "\n")
+			if trimmed == ")" {
+				inRequire = false
 			}
 		}
-		if alreadyHandled {
-			continue
-		}
-
-		target := s
-		if s == "gopkg.in/check.v1" {
-			target = "check.v1"
-		}
-
-		var libPath string
-		if s == "github.com/mark3labs/mcp-go" {
-			libPath = filepath.Join(root, "OlympusForge", "ZC0400-Sovereign-Source", "mcp-go")
-		} else {
-			libPath = filepath.Join(root, "Olympus2", "00000-Identity-Foundations", "P0000-pkg", target)
-		}
-
-		if _, err := os.Stat(libPath); err != nil {
-			continue
-		}
-		rel, _ := filepath.Rel(mod.Path, libPath)
-		relPath := filepath.ToSlash(rel)
-		if !strings.HasPrefix(relPath, ".") {
-			relPath = "./" + relPath
-		}
-		sb.WriteString(fmt.Sprintf("replace %s => %s\n", s, relPath))
-	}
-
-	if existingRequires != "" {
-		sb.WriteString(existingRequires)
 	}
 
 	return os.WriteFile(modPath, []byte(sb.String()), 0644)
@@ -281,16 +235,12 @@ func VerifyFleet(root string) error {
 		// Check local replacements exist
 		lines := strings.Split(string(content), "\n")
 		for _, line := range lines {
-			if strings.HasPrefix(line, "replace ") {
+			if strings.HasPrefix(strings.TrimSpace(line), "replace ") {
 				parts := strings.Fields(line)
-				if len(parts) >= 4 {
-					target := parts[3]
-					if strings.HasPrefix(target, "..") {
-						absTarget := filepath.Join(mod.Path, target)
-						if _, err := os.Stat(absTarget); err != nil {
-							issues = append(issues, fmt.Sprintf("Module %s has broken replacement: %s", mod.Name, target))
-						}
-					}
+				if len(parts) >= 2 {
+					target := parts[1] // The module name being replaced
+					// Project Mandate: Do NOT use replace directives in go.mod files for local resolution.
+					issues = append(issues, fmt.Sprintf("Module %s contains forbidden 'replace' directive for %s", mod.Name, target))
 				}
 			}
 		}

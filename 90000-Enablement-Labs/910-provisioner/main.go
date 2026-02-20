@@ -25,6 +25,7 @@ var tools = []Tool{
 	{Name: "air", Category: "authoring", Method: "go-install", Package: "github.com/air-verse/air@v1.64.5", Binary: "air.exe"},
 	{Name: "buf", Category: "authoring", Method: "go-install", Package: "github.com/bufbuild/buf/cmd/buf@v1.50.0", Binary: "buf.exe"},
 	{Name: "protoc-gen-connect-go", Category: "authoring", Method: "go-install", Package: "connectrpc.com/connect/cmd/protoc-gen-connect-go@v1.18.1", Binary: "protoc-gen-connect-go.exe"},
+	{Name: "protoc-gen-go", Category: "authoring", Method: "go-install", Package: "google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.1", Binary: "protoc-gen-go.exe"},
 	{Name: "gh", Category: "authoring", Method: "gh-release", Package: "cli/cli", Binary: "gh.exe"},
 
 	// Infrastructure

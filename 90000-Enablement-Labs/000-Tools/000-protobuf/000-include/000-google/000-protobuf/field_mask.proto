@@ -37,7 +37,7 @@ option java_outer_classname = "FieldMaskProto";
 option java_multiple_files = true;
 option objc_class_prefix = "GPB";
 option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "OlympusForge/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympusforge/v1x;olympusforgev1";
+option go_package = "OlympusForge/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympusforge/v1;olympusforgev1";
 option cc_enable_arenas = true;
 
 // `FieldMask` represents a set of symbolic field paths, for example:

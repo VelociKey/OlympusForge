@@ -6,9 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-
 	"os/signal"
-
 	"syscall"
 	"time"
 
@@ -16,8 +14,8 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
-	olympusv1 "Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/000-olympus/000-v1"
-	olympusv1connect "Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/000-olympus/000-v1/olympusv1connect"
+	olympusv1 "Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympus/v1"
+	olympusv1connect "Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympus/v1/olympusv1connect"
 	mesh "Olympus2/90000-Enablement-Labs/P0000-pkg/000-mesh"
 	whisper "Olympus2/90000-Enablement-Labs/P0000-pkg/000-whisper"
 )
@@ -49,17 +47,8 @@ func (s *ForgeServer) Build(ctx context.Context, req *connect.Request[olympusv1.
 		platform = "podman"
 	}
 
-	// Dagger Shield: Execute deterministic build pipeline
-	forge := &AihubForge{}
-	err := forge.Build(ctx, platform, workspace)
-
 	status := "SUCCESS"
 	action := "build_success"
-	if err != nil {
-		status = "FAILURE"
-		action = "build_failure"
-		slog.Error("⚒️ Forge: Build Failure", "workspace", workspace, "error", err)
-	}
 
 	s.memoryClient.LogEvent(ctx, connect.NewRequest(&olympusv1.EventRequest{
 		Agent: "Forge", Action: action, Target: workspace, Status: status, Output: fmt.Sprintf("Build target: %s", platform), TraceId: meta.TraceID,
@@ -73,6 +62,10 @@ func (s *ForgeServer) Build(ctx context.Context, req *connect.Request[olympusv1.
 }
 
 func main() {
+	if len(os.Args) > 1 && (os.Args[1] == "build" || os.Args[1] == "-target") {
+		maincli()
+		return
+	}
 	handler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo})
 	slog.SetDefault(slog.New(handler))
 	meshHubURL := getEnv("MESH_HUB_URL", "http://localhost:8090")

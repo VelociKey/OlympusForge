@@ -1,1 +1,1 @@
-@echo off & "..\infrastructure\dagger.exe" %*
+@echo off & "%~dp0..\000-infrastructure\dagger.exe" %*

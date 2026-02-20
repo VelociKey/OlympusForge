@@ -3,79 +3,16 @@ module OlympusForge
 go 1.25.7
 
 // Local Resolution
-replace Olympus2 => ../Olympus2
-replace Olympus2/00000-Identity-Foundations/P0000-pkg/check.v1 => ../Olympus2/00000-Identity-Foundations/P0000-pkg/check.v1
-replace Olympus2/00000-Identity-Foundations/P0000-pkg/go-internal => ../Olympus2/00000-Identity-Foundations/P0000-pkg/go-internal
-replace Olympus2/00000-Identity-Foundations/P0000-pkg/pretty => ../Olympus2/00000-Identity-Foundations/P0000-pkg/pretty
-replace Olympus2/00000-Identity-Foundations/P0000-pkg/text => ../Olympus2/00000-Identity-Foundations/P0000-pkg/text
-replace OlympusActors-Cognition => ../OlympusActors-Cognition
-replace OlympusActors-Delegation => ../OlympusActors-Delegation
-replace OlympusAscent => ../OlympusAscent
-replace OlympusAssurance => ../OlympusAssurance
-replace OlympusAtelier => ../OlympusAtelier
-replace OlympusFabric => ../OlympusFabric
-replace OlympusGCP-Compute => ../OlympusGCP-Compute
-replace OlympusGCP-Data => ../OlympusGCP-Data
-replace OlympusGCP-Events => ../OlympusGCP-Events
-replace OlympusGCP-FinOps => ../OlympusGCP-FinOps
-replace OlympusGCP-Firebase => ../OlympusGCP-Firebase
-replace OlympusGCP-Intelligence => ../OlympusGCP-Intelligence
-replace OlympusGCP-Messaging => ../OlympusGCP-Messaging
-replace OlympusGCP-Observability => ../OlympusGCP-Observability
-replace OlympusGCP-Storage => ../OlympusGCP-Storage
-replace OlympusGCP-Vault => ../OlympusGCP-Vault
-replace OlympusGrammar => ../OlympusGrammar
-replace OlympusInfrastructure => ../OlympusInfrastructure
-replace OlympusVision => ../OlympusVision
+replace OlympusForge/ZC0400-Sovereign-Source/mcp-go => ./ZC0400-Sovereign-Source/mcp-go
+replace aihub-forge => ./90000-Enablement-Labs/900-Forge
 replace github.com/mark3labs/mcp-go => ./ZC0400-Sovereign-Source/mcp-go
-replace text => ../Olympus2/00000-Identity-Foundations/P0000-pkg/text
-replace pretty => ../Olympus2/00000-Identity-Foundations/P0000-pkg/pretty
-replace go-internal => ../Olympus2/00000-Identity-Foundations/P0000-pkg/go-internal
-replace check.v1 => ../Olympus2/00000-Identity-Foundations/P0000-pkg/check.v1
-replace gopkg.in/check.v1 => ../Olympus2/00000-Identity-Foundations/P0000-pkg/check.v1
 
 require (
-	Olympus2 v0.0.0-00010101000000-000000000000
-	connectrpc.com/connect v1.19.1
-	dagger.io/dagger v0.19.11
-	golang.org/x/net v0.50.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
-	github.com/99designs/gqlgen v0.17.81 // indirect
-	github.com/Khan/genqlient v0.8.1 // indirect
-	github.com/adrg/xdg v0.5.3 // indirect
-	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
-	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/go-logr/logr v1.4.3 // indirect
-	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/google/uuid v1.6.0 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.7 // indirect
-	github.com/mitchellh/go-homedir v1.1.0 // indirect
-	github.com/sosodev/duration v1.3.1 // indirect
-	github.com/vektah/gqlparser/v2 v2.5.30 // indirect
-	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
-	go.opentelemetry.io/otel v1.40.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc v0.14.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp v0.14.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc v1.38.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp v1.38.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.40.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.40.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.38.0 // indirect
-	go.opentelemetry.io/otel/log v0.14.0 // indirect
-	go.opentelemetry.io/otel/metric v1.40.0 // indirect
-	go.opentelemetry.io/otel/sdk v1.40.0 // indirect
-	go.opentelemetry.io/otel/sdk/log v0.14.0 // indirect
-	go.opentelemetry.io/otel/sdk/metric v1.40.0 // indirect
-	go.opentelemetry.io/otel/trace v1.40.0 // indirect
-	go.opentelemetry.io/proto/otlp v1.9.0 // indirect
-	golang.org/x/sync v0.19.0 // indirect
-	golang.org/x/sys v0.41.0 // indirect
-	golang.org/x/text v0.34.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20260203192932-546029d2fa20 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260203192932-546029d2fa20 // indirect
-	google.golang.org/grpc v1.78.0 // indirect
-	google.golang.org/protobuf v1.36.11 // indirect
+	github.com/kr/pretty v0.3.1 // indirect
+	github.com/rogpeppe/go-internal v1.14.1 // indirect
+	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )

@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	mcpRepo = "https://github.com/mark3labs/mcp-go"
+	mcpRepo = "https://aihub-mcp"
 	zcDir   = "ZC0400-Sovereign-Source"
 )
 
@@ -50,7 +50,7 @@ func getPaths() (root, target string) {
 		}
 		curr = parent
 	}
-	target = filepath.Join(root, "OlympusForge", zcDir, "mcp-go")
+	target = filepath.Join(root, "OlympusForge", zcDir, "github.com/mark3labs/mcp-go")
 	return
 }
 

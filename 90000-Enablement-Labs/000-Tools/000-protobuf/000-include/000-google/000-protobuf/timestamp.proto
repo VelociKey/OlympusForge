@@ -33,7 +33,7 @@ syntax = "proto3";
 package google.protobuf;
 
 option cc_enable_arenas = true;
-option go_package = "OlympusForge/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympusforge/v1x;olympusforgev1";
+option go_package = "OlympusForge/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympusforge/v1;olympusforgev1";
 option java_package = "com.google.protobuf";
 option java_outer_classname = "TimestampProto";
 option java_multiple_files = true;
