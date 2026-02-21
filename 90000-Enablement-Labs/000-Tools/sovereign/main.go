@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net"
 	"os"
@@ -8,7 +9,10 @@ import (
 	"path/filepath"
 	"time"
 
+	econotel "Olympus2/90000-Enablement-Labs/P0000-pkg/000-econotel"
 	fleet "OlympusForge/00000-Identity-Foundations/P0000-pkg/000-fleet"
+
+	"go.opentelemetry.io/otel/attribute"
 )
 
 func main() {
@@ -62,6 +66,8 @@ func main() {
 		runDocs(root)
 	case "watch":
 		runWatch()
+	case "sync":
+		runSync(root)
 	case "migrate":
 		if len(os.Args) < 4 {
 			fmt.Println("Usage: sovereign migrate <oldPath> <newPath>")
@@ -88,6 +94,7 @@ func printUsage() {
 	fmt.Println("  build   Build a module leveraging OlympusForge (Target: GCP)")
 	fmt.Println("  docs    Aggregate markdown documentation for the active workspace")
 	fmt.Println("  watch   Open the interactive Mesh Watcher dashboard")
+	fmt.Println("  sync    Ping Sovereign context to the shared Conductor LPSV session log")
 	fmt.Println("  migrate Update import paths and replacements across the fleet")
 	fmt.Println("  help    Show this message")
 }
@@ -258,4 +265,33 @@ func runWatch() {
 
 		time.Sleep(2 * time.Second)
 	}
+}
+
+func runSync(root string) {
+	fmt.Println("📡 Pinging Sovereign Context to Conductor LPSV Session Log...")
+	logFile := filepath.Join(root, "conductor", "session.lpsv")
+
+	f, err := os.OpenFile(logFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Printf("Error opening session log: %v\n", err)
+		os.Exit(1)
+	}
+	defer f.Close()
+
+	tp, err := econotel.InitTracer("conductor-sidecar", f)
+	if err != nil {
+		fmt.Printf("Error initializing econotel: %v\n", err)
+		os.Exit(1)
+	}
+	defer tp.Shutdown(context.Background())
+
+	tr := tp.Tracer("sovereign-sync")
+	ctx, span := tr.Start(context.Background(), "SyncContext")
+	defer span.End()
+
+	econotel.RecordEconomicEvent(ctx, "session.sync", 1.0, "ping", 0.0)
+	span.SetAttributes(attribute.String("fleet.workspace", root))
+	span.SetAttributes(attribute.String("message", "Sovereign CLI synchronized workspace attributes"))
+
+	fmt.Printf("✅ Synced Context Ping to %s\n", logFile)
 }
