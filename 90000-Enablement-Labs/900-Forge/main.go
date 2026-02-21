@@ -44,7 +44,7 @@ func (s *ForgeServer) Build(ctx context.Context, req *connect.Request[olympusv1.
 
 	platform := os.Getenv("TARGET_PLATFORM")
 	if platform == "" {
-		platform = "podman"
+		platform = "native"
 	}
 
 	status := "SUCCESS"

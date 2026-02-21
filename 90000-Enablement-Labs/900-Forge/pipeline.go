@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"dagger.io/dagger"
 )
@@ -23,14 +24,15 @@ func (m *AihubForge) Build(ctx context.Context, target string, workspace string)
 	defer client.Close()
 
 	// 1. Acquire Source from Fleet Root (relative to Forge location)
+	fmt.Println("🔍 Forge: Acquiring source from relative root ../../..")
 	src := client.Host().Directory("../../..", dagger.HostDirectoryOpts{
-		Exclude: []string{"C0400-Artifacts", "C0990-Scratch", ".git", "node_modules", ".gemini/tmp"},
+		Exclude: []string{"C0400-Artifacts", "C0990-Scratch", ".git", "node_modules", ".gemini/tmp", "tmp_builds", "tmp_bin"},
 	})
 
-	// 2. Maturity Assessment (Athena)
-	// if err := validateAgentMaturity(ctx, client, src, workspace); err != nil {
-	// 	return fmt.Errorf("assessment failed: %v", err)
-	// }
+	// 2. Multi-Workspace Dispatch
+	if workspace == "all" {
+		return m.BuildAllClusters(ctx, target)
+	}
 
 	// 3. Dispatch to Target Strategy
 	switch target {
@@ -40,8 +42,6 @@ func (m *AihubForge) Build(ctx context.Context, target string, workspace string)
 		return m.buildPodman(ctx, client, src, workspace)
 	case "gcp":
 		return m.buildGCP(ctx, client, src, workspace)
-	case "all":
-		return m.BuildAllClusters(ctx, "podman") // Default to local OCI for all
 	default:
 		return fmt.Errorf("invalid target: %s. Options: native, podman, gcp, all", target)
 	}
@@ -75,13 +75,13 @@ func (m *AihubForge) buildNative(ctx context.Context, client *dagger.Client, src
 
 	// Build for host OS/Arch (Windows cross-compile since we are in a Linux container)
 	// We use sh -c to find and build the first main.go in the workspace
-	builder := client.Container().From("golang:1.24").
+	builder := client.Container().From("golang:1.25").
 		WithEnvVariable("GOOS", "windows").
 		WithEnvVariable("GOARCH", "amd64").
 		WithEnvVariable("GOWORK", "/src/go.work").
 		WithDirectory("/src", src).
-		WithWorkdir(filepath.Join("/src", workspace)).
-		WithExec([]string{"sh", "-c", "MAIN_PATH=$(find . -name main.go | head -n 1); if [ -z \"$MAIN_PATH\" ]; then exit 1; fi; go build -o bin/service.exe $MAIN_PATH"})
+		WithWorkdir("/src/" + workspace).
+		WithExec([]string{"sh", "-c", "MAIN_PATH=$(find . -name main.go | head -n 1); if [ -z \"$MAIN_PATH\" ]; then echo 'ERROR: No main.go found in '\"$(pwd)\"; exit 1; fi; go build -o bin/service.exe $MAIN_PATH"})
 
 	// Export binary back to host
 	_, err := builder.Directory("bin").Export(ctx, filepath.Join(workspace, "bin"))
@@ -102,13 +102,23 @@ func (m *AihubForge) buildPodman(ctx context.Context, client *dagger.Client, src
 
 // buildGCP builds and publishes images to Google Artifact Registry
 func (m *AihubForge) buildGCP(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) error {
+	return m.PublishService(ctx, client, src, workspace)
+}
+
+// PublishService tags and pushes the image to Google Artifact Registry.
+func (m *AihubForge) PublishService(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) error {
+	// Double-Verification Safeguard
+	if os.Getenv("GAR_PUSH_CONFIRMED") != "true" {
+		return fmt.Errorf("ABORTING PUSH: GAR Image Push requires double-verification. Please set GAR_PUSH_CONFIRMED=true to proceed")
+	}
+
 	projectID := os.Getenv("GCP_PROJECT_ID")
 	if projectID == "" {
 		projectID = "olympus-project"
 	}
 	garRegion := os.Getenv("GCP_GAR_REGION")
 	if garRegion == "" {
-		garRegion = "us-central1"
+		garRegion = "us-east1"
 	}
 
 	fmt.Printf("⚒️ Forge: GCP Cloud Run Build [%s] -> %s\n", workspace, projectID)
@@ -116,7 +126,7 @@ func (m *AihubForge) buildGCP(ctx context.Context, client *dagger.Client, src *d
 	image := m.sealedImage(client, src, workspace)
 
 	// Tag for GAR
-	tag := fmt.Sprintf("%s-docker.pkg.dev/%s/olympus-fleet/%s:latest", garRegion, projectID, workspace)
+	tag := fmt.Sprintf("%s-docker.pkg.dev/%s/olympus-fleet/%s:latest", garRegion, projectID, strings.ToLower(workspace))
 	_, err := image.Publish(ctx, tag)
 	return err
 }
