@@ -50,6 +50,14 @@ func main() {
 		runCheck(root)
 	case "start":
 		runStart(root)
+	case "build":
+		if len(os.Args) < 3 {
+			fmt.Println("Usage: sovereign build <moduleName>")
+			os.Exit(1)
+		}
+		runBuild(root, os.Args[2])
+	case "docs":
+		runDocs(root)
 	case "migrate":
 		if len(os.Args) < 4 {
 			fmt.Println("Usage: sovereign migrate <oldPath> <newPath>")
@@ -73,6 +81,8 @@ func printUsage() {
 	fmt.Println("  create  Scaffold a new Go module")
 	fmt.Println("  check   Verify fleet integrity and structural consistency")
 	fmt.Println("  start   Start the Sovereign Workstation Cloud (Infrastructure + Bridges)")
+	fmt.Println("  build   Build a module leveraging OlympusForge (Target: GCP)")
+	fmt.Println("  docs    Aggregate markdown documentation for the active workspace")
 	fmt.Println("  migrate Update import paths and replacements across the fleet")
 	fmt.Println("  help    Show this message")
 }
@@ -169,4 +179,48 @@ func runTidy(root string) {
 	}
 
 	fmt.Println("✅ Fleet tidying complete.")
+}
+
+func runBuild(root, moduleName string) {
+	fmt.Printf("🚀 Building %s via OlympusForge...\n", moduleName)
+	cmd := exec.Command("go", "run", ".", "-target", "gcp", "-workspace", moduleName)
+	cmd.Dir = filepath.Join(root, "OlympusForge", "90000-Enablement-Labs", "900-Forge")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("Error building module: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println("✅ Build pipeline complete.")
+}
+
+func runDocs(root string) {
+	fmt.Println("📚 Aggregating Sovereign Workspace Documentation...")
+	modules, err := fleet.FindGoModules(root)
+	if err != nil {
+		fmt.Printf("Error scanning modules: %v\n", err)
+		os.Exit(1)
+	}
+
+	for _, mod := range modules {
+		docFile := filepath.Join(mod.Path, "SOVEREIGN_DOCS.md")
+
+		var content []byte
+		filepath.Walk(mod.Path, func(path string, info os.FileInfo, err error) error {
+			if !info.IsDir() && filepath.Ext(path) == ".md" && filepath.Base(path) != "SOVEREIGN_DOCS.md" {
+				data, readErr := os.ReadFile(path)
+				if readErr == nil {
+					content = append(content, []byte(fmt.Sprintf("\n# Source: %s\n\n", filepath.Base(path)))...)
+					content = append(content, data...)
+				}
+			}
+			return nil
+		})
+
+		if len(content) > 0 {
+			os.WriteFile(docFile, content, 0644)
+			fmt.Printf("Generated %s\n", docFile)
+		}
+	}
+	fmt.Println("✅ Documentation aggregation complete.")
 }
