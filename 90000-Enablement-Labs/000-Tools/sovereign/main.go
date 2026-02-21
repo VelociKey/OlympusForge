@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"net"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"time"
 
 	fleet "OlympusForge/00000-Identity-Foundations/P0000-pkg/000-fleet"
 )
@@ -58,6 +60,8 @@ func main() {
 		runBuild(root, os.Args[2])
 	case "docs":
 		runDocs(root)
+	case "watch":
+		runWatch()
 	case "migrate":
 		if len(os.Args) < 4 {
 			fmt.Println("Usage: sovereign migrate <oldPath> <newPath>")
@@ -83,6 +87,7 @@ func printUsage() {
 	fmt.Println("  start   Start the Sovereign Workstation Cloud (Infrastructure + Bridges)")
 	fmt.Println("  build   Build a module leveraging OlympusForge (Target: GCP)")
 	fmt.Println("  docs    Aggregate markdown documentation for the active workspace")
+	fmt.Println("  watch   Open the interactive Mesh Watcher dashboard")
 	fmt.Println("  migrate Update import paths and replacements across the fleet")
 	fmt.Println("  help    Show this message")
 }
@@ -223,4 +228,34 @@ func runDocs(root string) {
 		}
 	}
 	fmt.Println("✅ Documentation aggregation complete.")
+}
+
+func runWatch() {
+	ports := []string{"8092", "8091", "8096", "8098", "8095", "8093", "8094", "8097", "8099", "8090"}
+
+	for {
+		// Clear screen
+		fmt.Print("\033[H\033[2J")
+		fmt.Println("📡 Sovereign Mesh Watcher Dashboard")
+		fmt.Println("=====================================")
+		fmt.Printf("Time: %s\n\n", time.Now().Format(time.RFC1123))
+
+		active := 0
+		for _, port := range ports {
+			conn, err := net.DialTimeout("tcp", "localhost:"+port, 500*time.Millisecond)
+			if err == nil {
+				fmt.Printf(" [OK] Port %s: 🟩 ONLINE\n", port)
+				active++
+				conn.Close()
+			} else {
+				fmt.Printf(" [XX] Port %s: 🟥 OFFLINE\n", port)
+			}
+		}
+
+		fmt.Println("-------------------------------------")
+		fmt.Printf("Total Online: %d/%d\n", active, len(ports))
+		fmt.Println("Press Ctrl+C to exit.")
+
+		time.Sleep(2 * time.Second)
+	}
 }
