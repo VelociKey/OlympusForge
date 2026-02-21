@@ -88,15 +88,35 @@ func (m *AihubForge) buildNative(ctx context.Context, client *dagger.Client, src
 	return err
 }
 
+// buildLinux builds binaries for linux/amd64 inside the container using the full `src` tree to preserve go.work
+func (m *AihubForge) buildLinux(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) (*dagger.Directory, error) {
+	fmt.Printf("⚒️ Forge: Linux Build [%s]\n", workspace)
+
+	builder := client.Container().From("golang:1.25").
+		WithEnvVariable("GOOS", "linux").
+		WithEnvVariable("GOARCH", "amd64").
+		WithEnvVariable("CGO_ENABLED", "0").
+		WithEnvVariable("GOWORK", "/src/go.work").
+		WithDirectory("/src", src).
+		WithWorkdir("/src/" + workspace).
+		WithExec([]string{"sh", "-c", "MAIN_PATH=$(find . -name main.go | head -n 1); if [ -z \"$MAIN_PATH\" ]; then echo 'ERROR: No main.go found in '\"$(pwd)\"; exit 1; fi; go build -o bin/service $MAIN_PATH"})
+
+	return builder.Directory("bin"), nil
+}
+
 // buildPodman builds OCI images for local Podman Desktop execution
 func (m *AihubForge) buildPodman(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) error {
 	fmt.Printf("⚒️ Forge: Podman Image Build [%s]\n", workspace)
 
-	image := m.sealedImage(client, src, workspace)
+	binDir, err := m.buildLinux(ctx, client, src, workspace)
+	if err != nil {
+		return err
+	}
+	image := m.sealedImage(client, src, binDir, workspace)
 
 	// Tag for local Podman
 	tag := fmt.Sprintf("localhost/%s:latest", workspace)
-	_, err := image.Publish(ctx, tag)
+	_, err = image.Publish(ctx, tag)
 	return err
 }
 
@@ -123,18 +143,23 @@ func (m *AihubForge) PublishService(ctx context.Context, client *dagger.Client, 
 
 	fmt.Printf("⚒️ Forge: GCP Cloud Run Build [%s] -> %s\n", workspace, projectID)
 
-	image := m.sealedImage(client, src, workspace)
+	binDir, err := m.buildLinux(ctx, client, src, workspace)
+	if err != nil {
+		return err
+	}
+	image := m.sealedImage(client, src, binDir, workspace)
 
 	// Tag for GAR
 	tag := fmt.Sprintf("%s-docker.pkg.dev/%s/olympus-fleet/%s:latest", garRegion, projectID, strings.ToLower(workspace))
-	_, err := image.Publish(ctx, tag)
+	_, err = image.Publish(ctx, tag)
 	return err
 }
 
 // sealedImage creates a deterministic, attestation-ready OCI image
-func (m *AihubForge) sealedImage(client *dagger.Client, src *dagger.Directory, workspace string) *dagger.Container {
+func (m *AihubForge) sealedImage(client *dagger.Client, src *dagger.Directory, binDir *dagger.Directory, workspace string) *dagger.Container {
 	return client.Container().From("debian:trixie-slim").
 		WithDirectory("/app", src.Directory(workspace)).
+		WithDirectory("/app/bin", binDir).
 		WithWorkdir("/app").
 		WithExec([]string{"apt-get", "update"}).
 		WithExec([]string{"apt-get", "install", "-y", "ca-certificates"}).
