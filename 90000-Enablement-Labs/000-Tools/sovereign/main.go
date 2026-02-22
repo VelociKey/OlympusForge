@@ -12,6 +12,14 @@ import (
 	econotel "Olympus2/90000-Enablement-Labs/P0000-pkg/000-econotel"
 	fleet "OlympusForge/00000-Identity-Foundations/P0000-pkg/000-fleet"
 
+	georgev1 "George/40000-Communication-Contracts/430-Protocol-Definitions/000-proto/george/v1"
+	"George/40000-Communication-Contracts/430-Protocol-Definitions/000-proto/george/v1/georgev1connect"
+
+	"net/http"
+
+	"io"
+
+	"connectrpc.com/connect"
 	"go.opentelemetry.io/otel/attribute"
 )
 
@@ -74,6 +82,14 @@ func main() {
 			os.Exit(1)
 		}
 		runMigrate(root, os.Args[2], os.Args[3])
+	case "daemon":
+		runDaemon(root)
+	case "ask":
+		if len(os.Args) < 3 {
+			fmt.Println("Usage: sovereign ask <question>")
+			os.Exit(1)
+		}
+		runAsk(root, os.Args[2])
 	case "help":
 		printUsage()
 	default:
@@ -91,11 +107,13 @@ func printUsage() {
 	fmt.Println("  create  Scaffold a new Go module")
 	fmt.Println("  check   Verify fleet integrity and structural consistency")
 	fmt.Println("  start   Start the Sovereign Workstation Cloud (Infrastructure + Bridges)")
-	fmt.Println("  build   Build a module leveraging OlympusForge (Target: GCP)")
+	fmt.Println("  build   Build a module natively leveraging OlympusForge")
 	fmt.Println("  docs    Aggregate markdown documentation for the active workspace")
 	fmt.Println("  watch   Open the interactive Mesh Watcher dashboard")
 	fmt.Println("  sync    Ping Sovereign context to the shared Conductor LPSV session log")
 	fmt.Println("  migrate Update import paths and replacements across the fleet")
+	fmt.Println("  daemon  Start the Sovereign background watcher daemon")
+	fmt.Println("  ask     Ask George for assistance (context-aware)")
 	fmt.Println("  help    Show this message")
 }
 
@@ -194,11 +212,20 @@ func runTidy(root string) {
 }
 
 func runBuild(root, moduleName string) {
-	fmt.Printf("🚀 Building %s via OlympusForge...\n", moduleName)
-	cmd := exec.Command("go", "run", ".", "-target", "gcp", "-workspace", moduleName)
+	scratchDir := filepath.Join(root, "Olympus2", "C0990-Ephemeral-Scratch")
+	os.MkdirAll(scratchDir, 0755)
+	lastErrFile := filepath.Join(scratchDir, "last_error.log")
+
+	fmt.Printf("🚀 Building %s natively via OlympusForge...\n", moduleName)
+	cmd := exec.Command("go", "run", ".", "-target", "native", "-workspace", moduleName)
 	cmd.Dir = filepath.Join(root, "OlympusForge", "90000-Enablement-Labs", "900-Forge")
+
+	f, _ := os.Create(lastErrFile)
+	defer f.Close()
+
 	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	cmd.Stderr = io.MultiWriter(os.Stderr, f)
+
 	if err := cmd.Run(); err != nil {
 		fmt.Printf("Error building module: %v\n", err)
 		os.Exit(1)
@@ -294,4 +321,69 @@ func runSync(root string) {
 	span.SetAttributes(attribute.String("message", "Sovereign CLI synchronized workspace attributes"))
 
 	fmt.Printf("✅ Synced Context Ping to %s\n", logFile)
+}
+
+func runDaemon(root string) {
+	fmt.Println("👁️  Starting Sovereign Daemon...")
+	// In a real implementation, this would use fsnotify to watch for changes
+	// and update George's knowledge base or trigger builds.
+	for {
+		fmt.Printf("[%s] Sovereign Daemon active. Watching for fleet events...\n", time.Now().Format("15:04:05"))
+		time.Sleep(10 * time.Second)
+	}
+}
+
+func runAsk(root string, question string) {
+	fmt.Printf("🧠 Consulting George: %s\n", question)
+
+	// Check for active failures in scratch space
+	scratchDir := filepath.Join(root, "Olympus2", "C0990-Ephemeral-Scratch")
+	lastErrFile := filepath.Join(scratchDir, "last_error.log")
+	var contextStr string
+	if data, err := os.ReadFile(lastErrFile); err == nil {
+		fmt.Println("📎 Detected active failure in scratch, adding to context...")
+		contextStr = fmt.Sprintf("\n\nRECENT_FAILURE_LOG:\n%s", string(data))
+	}
+
+	client := georgev1connect.NewGeorgeServiceClient(http.DefaultClient, "http://localhost:8080")
+
+	// 1. Start or resume session (mocking user_id for now)
+	ctx := context.Background()
+	startReq := connect.NewRequest(&georgev1.StartSessionRequest{
+		UserId: "sovereign_cli_user",
+	})
+	startReq.Header().Set("Authorization", "Bearer sovereign_cli_user-token")
+
+	startResp, err := client.StartSession(ctx, startReq)
+	if err != nil {
+		fmt.Printf("❌ Failed to connect to George: %v\n", err)
+		return
+	}
+	sessionID := startResp.Msg.SessionId
+
+	// 2. Send message
+	req := connect.NewRequest(&georgev1.SendMessageRequest{
+		SessionId: sessionID,
+		Text:      question + contextStr,
+	})
+	req.Header().Set("Authorization", "Bearer sovereign_cli_user-token")
+
+	stream, err := client.SendMessage(ctx, req)
+	if err != nil {
+		fmt.Printf("❌ Error: %v\n", err)
+		return
+	}
+
+	fmt.Print("🤖 George: ")
+	for stream.Receive() {
+		event := stream.Msg()
+		if event.Type == georgev1.AgentEvent_TOKEN {
+			fmt.Print(event.Payload)
+		}
+	}
+	fmt.Println()
+
+	if err := stream.Err(); err != nil {
+		fmt.Printf("\n❌ Stream error: %v\n", err)
+	}
 }
