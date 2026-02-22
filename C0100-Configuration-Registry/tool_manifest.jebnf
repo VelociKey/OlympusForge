@@ -15,9 +15,10 @@ Validation {
 Infrastructure {
   Tool gcloud { 
     type = "external"; 
-    install_cmd = "powershell -ExecutionPolicy Bypass -Command "(New-Object Net.WebClient).DownloadFile('https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk-windows-x86_64-bundled-python.zip', 'gcloud.zip')"" 
+    install_cmd = "powershell -ExecutionPolicy Bypass -Command \"(New-Object Net.WebClient).DownloadFile('https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk-windows-x86_64-bundled-python.zip', 'gcloud.zip')\"" 
   }
   Tool firebase { type = "npm"; package = "firebase-tools" }
+  Tool gradle { version = "8.13"; bin = "90000-Enablement-Labs/000-Tools/000-infrastructure/gradle/bin/gradle.bat" }
 }
 
 Intelligence {

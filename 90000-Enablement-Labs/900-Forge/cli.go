@@ -10,6 +10,7 @@ import (
 func maincli() {
 	target := flag.String("target", "native", "build target (native, podman, gcp, all)")
 	workspace := flag.String("workspace", "", "workspace to build")
+	assess := flag.Bool("assess", false, "run maturity assessment instead of build")
 	flag.Parse()
 
 	if *workspace == "" && *target != "all" && *workspace != "all" {
@@ -28,6 +29,15 @@ func maincli() {
 
 	ctx := context.Background()
 	forge := &AihubForge{}
+
+	if *assess {
+		fmt.Printf("🛡️ Starting Athena Maturity Assessment for workspace: %s\n", *workspace)
+		if err := forge.Assess(ctx, *workspace); err != nil {
+			log.Fatalf("❌ Assessment failed: %v", err)
+		}
+		fmt.Println("✅ Assessment completed successfully")
+		return
+	}
 
 	fmt.Printf("🚀 Starting AihubForge Build [target=%s, workspace=%s]\n", *target, *workspace)
 	if err := forge.Build(ctx, *target, *workspace); err != nil {

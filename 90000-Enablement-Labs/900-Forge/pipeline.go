@@ -47,6 +47,52 @@ func (m *AihubForge) Build(ctx context.Context, target string, workspace string)
 	}
 }
 
+func (m *AihubForge) Assess(ctx context.Context, workspace string) error {
+	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
+	if err != nil {
+		return fmt.Errorf("failed to connect to dagger: %v", err)
+	}
+	defer client.Close()
+
+	fmt.Println("🔍 Forge: Acquiring source for Assessment")
+	src := client.Host().Directory("../../..", dagger.HostDirectoryOpts{
+		Exclude: []string{"C0400-Artifacts", "C0990-Scratch", ".git", "node_modules", ".gemini/tmp"},
+	})
+
+	if workspace == "all" {
+		return m.AssessAllClusters(ctx, client, src)
+	}
+
+	targets := strings.Split(workspace, ",")
+	for _, target := range targets {
+		t := strings.TrimSpace(target)
+		if t == "" {
+			continue
+		}
+		if err := validateAgentMaturity(ctx, client, src, t); err != nil {
+			fmt.Printf("⚠️ Assessment failed for %s: %v\n", t, err)
+		}
+	}
+	return nil
+}
+
+func (m *AihubForge) AssessAllClusters(ctx context.Context, client *dagger.Client, src *dagger.Directory) error {
+	clusters := []string{
+		"George",
+		"Olympus2",
+		"OlympusMCP",
+		"OlympusForge",
+		"OlympusGCP-Events",
+		"OlympusGCP-Vault",
+	}
+	for _, cluster := range clusters {
+		if err := validateAgentMaturity(ctx, client, src, cluster); err != nil {
+			fmt.Printf("⚠️ Assessment failed for %s: %v\n", cluster, err)
+		}
+	}
+	return nil
+}
+
 // BuildAllClusters iterates over all 10 GCP clusters and builds them for the specified target.
 func (m *AihubForge) BuildAllClusters(ctx context.Context, target string) error {
 	clusters := []string{

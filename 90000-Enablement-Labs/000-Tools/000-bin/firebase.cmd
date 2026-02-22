@@ -1,1 +1,2 @@
-@echo off & "..\foundation\firebase.cmd" %*
+@echo off
+"%~dp0..\000-infrastructure\firebase\firebase.cmd" %*

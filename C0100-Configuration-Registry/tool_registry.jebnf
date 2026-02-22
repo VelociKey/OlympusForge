@@ -1,0 +1,43 @@
+# OlympusForge: Universal Tool Registry (Cycle 11)
+# Format: jeBNF
+
+Registry = { ToolCategory } ;
+
+ToolCategory = CategoryName "{" { ToolDefinition } "}" ;
+
+ToolDefinition = "Tool" ToolName "{" 
+    "version" "=" ToolVersion ";"
+    "origin" "=" ToolOrigin ";"
+    [ "package" "=" PackagePath ";" ]
+    [ "binary" "=" BinaryName ";" ]
+    [ "registry_hash" "=" MPHHash ";" ]
+"}" ;
+
+# Active Tools Configuration
+Foundation {
+    Tool go { version = "1.24.0"; origin = "external"; package = "https://go.dev/dl/go1.24.0.windows-amd64.zip"; binary = "bin/go.exe" }
+    Tool git { version = "2.47.1"; origin = "external"; package = "https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/MinGit-2.47.1-64-bit.zip"; binary = "cmd/git.exe" }
+}
+
+Engineering {
+    Tool buf { version = "v1.50.0"; origin = "go-install"; package = "github.com/bufbuild/buf/cmd/buf@v1.50.0"; binary = "buf.exe" }
+    Tool air { version = "v1.64.5"; origin = "go-install"; package = "github.com/air-verse/air@v1.64.5"; binary = "air.exe" }
+    Tool protoc_gen_go { version = "v1.36.1"; origin = "go-install"; package = "google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.1"; binary = "protoc-gen-go.exe" }
+    Tool protoc_gen_connect_go { version = "v1.18.1"; origin = "go-install"; package = "connectrpc.com/connect/cmd/protoc-gen-connect-go@v1.18.1"; binary = "protoc-gen-connect-go.exe" }
+    Tool flutter { version = "3.29.0"; origin = "external"; package = "https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.29.0-stable.zip"; binary = "bin/flutter.bat" }
+}
+
+Security {
+    Tool trivy { version = "v0.59.1"; origin = "gh-release"; package = "aquasecurity/trivy"; binary = "trivy.exe" }
+    Tool gosec { version = "latest"; origin = "go-install"; package = "github.com/securego/gosec/v2/cmd/gosec@latest"; binary = "gosec.exe" }
+    Tool govulncheck { version = "latest"; origin = "go-install"; package = "golang.org/x/vuln/cmd/govulncheck@latest"; binary = "govulncheck.exe" }
+}
+
+Intelligence {
+    Tool george_bootstrap { version = "v1.0.0"; origin = "local-source"; package = "OlympusForge/90000-Enablement-Labs/000-Tools/000-intelligence/george-bootstrap"; binary = "george-bootstrap.exe" }
+    Tool ollama { version = "latest"; origin = "external"; package = "https://ollama.com/download/ollama-windows-amd64.zip"; binary = "ollama.exe" }
+}
+
+Infrastructure {
+    Tool gradle { version = "8.13"; origin = "external"; package = "https://services.gradle.org/distributions/gradle-8.13-bin.zip"; binary = "bin/gradle.bat" }
+}

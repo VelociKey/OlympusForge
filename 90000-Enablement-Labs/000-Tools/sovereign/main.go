@@ -12,8 +12,8 @@ import (
 	econotel "Olympus2/90000-Enablement-Labs/P0000-pkg/000-econotel"
 	fleet "OlympusForge/00000-Identity-Foundations/P0000-pkg/000-fleet"
 
-	georgev1 "George/40000-Communication-Contracts/430-Protocol-Definitions/000-proto/george/v1"
-	"George/40000-Communication-Contracts/430-Protocol-Definitions/000-proto/george/v1/georgev1connect"
+	reasoningv1 "OlympusGrammar/40000-Communication-Contracts/gen/reasoning/v1"
+	"OlympusGrammar/40000-Communication-Contracts/gen/reasoning/v1/reasoningv1connect"
 
 	"net/http"
 
@@ -60,6 +60,12 @@ func main() {
 			os.Exit(1)
 		}
 		runCreate(root, os.Args[2])
+	case "assess":
+		if len(os.Args) < 3 {
+			runAssess(root, "all")
+		} else {
+			runAssess(root, os.Args[2])
+		}
 	case "check":
 		runCheck(root)
 	case "start":
@@ -105,6 +111,7 @@ func printUsage() {
 	fmt.Println("  init    Synchronize all go.mod and go.work files")
 	fmt.Println("  tidy    Run 'go mod tidy' across all modules")
 	fmt.Println("  create  Scaffold a new Go module")
+	fmt.Println("  assess  Assess maturity of workspace(s) via Athena (Dagger)")
 	fmt.Println("  check   Verify fleet integrity and structural consistency")
 	fmt.Println("  start   Start the Sovereign Workstation Cloud (Infrastructure + Bridges)")
 	fmt.Println("  build   Build a module natively leveraging OlympusForge")
@@ -233,6 +240,20 @@ func runBuild(root, moduleName string) {
 	fmt.Println("✅ Build pipeline complete.")
 }
 
+func runAssess(root, workspace string) {
+	fmt.Printf("🛡️  Assessing maturity of %s via Athena...\n", workspace)
+	cmd := exec.Command("go", "run", ".", "-assess", "-workspace", workspace)
+	cmd.Dir = filepath.Join(root, "OlympusForge", "90000-Enablement-Labs", "900-Forge")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("Error during assessment: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println("✅ Assessment complete.")
+}
+
 func runDocs(root string) {
 	fmt.Println("📚 Aggregating Sovereign Workspace Documentation...")
 	modules, err := fleet.FindGoModules(root)
@@ -345,11 +366,11 @@ func runAsk(root string, question string) {
 		contextStr = fmt.Sprintf("\n\nRECENT_FAILURE_LOG:\n%s", string(data))
 	}
 
-	client := georgev1connect.NewGeorgeServiceClient(http.DefaultClient, "http://localhost:8080")
+	client := reasoningv1connect.NewAutonomousInferenceServiceClient(http.DefaultClient, "http://localhost:8080")
 
 	// 1. Start or resume session (mocking user_id for now)
 	ctx := context.Background()
-	startReq := connect.NewRequest(&georgev1.StartSessionRequest{
+	startReq := connect.NewRequest(&reasoningv1.StartSessionRequest{
 		UserId: "sovereign_cli_user",
 	})
 	startReq.Header().Set("Authorization", "Bearer sovereign_cli_user-token")
@@ -362,7 +383,7 @@ func runAsk(root string, question string) {
 	sessionID := startResp.Msg.SessionId
 
 	// 2. Send message
-	req := connect.NewRequest(&georgev1.SendMessageRequest{
+	req := connect.NewRequest(&reasoningv1.SendMessageRequest{
 		SessionId: sessionID,
 		Text:      question + contextStr,
 	})
@@ -377,7 +398,7 @@ func runAsk(root string, question string) {
 	fmt.Print("🤖 George: ")
 	for stream.Receive() {
 		event := stream.Msg()
-		if event.Type == georgev1.AgentEvent_TOKEN {
+		if event.Type == reasoningv1.AgentEvent_TOKEN {
 			fmt.Print(event.Payload)
 		}
 	}
