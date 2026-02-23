@@ -72,6 +72,19 @@ func main() {
 	syncCmd := exec.Command("go", "work", "sync")
 	syncCmd.Run()
 
+	// 4. Project Workspace Provisioning (George Sandbox)
+	fmt.Println("Provisioning Project Workspaces...")
+	georgeProvPath := filepath.Join("George", "provision.go")
+	if _, err := os.Stat(georgeProvPath); err == nil {
+		fmt.Println("Running George Provisioner...")
+		georgeCmd := exec.Command("go", "run", georgeProvPath)
+		georgeCmd.Stdout = os.Stdout
+		georgeCmd.Stderr = os.Stderr
+		if err := georgeCmd.Run(); err != nil {
+			fmt.Printf("⚠️ George provisioning failed: %v\n", err)
+		}
+	}
+
 	fmt.Println("OlympusForge provisioning complete.")
 }
 

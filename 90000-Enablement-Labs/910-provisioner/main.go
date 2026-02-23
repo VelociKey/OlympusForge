@@ -3,7 +3,6 @@ package main
 import (
 	"archive/zip"
 	"context"
-	"encoding/json"
 	"fmt"
 	"io"
 	"log/slog"
@@ -13,6 +12,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"time"
 )
 
 // ToolDefinition matches the jeBNF structure
@@ -257,10 +257,17 @@ func unzip(src, dest string) error {
 }
 
 func saveRegistry(basePath string, reg *Registry, logger *slog.Logger) {
-	// JSON version for cross-language agents
-	regPath := filepath.Join(basePath, "tool_registry.json")
-	data, _ := json.MarshalIndent(reg, "", "  ")
-	os.WriteFile(regPath, data, 0644)
+	// jeBNF version for agent navigation (Mantra aligned)
+	regPath := filepath.Join(basePath, "tool_symbols.jebnf")
+	var jb strings.Builder
+	jb.WriteString("# Forge Tool Symbols (jeBNF-mPSH)\n")
+	jb.WriteString(fmt.Sprintf("generated_at = %q\n\n", time.Now().Format(time.RFC3339)))
+	jb.WriteString("Symbols {\n")
+	for name, path := range reg.Symbols {
+		jb.WriteString(fmt.Sprintf("  %s = %q\n", name, filepath.ToSlash(path)))
+	}
+	jb.WriteString("}\n")
+	os.WriteFile(regPath, []byte(jb.String()), 0644)
 
 	// Go version for compiled-in MPH performance (Mantra aligned)
 	registryDir := filepath.Join(basePath, "registry")
@@ -276,5 +283,5 @@ func saveRegistry(basePath string, reg *Registry, logger *slog.Logger) {
 	sb.WriteString("}\n")
 	os.WriteFile(goPath, []byte(sb.String()), 0644)
 
-	logger.Info("Symbol Table Registry generated", "json", regPath, "go", goPath, "count", len(reg.Symbols))
+	logger.Info("Symbol Table Registry generated", "jebnf", regPath, "go", goPath, "count", len(reg.Symbols))
 }
