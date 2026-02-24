@@ -12,8 +12,8 @@ import (
 	econotel "Olympus2/90000-Enablement-Labs/P0000-pkg/000-econotel"
 	fleet "OlympusForge/00000-Identity-Foundations/P0000-pkg/000-fleet"
 
-	reasoningv1 "OlympusGrammar/40000-Communication-Contracts/gen/reasoning/v1"
-	"OlympusGrammar/40000-Communication-Contracts/gen/reasoning/v1/reasoningv1connect"
+	reasoningv1 "OlympusGrammar/gen/v1/reasoning"
+	reasoningv1connect "OlympusGrammar/gen/v1/reasoning/reasoningv1connect"
 
 	"net/http"
 

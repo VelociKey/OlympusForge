@@ -78,6 +78,13 @@ func main() {
 		sc:           whisper.New("Forge", "forge.lpsv"),
 	}
 	mux := http.NewServeMux()
+
+	// Health Check / Pulse
+	mux.HandleFunc("/pulse", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		fmt.Fprintf(w, `{"status":"HEALTHY", "workspace":"OlympusForge", "time":"%s"}`, time.Now().Format(time.RFC3339))
+	})
+
 	mux.Handle(olympusv1connect.NewForgeServiceHandler(server, interceptors))
 	srv := &http.Server{Addr: ":8088", Handler: h2c.NewHandler(mux, &http2.Server{})}
 	stop := make(chan os.Signal, 1)

@@ -54,6 +54,7 @@ func (m *AihubForge) Build(ctx context.Context, target string, workspace string)
 }
 
 func (m *AihubForge) Assess(ctx context.Context, workspace string) error {
+	fmt.Printf("🔍 Forge: Connecting to Dagger for Assessment of %s...\n", workspace)
 	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
 	if err != nil {
 		return fmt.Errorf("failed to connect to dagger: %v", err)
@@ -161,7 +162,7 @@ func (m *AihubForge) buildPodman(ctx context.Context, client *dagger.Client, src
 	fmt.Printf("⚒️ Forge: Podman Image Build [%s]\n", workspace)
 
 	if workspace == "George" {
-		return m.buildGeorgePodman(ctx, client, src)
+		return m.buildGeorgeHardened(ctx, client, src)
 	}
 
 	binDir, err := m.buildLinux(ctx, client, src, workspace)
@@ -173,46 +174,6 @@ func (m *AihubForge) buildPodman(ctx context.Context, client *dagger.Client, src
 	// Tag for local Podman
 	tag := fmt.Sprintf("localhost/%s:latest", workspace)
 	_, err = image.Publish(ctx, tag)
-	return err
-}
-
-func (m *AihubForge) buildGeorgePodman(ctx context.Context, client *dagger.Client, src *dagger.Directory) error {
-	// 1. Build Go WASM
-	goWasm := client.Container().From("golang:1.25").
-		WithEnvVariable("GOOS", "js").
-		WithEnvVariable("GOARCH", "wasm").
-		WithDirectory("/src", src).
-		WithWorkdir("/src/George/10000-Autonomous-Actors/10700-Processing-Engines/10710-Reasoning-Inference").
-		WithExec([]string{"go", "build", "-o", "/out/george.wasm", "."}).
-		File("/out/george.wasm")
-
-	// 2. Build Go Windows EXE
-	goWin := client.Container().From("golang:1.25").
-		WithEnvVariable("GOOS", "windows").
-		WithEnvVariable("GOARCH", "amd64").
-		WithDirectory("/src", src).
-		WithWorkdir("/src/George/10000-Autonomous-Actors/10700-Processing-Engines/10710-Reasoning-Inference").
-		WithExec([]string{"go", "build", "-o", "/out/george-reasoning.exe", "."}).
-		File("/out/george-reasoning.exe")
-
-	// 3. Build Flutter Web WASM
-	flutterBuild := client.Container().From("ghcr.io/cirruslabs/flutter:stable").
-		WithDirectory("/src", src).
-		WithWorkdir("/src/George/F0000-frontend").
-		WithFile("assets/wasm/george.wasm", goWasm).
-		WithExec([]string{"flutter", "build", "web", "--wasm"}).
-		Directory("build/web")
-
-	// 4. Create final Nginx container
-	image := client.Container().From("nginx:alpine").
-		WithFile("/etc/nginx/nginx.conf", src.File("George/nginx.conf")).
-		WithDirectory("/usr/share/nginx/html", flutterBuild).
-		WithFile("/artifacts/george-reasoning.exe", goWin).
-		WithDirectory("/src/go/10000-Autonomous-Actors", src.Directory("George/10000-Autonomous-Actors")).
-		WithDirectory("/src/go/40000-Communication-Contracts", src.Directory("George/40000-Communication-Contracts")).
-		WithEntrypoint([]string{"nginx", "-g", "daemon off;"})
-
-	_, err := image.Publish(ctx, "localhost/george-platform:latest")
 	return err
 }
 

@@ -1,0 +1,12 @@
+edition = "2024";
+
+package proto2_unittest;
+option go_package = "OlympusForge/gen/v1/late_loaded_option_user;late_loaded_option_userv1";
+
+import option "google/protobuf/late_loaded_option.proto";
+
+message LateLoadedOptionUser {
+  option (proto2_unittest.LateLoadedOption.ext) = {
+    value: 1
+  };
+}
