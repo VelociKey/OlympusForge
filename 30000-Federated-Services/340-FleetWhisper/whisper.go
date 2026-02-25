@@ -4,7 +4,8 @@ import (
 	"context"
 	"log/slog"
 
-	whisperv1 "OlympusGrammar/gen/v1/whisper"
+	whisperv1 "OlympusGrammar/gen/v1/whisper/whisperv1connect"
+
 	"connectrpc.com/connect"
 )
 
@@ -21,7 +22,7 @@ func NewFleetWhisper(httpClient connect.HTTPClient, baseURL string) *FleetWhispe
 // BroadcastSignal emits an infrastructure event to the fleet.
 func (w *FleetWhisper) BroadcastSignal(ctx context.Context, topic, payload string) error {
 	slog.Info("Broadcasting Fleet Signal", "topic", topic)
-	
+
 	// Real implementation would call Emit on the WhisperBus
 	return nil
 }

@@ -10,23 +10,78 @@ import (
 	"dagger.io/dagger"
 )
 
+const FleetGoVersion = "1.26.0"
+const FleetFlutterVersion = "3.41.1" // "The Year of Fire Horse" (Feb 2026)
+
 // AihubForge is the central Sovereign Factory for the Olympus2 fleet.
 // It provides deterministic build pipelines for workstation-native, containerized, and cloud-native targets.
 type AihubForge struct{}
 
+// isNoBuild checks if the workspace has a .nobuild marker
+func (m *AihubForge) isNoBuild(workspace string) bool {
+	path := filepath.Join(workspace, ".nobuild")
+	if _, err := os.Stat(path); err == nil {
+		return true
+	}
+	// Also check if workspace is just "." and root has .nobuild
+	if workspace == "." || workspace == "" {
+		if _, err := os.Stat(".nobuild"); err == nil {
+			return true
+		}
+	}
+	return false
+}
+
+// goBase returns a cached Go builder container
+func (m *AihubForge) goBase(client *dagger.Client) *dagger.Container {
+	return client.Container().From("golang:"+FleetGoVersion).
+		WithEnvVariable("CGO_ENABLED", "0")
+}
+
+// flutterBase returns a cached Flutter builder container
+func (m *AihubForge) flutterBase(client *dagger.Client) *dagger.Container {
+	return client.Container().From("ghcr.io/cirruslabs/flutter:stable").
+		WithExec([]string{"flutter", "config", "--enable-web"})
+}
+
 // Build triggers the build pipeline with the specified target and workspace.
 // Targets: native (workstation), podman (local OCI), gcp (Google Artifact Registry)
 func (m *AihubForge) Build(ctx context.Context, target string, workspace string) error {
+	if m.isNoBuild(workspace) {
+		fmt.Printf("⏭️  Forge: Skipping %s (.nobuild marker detected)\n", workspace)
+		return nil
+	}
+
 	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
 	if err != nil {
 		return fmt.Errorf("failed to connect to dagger: %v", err)
 	}
 	defer client.Close()
 
-	// 1. Acquire Source from Fleet Root (relative to Forge location)
-	fmt.Println("🔍 Forge: Acquiring source from relative root ../../..")
+	// 1. Acquire Source from Fleet Root (Selective Sync for speed)
+	fmt.Println("🔍 Forge: Performing Selective Sync [Inclusion Mode]")
 	src := client.Host().Directory("../../..", dagger.HostDirectoryOpts{
-		Exclude: []string{"C0400-Artifacts", "C0990-Scratch", ".git", "node_modules", ".gemini/tmp", "tmp_builds", "tmp_bin"},
+		Include: []string{
+			workspace + "/**",
+			"Olympus2/**",
+			"OlympusForge/90000-Enablement-Labs/900-Forge/**", // Only include the build tool itself
+			"OlympusForge/bin/linux/flutter/**",               // Include Fleet Flutter SDK
+			"OlympusGrammar/**",
+			"OlympusAtelier/**",
+		},
+		Exclude: []string{
+			"**/node_modules",
+			"**/.git",
+			"**/.gemini/tmp",
+			"Olympus2/gen",
+			"Olympus2/gen/**",
+			"Olympus2/C0990-Ephemeral-Scratch", // Massive scratch space
+			"Olympus2/C0400-Artifact-Repository",
+			"**/*.exe",
+			"OlympusForge/models", // Double-check exclusion
+			"go.work",
+			"go.sum",
+		},
 	})
 
 	// 2. Multi-Workspace Dispatch
@@ -53,6 +108,36 @@ func (m *AihubForge) Build(ctx context.Context, target string, workspace string)
 	}
 }
 
+// minimalGoWork returns a go.work string containing only the workspaces synced into the container.
+func (m *AihubForge) minimalGoWork(workspace string) string {
+	// These are the core workspaces required for almost all builds
+	// OlympusForge is NOT core for runtime services (only for tooling), so we exclude it by default
+	// unless the workspace itself is OlympusForge.
+	core := []string{
+		"Olympus2",
+		"OlympusGrammar",
+		"OlympusAtelier",
+	}
+	
+	lines := []string{"go 1.25.7", "use ("}
+	seen := make(map[string]bool)
+	
+	wss := append(core, workspace)
+	for _, ws := range wss {
+		if !seen[ws] {
+			lines = append(lines, fmt.Sprintf("\t./%s", ws))
+			seen[ws] = true
+		}
+	}
+	// Explicitly add OlympusForge only if we are building it (or a subdir of it)
+	if strings.HasPrefix(workspace, "OlympusForge") {
+		lines = append(lines, "\t./OlympusForge")
+	}
+
+	lines = append(lines, ")")
+	return strings.Join(lines, "\n")
+}
+
 func (m *AihubForge) Assess(ctx context.Context, workspace string) error {
 	fmt.Printf("🔍 Forge: Connecting to Dagger for Assessment of %s...\n", workspace)
 	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
@@ -61,9 +146,25 @@ func (m *AihubForge) Assess(ctx context.Context, workspace string) error {
 	}
 	defer client.Close()
 
-	fmt.Println("🔍 Forge: Acquiring source for Assessment")
+	fmt.Println("🔍 Forge: Acquiring source for Assessment (Selective Sync)")
 	src := client.Host().Directory("../../..", dagger.HostDirectoryOpts{
-		Exclude: []string{"C0400-Artifacts", "C0990-Scratch", ".git", "node_modules", ".gemini/tmp"},
+		Include: []string{
+			workspace + "/**",
+			"Olympus2/**",
+			"OlympusForge/**",
+			"OlympusGrammar/**",
+			"OlympusAtelier/**",
+		},
+		Exclude: []string{
+			"**/node_modules",
+			"**/.git",
+			"**/.gemini/tmp",
+			"Olympus2/gen",
+			"Olympus2/gen/**",
+			"**/*.exe",
+			"go.work",
+			"go.sum",
+		},
 	})
 
 	if workspace == "all" {
@@ -122,47 +223,100 @@ func (m *AihubForge) BuildAllClusters(ctx context.Context, target string) error 
 	return nil
 }
 
+// detectStack identifies if a workspace is Go or Flutter
+func (m *AihubForge) detectStack(workspace string) string {
+	if _, err := os.Stat(filepath.Join(workspace, "pubspec.yaml")); err == nil {
+		return "flutter"
+	}
+	if _, err := os.Stat(filepath.Join(workspace, "go.mod")); err == nil {
+		return "go"
+	}
+	return "unknown"
+}
+
 // buildNative builds binaries directly on the host or in a host-mirrored environment
 func (m *AihubForge) buildNative(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) error {
-	fmt.Printf("⚒️ Forge: Native Build [%s]\n", workspace)
+	stack := m.detectStack(workspace)
+	fmt.Printf("⚒️ Forge: Native Build [%s] (Stack: %s)\n", workspace, stack)
 
-	// Build for host OS/Arch (Windows cross-compile since we are in a Linux container)
-	// We use sh -c to find and build the first main.go in the workspace
-	builder := client.Container().From("golang:1.25").
-		WithEnvVariable("GOOS", "windows").
-		WithEnvVariable("GOARCH", "amd64").
-		WithEnvVariable("GOWORK", "/src/go.work").
-		WithDirectory("/src", src).
-		WithWorkdir("/src/" + workspace).
-		WithExec([]string{"sh", "-c", "MAIN_PATH=$(find . -name main.go | head -n 1); if [ -z \"$MAIN_PATH\" ]; then echo 'ERROR: No main.go found in '\"$(pwd)\"; exit 1; fi; go build -o bin/service.exe $MAIN_PATH"})
+	// Load Podman Mount System configuration
+	config, err := m.loadProvisionConfig(workspace)
+	if err != nil {
+		return fmt.Errorf("failed to load provision config: %v", err)
+	}
 
-	// Export binary back to host
-	_, err := builder.Directory("bin").Export(ctx, filepath.Join(workspace, "bin"))
+	var builder *dagger.Container
+	switch stack {
+	case "go":
+		builder = m.goBase(client).
+			WithEnvVariable("GOOS", "windows").
+			WithEnvVariable("GOARCH", "amd64").
+			WithDirectory("/src", src).
+			WithNewFile("/src/go.work", m.minimalGoWork(workspace)).
+			WithEnvVariable("GOWORK", "/src/go.work").
+			WithWorkdir("/src/"+workspace)
+
+		// Inject Mount Envs for the build or runtime
+		for _, mount := range config.Mounts {
+			envName := fmt.Sprintf("MOUNT_%s_PATH", strings.ToUpper(mount.Name))
+			builder = builder.WithEnvVariable(envName, mount.Source)
+		}
+
+		builder = builder.WithExec([]string{"sh", "-c", "MAIN_PATH=$(find . -name main.go | head -n 1); if [ -z \"$MAIN_PATH\" ]; then echo 'ERROR: No main.go found in '\"$(pwd)\"; exit 1; fi; go build -o bin/service.exe $MAIN_PATH"})
+	case "flutter":
+		builder = m.flutterBase(client).
+			WithDirectory("/src", src).
+			WithWorkdir("/src/"+workspace).
+			WithExec([]string{"flutter", "build", "web", "--wasm"})
+	default:
+		return fmt.Errorf("unknown stack for workspace: %s", workspace)
+	}
+
+	// Export binary or build artifacts back to host
+	exportDir := "bin"
+	if stack == "flutter" {
+		exportDir = "build/web"
+	}
+	_, err = builder.Directory(exportDir).Export(ctx, filepath.Join(workspace, exportDir))
 	return err
 }
 
-// buildLinux builds binaries for linux/amd64 inside the container using the full `src` tree to preserve go.work
+// buildLinux builds binaries for linux/amd64 inside the container
 func (m *AihubForge) buildLinux(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) (*dagger.Directory, error) {
-	fmt.Printf("⚒️ Forge: Linux Build [%s]\n", workspace)
+	stack := m.detectStack(workspace)
+	fmt.Printf("⚒️ Forge: Linux Build [%s] (Stack: %s)\n", workspace, stack)
 
-	builder := client.Container().From("golang:1.25").
-		WithEnvVariable("GOOS", "linux").
-		WithEnvVariable("GOARCH", "amd64").
-		WithEnvVariable("CGO_ENABLED", "0").
-		WithEnvVariable("GOWORK", "/src/go.work").
-		WithDirectory("/src", src).
-		WithWorkdir("/src/" + workspace).
-		WithExec([]string{"sh", "-c", "MAIN_PATH=$(find . -name main.go | head -n 1); if [ -z \"$MAIN_PATH\" ]; then echo 'ERROR: No main.go found in '\"$(pwd)\"; exit 1; fi; go build -o bin/service $MAIN_PATH"})
-
-	return builder.Directory("bin"), nil
+	var builder *dagger.Container
+	switch stack {
+	case "go":
+		builder = m.goBase(client).
+			WithEnvVariable("GOOS", "linux").
+			WithEnvVariable("GOARCH", "amd64").
+			WithDirectory("/src", src).
+			WithNewFile("/src/go.work", m.minimalGoWork(workspace)).
+			WithEnvVariable("GOWORK", "/src/go.work").
+			WithWorkdir("/src/" + workspace).
+			WithExec([]string{"sh", "-c", "MAIN_PATH=$(find . -name main.go | head -n 1); if [ -z \"$MAIN_PATH\" ]; then echo 'ERROR: No main.go found in '\"$(pwd)\"; exit 1; fi; go build -o bin/service $MAIN_PATH"})
+		return builder.Directory("bin"), nil
+	case "flutter":
+		builder = m.flutterBase(client).
+			WithDirectory("/src", src).
+			WithWorkdir("/src/" + workspace).
+			WithExec([]string{"flutter", "build", "web", "--wasm"})
+		return builder.Directory("build/web"), nil
+	default:
+		return nil, fmt.Errorf("unknown stack for workspace: %s", workspace)
+	}
 }
 
 // buildPodman builds OCI images for local Podman Desktop execution
 func (m *AihubForge) buildPodman(ctx context.Context, client *dagger.Client, src *dagger.Directory, workspace string) error {
 	fmt.Printf("⚒️ Forge: Podman Image Build [%s]\n", workspace)
 
-	if workspace == "George" {
-		return m.buildGeorgeHardened(ctx, client, src)
+	// Load Podman Mount System configuration
+	config, err := m.loadProvisionConfig(workspace)
+	if err != nil {
+		return fmt.Errorf("failed to load provision config: %v", err)
 	}
 
 	binDir, err := m.buildLinux(ctx, client, src, workspace)
@@ -171,10 +325,22 @@ func (m *AihubForge) buildPodman(ctx context.Context, client *dagger.Client, src
 	}
 	image := m.sealedImage(client, src, binDir, workspace)
 
+	// Apply Mounts and Emulators to the runtime container
+	image = m.applyMountsToContainer(client, image, config)
+
 	// Tag for local Podman
-	tag := fmt.Sprintf("localhost/%s:latest", workspace)
+	tag := fmt.Sprintf("localhost/%s:latest", strings.ToLower(workspace))
 	_, err = image.Publish(ctx, tag)
-	return err
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("\n✅ Podman Image Built: %s\n", tag)
+	if len(config.Mounts) > 0 || len(config.Emulators) > 0 {
+		fmt.Println("🚀 RUN COMMAND (with Podman Mount System):")
+		fmt.Println(m.generatePodmanRun(workspace, config))
+	}
+	return nil
 }
 
 // buildGCP builds and publishes images to Google Artifact Registry

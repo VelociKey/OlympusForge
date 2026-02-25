@@ -47,11 +47,7 @@ func main() {
 	// but architected to be easily swappable for a parser.
 	// Expanded toolset based on Olympus requirements
 	tools := []ToolDefinition{
-		// Foundation
-		{Name: "go", Category: "foundation", Version: "1.24.0", Origin: "external", Package: "https://go.dev/dl/go1.24.0.windows-amd64.zip", Binary: "bin/go.exe"},
-		{Name: "git", Category: "foundation", Version: "2.47.1", Origin: "external", Package: "https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/MinGit-2.47.1-64-bit.zip", Binary: "cmd/git.exe"},
-		{Name: "gh", Category: "foundation", Version: "2.66.1", Origin: "external", Package: "https://github.com/cli/cli/releases/download/v2.66.1/gh_2.66.1_windows_amd64.zip", Binary: "bin/gh.exe"},
-		//{Name: "flutter", Category: "foundation", Version: "3.24.1", Origin: "external", Package: "https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.24.1-stable.zip", Binary: "bin/flutter.bat"},
+		// Foundation (Go, Git, GH, Flutter managed via Dagger/Containers)
 
 		// Authoring
 		{Name: "buf", Category: "authoring", Version: "v1.50.0", Origin: "go-install", Package: "github.com/bufbuild/buf/cmd/buf@v1.50.0", Binary: "buf.exe"},
