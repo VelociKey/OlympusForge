@@ -47,7 +47,9 @@ func main() {
 	// but architected to be easily swappable for a parser.
 	// Expanded toolset based on Olympus requirements
 	tools := []ToolDefinition{
-		// Foundation (Go, Git, GH, Flutter managed via Dagger/Containers)
+		// Foundation
+		{Name: "gh", Category: "foundation", Version: "v2.67.0", Origin: "external", Package: "https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_windows_amd64.zip", Binary: "bin/gh.exe"},
+		{Name: "git", Category: "foundation", Version: "v2.48.1", Origin: "external", Package: "https://github.com/git-for-windows/git/releases/download/v2.48.1.windows.1/MinGit-2.48.1-64-bit.zip", Binary: "cmd/git.exe"},
 
 		// Authoring
 		{Name: "buf", Category: "authoring", Version: "v1.50.0", Origin: "go-install", Package: "github.com/bufbuild/buf/cmd/buf@v1.50.0", Binary: "buf.exe"},
@@ -58,13 +60,16 @@ func main() {
 		{Name: "trivy", Category: "security", Version: "v0.59.1", Origin: "gh-release", Package: "aquasecurity/trivy", Binary: "trivy.exe"},
 
 		// Infrastructure
+		{Name: "jdk", Category: "infrastructure", Version: "25", Origin: "external", Package: "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.0%2B9/OpenJDK25U-jdk_x64_windows_hotspot_25.0.0_9.zip", Binary: "bin/java.exe"},
 		{Name: "gcloud", Category: "infrastructure", Version: "latest", Origin: "external", Package: "https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk-windows-x86_64-bundled-python.zip", Binary: "bin/gcloud.cmd"},
 		{Name: "gradle", Category: "infrastructure", Version: "8.13", Origin: "external", Package: "https://services.gradle.org/distributions/gradle-8.13-bin.zip", Binary: "bin/gradle.bat"},
 		{Name: "firebase", Category: "infrastructure", Version: "latest", Origin: "npm", Package: "firebase-tools", Binary: "firebase.cmd"},
 
 		// Intelligence (Gemini Tools)
+		{Name: "gemini-cli", Category: "intelligence", Version: "latest", Origin: "npm", Package: "@google/gemini-cli", Binary: "gemini.cmd"},
 		{Name: "george-bootstrap", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-intelligence/george-bootstrap", Binary: "george-bootstrap.exe"},
 		{Name: "fleet-doctor", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-maintenance/fleet-doctor", Binary: "fleet-doctor.exe"},
+		{Name: "fleet-large-file-finder", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-intelligence/fleet-large-file-finder", Binary: "fleet-large-file-finder.exe"},
 	}
 
 	registry := &Registry{Symbols: make(map[string]string)}
