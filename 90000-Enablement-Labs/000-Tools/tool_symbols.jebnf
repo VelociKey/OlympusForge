@@ -1,17 +1,18 @@
 # Forge Tool Symbols (jeBNF-mPSH)
-generated_at = "2026-02-25T17:35:28-05:00"
+generated_at = "2026-02-25T19:11:18-05:00"
 
 Symbols {
-  fleet-large-file-finder = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-large-file-finder.cmd"
-  buf = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/buf.cmd"
-  gcloud = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/gcloud.cmd"
-  gradle = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/gradle.cmd"
-  firebase = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/firebase.cmd"
   gemini-cli = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/gemini-cli.cmd"
+  george-bootstrap = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/george-bootstrap.cmd"
   gh = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/gh.cmd"
   git = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/git.cmd"
+  gradle = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/gradle.cmd"
+  fleet-large-file-finder = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-large-file-finder.cmd"
+  fleet-daily-chronicle = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-daily-chronicle.cmd"
+  buf = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/buf.cmd"
   air = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/air.cmd"
   golangci-lint = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/golangci-lint.cmd"
   trivy = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/trivy.cmd"
-  george-bootstrap = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/george-bootstrap.cmd"
+  gcloud = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/gcloud.cmd"
+  firebase = "C:/aAntigravitySpace/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/firebase.cmd"
 }

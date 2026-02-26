@@ -70,6 +70,7 @@ func main() {
 		{Name: "george-bootstrap", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-intelligence/george-bootstrap", Binary: "george-bootstrap.exe"},
 		{Name: "fleet-doctor", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-maintenance/fleet-doctor", Binary: "fleet-doctor.exe"},
 		{Name: "fleet-large-file-finder", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-intelligence/fleet-large-file-finder", Binary: "fleet-large-file-finder.exe"},
+		{Name: "fleet-daily-chronicle", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-intelligence/fleet-daily-chronicle", Binary: "fleet-daily-chronicle.exe"},
 	}
 
 	registry := &Registry{Symbols: make(map[string]string)}

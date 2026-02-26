@@ -47,6 +47,7 @@ terraform.tfstate*
 90000-Enablement-Labs/000-Tools/000-foundation/gh/
 90000-Enablement-Labs/000-Tools/000-foundation/git/
 90000-Enablement-Labs/000-Tools/000-intelligence/gemini-cli/
+90000-Enablement-Labs/000-Tools/000-intelligence/fleet-daily-chronicle/
 
 # --- IDE & OS (VS Code / JetBrains / Windows / macOS) ---
 .vscode/*
