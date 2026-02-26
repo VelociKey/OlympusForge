@@ -112,13 +112,6 @@ func main() {
 		} else {
 			logger.Info("Tool is up to date, skipping", "tool", tool.Name, "version", tool.Version)
 		}
-
-		// Map for Symbol Table (Quick Lookup)
-		binPath := filepath.Join(basePath, "000-bin", tool.Name+".cmd")
-		if runtime.GOOS != "windows" {
-			binPath = filepath.Join(basePath, "000-bin", tool.Name)
-		}
-		registry.Symbols[tool.Name] = binPath
 	}
 
 	// Re-add symbols for all tools in registry even if we didn't provision them this run
@@ -221,7 +214,7 @@ func provisionGHRelease(tool ToolDefinition, toolDir string, binDir string, logg
 }
 
 func provisionLocalSource(ctx context.Context, tool ToolDefinition, toolDir string, binDir string, basePath string, logger *slog.Logger) error {
-	logger.Info("Daggerizing local source build", "tool", tool.Name, "src", tool.Package)
+	logger.Info("Daggerizing local source build (High Fidelity)", "tool", tool.Name, "src", tool.Package)
 	
 	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
 	if err != nil { return err }
@@ -230,11 +223,25 @@ func provisionLocalSource(ctx context.Context, tool ToolDefinition, toolDir stri
 	rootPath, _ := filepath.Abs(filepath.Join(basePath, "..", "..", ".."))
 	isFlutter := strings.Contains(tool.Package, "interaction-surface") || strings.Contains(tool.Package, "BrandingFactory")
 	
+	// Quality Approach: Include ALL mod/sum files plus the tool's source
+	// This makes go.work happy without uploading 10GB of node_modules/git history
+	includes := []string{
+		"**/go.mod",
+		"**/go.sum",
+		"**/pubspec.yaml",
+		"go.work",
+		"go.work.sum",
+		tool.Package + "/**",
+	}
+
+	// Special case for tools that have cross-workspace dependencies beyond just mod files
+	if tool.Name == "fleet-index" {
+		includes = append(includes, "Olympus2/90000-Enablement-Labs/P0000-pkg/000-search/**")
+		includes = append(includes, "Olympus2/00000-Identity-Foundations/**")
+	}
+
 	src := client.Host().Directory(rootPath, dagger.HostDirectoryOpts{
-		Include: []string{
-			tool.Package + "/**",
-			"Olympus2/00000-Identity-Foundations/**",
-		},
+		Include: includes,
 	})
 
 	var builder *dagger.Container
@@ -250,7 +257,6 @@ func provisionLocalSource(ctx context.Context, tool ToolDefinition, toolDir stri
 			WithEnvVariable("CGO_ENABLED", "0").
 			WithEnvVariable("GOOS", runtime.GOOS).
 			WithEnvVariable("GOARCH", runtime.GOARCH).
-			WithEnvVariable("GOWORK", "off"). // Disable go.work to avoid missing module errors
 			WithDirectory("/src", src).
 			WithWorkdir("/src/"+tool.Package).
 			WithExec([]string{"go", "build", "-o", tool.Binary, "."})
@@ -277,6 +283,7 @@ func provisionNPM(tool ToolDefinition, toolDir string, binDir string, logger *sl
 func createShim(tool ToolDefinition, toolDir string, binDir string) error {
 	binPath := filepath.Join(toolDir, tool.Binary)
 	if _, err := os.Stat(binPath); err != nil {
+		// Try recursive search for the binary
 		found := ""
 		filepath.WalkDir(toolDir, func(p string, d fs.DirEntry, err error) error {
 			if !d.IsDir() && d.Name() == tool.Binary {

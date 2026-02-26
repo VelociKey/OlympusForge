@@ -38,6 +38,7 @@ Intelligence {
     Tool fleet_ls { version = "v1.0.0"; origin = "local-source"; package = "Olympus2/90000-Enablement-Labs/.000-Tools/fleet-ls"; binary = "fleet-ls.exe" }
     Tool fleet_dagger_up { version = "v1.0.0"; origin = "local-source"; package = "Olympus2/90000-Enablement-Labs/.000-Tools/fleet-dagger-up"; binary = "fleet-dagger-up.exe" }
     Tool fleet_daily_chronicle { version = "v1.0.0"; origin = "local-source"; package = "OlympusForge/90000-Enablement-Labs/000-Tools/000-intelligence/fleet-daily-chronicle"; binary = "fleet-daily-chronicle.exe" }
+    Tool fleet_index { version = "v1.0.0"; origin = "local-source"; package = "Olympus2/90000-Enablement-Labs/.000-Tools/fleet-index"; binary = "fleet-index.exe" }
     Tool fleet_commit { version = "v1.0.0"; origin = "local-source"; package = "Olympus2/90000-Enablement-Labs/.000-Tools/fleet-commit"; binary = "fleet-commit.exe" }
     Tool fleet_publish { version = "v1.0.0"; origin = "local-source"; package = "Olympus2/90000-Enablement-Labs/.000-Tools/fleet-publish"; binary = "fleet-publish.exe" }
     Tool gnd_manifest_gen { version = "v1.0.0"; origin = "local-source"; package = "GND-Substrate/90000-Enablement-Labs/000-Tools/gnd-manifest-gen"; binary = "gnd-manifest-gen.exe" }
