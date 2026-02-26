@@ -35,6 +35,25 @@ Security {
 
 Intelligence {
     Tool george_bootstrap { version = "v1.0.0"; origin = "local-source"; package = "OlympusForge/90000-Enablement-Labs/000-Tools/000-intelligence/george-bootstrap"; binary = "george-bootstrap.exe" }
+    Tool fleet_ls { version = "v1.0.0"; origin = "local-source"; package = "Olympus2/90000-Enablement-Labs/.000-Tools/fleet-ls"; binary = "fleet-ls.exe" }
+    Tool fleet_dagger_up { version = "v1.0.0"; origin = "local-source"; package = "Olympus2/90000-Enablement-Labs/.000-Tools/fleet-dagger-up"; binary = "fleet-dagger-up.exe" }
+    Tool fleet_daily_chronicle { version = "v1.0.0"; origin = "local-source"; package = "OlympusForge/90000-Enablement-Labs/000-Tools/000-intelligence/fleet-daily-chronicle"; binary = "fleet-daily-chronicle.exe" }
+    Tool gnd_manifest_gen { version = "v1.0.0"; origin = "local-source"; package = "GND-Substrate/90000-Enablement-Labs/000-Tools/gnd-manifest-gen"; binary = "gnd-manifest-gen.exe" }
+    Tool gnd_port { version = "v1.0.0"; origin = "local-source"; package = "GND-Substrate/10000-Autonomous-Actors/GNDPort"; binary = "gnd-port.exe" }
+    Tool mg { version = "v1.0.0"; origin = "local-source"; package = "GND-Substrate/10000-Autonomous-Actors/MinimumGeorge"; binary = "mg.exe" }
+    Tool gnd_situs_attest { version = "v1.0.0"; origin = "local-source"; package = "GND-Customs/90000-Enablement-Labs/000-Tools/gnd-situs-attest"; binary = "gnd-situs-attest.exe" }
+    Tool gnd_fence { version = "v1.0.0"; origin = "local-source"; package = "GND-Customs/90000-Enablement-Labs/000-Tools/gnd-fence"; binary = "gnd-fence.exe" }
+    Tool gnd_permit_issue { version = "v1.0.0"; origin = "local-source"; package = "GND-Clearinghouse/90000-Enablement-Labs/000-Tools/gnd-permit-issue"; binary = "gnd-permit-issue.exe" }
+    Tool gnd_bond_issue { version = "v1.0.0"; origin = "local-source"; package = "GND-Clearinghouse/90000-Enablement-Labs/000-Tools/gnd-bond-issue"; binary = "gnd-bond-issue.exe" }
+    Tool gnd_cert_issue { version = "v1.0.0"; origin = "local-source"; package = "GND-Clearinghouse/90000-Enablement-Labs/000-Tools/gnd-cert-issue"; binary = "gnd-cert-issue.exe" }
+    Tool gnd_index { version = "v1.0.0"; origin = "local-source"; package = "GND-Registry/90000-Enablement-Labs/000-Tools/gnd-index"; binary = "gnd-index.exe" }
+    Tool gnd_clear { version = "v1.0.0"; origin = "local-source"; package = "GND-Clearinghouse/90000-Enablement-Labs/000-Tools/gnd-clear"; binary = "gnd-clear.exe" }
+    Tool gnd_levy { version = "v1.0.0"; origin = "local-source"; package = "GND-Clearinghouse/90000-Enablement-Labs/000-Tools/gnd-levy"; binary = "gnd-levy.exe" }
+    Tool gnd_agent_class { version = "v1.0.0"; origin = "local-source"; package = "AgentGrounds/90000-Enablement-Labs/000-Tools/gnd-agent-class"; binary = "gnd-agent-class.exe" }
+    Tool gnd_dbol { version = "v1.0.0"; origin = "local-source"; package = "GND-Freight/90000-Enablement-Labs/000-Tools/gnd-dbol"; binary = "gnd-dbol.exe" }
+    Tool gnd_handshake { version = "v1.0.0"; origin = "local-source"; package = "GND-Rails/90000-Enablement-Labs/000-Tools/gnd-handshake"; binary = "gnd-handshake.exe" }
+    Tool gnd_satchel_tool { version = "v1.0.0"; origin = "local-source"; package = "GND-Freight/90000-Enablement-Labs/000-Tools/gnd-satchel-tool"; binary = "gnd-satchel-tool.exe" }
+    Tool gnd_bale { version = "v1.0.0"; origin = "local-source"; package = "GND-Freight/90000-Enablement-Labs/000-Tools/gnd-bale"; binary = "gnd-bale.exe" }
     Tool ollama { version = "latest"; origin = "external"; package = "https://ollama.com/download/ollama-windows-amd64.zip"; binary = "ollama.exe" }
 }
 

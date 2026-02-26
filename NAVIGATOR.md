@@ -1,7 +1,7 @@
 # 🗺️ OlympusForge Navigator
 
 **Category:** SDLC  
-**Last Synchronized:** 2026-02-26 13:43:39 EST  
+**Last Synchronized:** 2026-02-26 14:55:48 EST  
 
 > **The Universal Grammar Manufacturing Plant**
 
@@ -37,7 +37,7 @@ This navigator lists only the active surface areas within this workspace, filter
 | `70000` | [70000-Environmental-Harness/dagger/internal/dagger](./70000-Environmental-Harness/dagger/internal/dagger) | `b8d51757` |
 | `80000` | [80000-System-Governance](./80000-System-Governance) | `ceb7b5b3` |
 | `90000` | [90000-Enablement-Labs](./90000-Enablement-Labs) | `fb057a5c` |
-| `90000` | [90000-Enablement-Labs/000-Tools](./90000-Enablement-Labs/000-Tools) | `8f2e22ef` |
+| `90000` | [90000-Enablement-Labs/000-Tools](./90000-Enablement-Labs/000-Tools) | `8f887a73` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-authoring](./90000-Enablement-Labs/000-Tools/000-authoring) | `13ad3110` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-authoring/air](./90000-Enablement-Labs/000-Tools/000-authoring/air) | `c53915f0` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-authoring/buf](./90000-Enablement-Labs/000-Tools/000-authoring/buf) | `9d2edfc3` |
@@ -105,6 +105,7 @@ This navigator lists only the active surface areas within this workspace, filter
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure](./90000-Enablement-Labs/000-Tools/000-infrastructure) | `69066968` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/000-trivy-cache/000-db](./90000-Enablement-Labs/000-Tools/000-infrastructure/000-trivy-cache/000-db) | `d95daaf0` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/firebase](./90000-Enablement-Labs/000-Tools/000-infrastructure/firebase) | `b8054790` |
+| `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/fleet-ls](./90000-Enablement-Labs/000-Tools/000-infrastructure/fleet-ls) | `cd949210` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/gradle](./90000-Enablement-Labs/000-Tools/000-infrastructure/gradle) | `4d8a97f8` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/gradle/bin](./90000-Enablement-Labs/000-Tools/000-infrastructure/gradle/bin) | `35a18e47` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/gradle/init.d](./90000-Enablement-Labs/000-Tools/000-infrastructure/gradle/init.d) | `28f31fd1` |

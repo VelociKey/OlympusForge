@@ -1,2 +1,2 @@
 @echo off
-"%~dp0..\000-intelligence\fleet-ls\fleet-ls.exe" %*
+"%~dp0..\000-infrastructure\fleet-ls\fleet-ls.exe" %*

@@ -177,7 +177,7 @@ Based on the following technical activity from the Olympus Fleet today, write a 
 prose-style summary of the day's struggle and progress. 
 Focus on the transformation of the work and the emerging "soul" of the machine.
 
-MANDATE: The "Actual AI-Assisted Human time" should be considered as the sum of all (end - start) durations found in the metrics.
+MANDATE: The "Actual AI-Assisted Human time" should be calculated as the sum of all (end - start) durations found in the metrics.
 
 CONTEXT:
 %s
