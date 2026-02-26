@@ -1,7 +1,7 @@
 # 🗺️ OlympusForge Navigator
 
 **Category:** SDLC  
-**Last Synchronized:** 2026-02-26 15:00:22 EST  
+**Last Synchronized:** 2026-02-26 15:14:16 EST  
 
 > **The Universal Grammar Manufacturing Plant**
 
@@ -105,7 +105,9 @@ This navigator lists only the active surface areas within this workspace, filter
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure](./90000-Enablement-Labs/000-Tools/000-infrastructure) | `69066968` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/000-trivy-cache/000-db](./90000-Enablement-Labs/000-Tools/000-infrastructure/000-trivy-cache/000-db) | `d95daaf0` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/firebase](./90000-Enablement-Labs/000-Tools/000-infrastructure/firebase) | `b8054790` |
+| `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/fleet-commit](./90000-Enablement-Labs/000-Tools/000-infrastructure/fleet-commit) | `3eb425ad` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/fleet-ls](./90000-Enablement-Labs/000-Tools/000-infrastructure/fleet-ls) | `cd949210` |
+| `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/fleet-publish](./90000-Enablement-Labs/000-Tools/000-infrastructure/fleet-publish) | `3d893cb0` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/gradle](./90000-Enablement-Labs/000-Tools/000-infrastructure/gradle) | `4d8a97f8` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/gradle/bin](./90000-Enablement-Labs/000-Tools/000-infrastructure/gradle/bin) | `35a18e47` |
 | `90000` | [90000-Enablement-Labs/000-Tools/000-infrastructure/gradle/init.d](./90000-Enablement-Labs/000-Tools/000-infrastructure/gradle/init.d) | `28f31fd1` |
