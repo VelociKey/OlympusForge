@@ -3,6 +3,7 @@ package main
 import (
 	"archive/zip"
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"log/slog"
@@ -30,6 +31,16 @@ type Registry struct {
 	Symbols map[string]string `json:"symbols"`
 }
 
+// ToolState tracks the last provisioned version/state
+type ToolState struct {
+	Version   string    `json:"version"`
+	Timestamp time.Time `json:"timestamp"`
+}
+
+type ProvisionerState struct {
+	Tools map[string]ToolState `json:"tools"`
+}
+
 func main() {
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 	ctx := context.Background()
@@ -40,12 +51,11 @@ func main() {
 		basePath = filepath.Join(basePath, "OlympusForge", "90000-Enablement-Labs", "000-Tools")
 	}
 
-	logger.Info("Starting Forge Provisioner 2.0", "base", basePath)
+	statePath := filepath.Join(basePath, "provisioner_state.json")
+	state := loadState(statePath)
 
-	// In a real implementation, we would parse the .jebnf here.
-	// For this task, I will use a hardcoded slice derived from the .jebnf
-	// but architected to be easily swappable for a parser.
-	// Expanded toolset based on Olympus requirements
+	logger.Info("Starting Forge Provisioner 2.0 (Incremental)", "base", basePath)
+
 	tools := []ToolDefinition{
 		// Foundation
 		{Name: "gh", Category: "foundation", Version: "v2.67.0", Origin: "external", Package: "https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_windows_amd64.zip", Binary: "bin/gh.exe"},
@@ -57,18 +67,20 @@ func main() {
 		{Name: "golangci-lint", Category: "authoring", Version: "v1.64.4", Origin: "go-install", Package: "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.4", Binary: "golangci-lint.exe"},
 
 		// Security
-		{Name: "trivy", Category: "security", Version: "v0.59.1", Origin: "gh-release", Package: "aquasecurity/trivy", Binary: "trivy.exe"},
+		{Name: "trivy", Category: "security", Version: "v0.59.1", Origin: "external", Package: "https://github.com/aquasecurity/trivy/releases/download/v0.59.1/trivy_0.59.1_windows-64bit.zip", Binary: "trivy.exe"},
 
 		// Infrastructure
-		{Name: "jdk", Category: "infrastructure", Version: "25", Origin: "external", Package: "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.0%2B9/OpenJDK25U-jdk_x64_windows_hotspot_25.0.0_9.zip", Binary: "bin/java.exe"},
-		{Name: "gcloud", Category: "infrastructure", Version: "latest", Origin: "external", Package: "https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk-windows-x86_64-bundled-python.zip", Binary: "bin/gcloud.cmd"},
-		{Name: "gradle", Category: "infrastructure", Version: "8.13", Origin: "external", Package: "https://services.gradle.org/distributions/gradle-8.13-bin.zip", Binary: "bin/gradle.bat"},
+		{Name: "jdk", Category: "infrastructure", Version: "25", Origin: "external", Package: "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.0%2B9/OpenJDK25U-jdk_x64_windows_hotspot_25.0.0_9.zip", Binary: "jdk-25.0.0+9/bin/java.exe"},
+		{Name: "gcloud", Category: "infrastructure", Version: "latest", Origin: "external", Package: "https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk-windows-x86_64-bundled-python.zip", Binary: "google-cloud-sdk/bin/gcloud.cmd"},
+		{Name: "gradle", Category: "infrastructure", Version: "8.13", Origin: "external", Package: "https://services.gradle.org/distributions/gradle-8.13-bin.zip", Binary: "gradle-8.13/bin/gradle.bat"},
 		{Name: "firebase", Category: "infrastructure", Version: "latest", Origin: "npm", Package: "firebase-tools", Binary: "firebase.cmd"},
 
 		// Intelligence (Gemini Tools)
 		{Name: "gemini-cli", Category: "intelligence", Version: "latest", Origin: "npm", Package: "@google/gemini-cli", Binary: "gemini.cmd"},
 		{Name: "george-bootstrap", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-intelligence/george-bootstrap", Binary: "george-bootstrap.exe"},
 		{Name: "fleet-doctor", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-maintenance/fleet-doctor", Binary: "fleet-doctor.exe"},
+		{Name: "fleet-ls", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "../Olympus2/90000-Enablement-Labs/.000-Tools/fleet-ls", Binary: "fleet-ls.exe"},
+		{Name: "fleet-dagger-up", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "../Olympus2/90000-Enablement-Labs/.000-Tools/fleet-dagger-up", Binary: "fleet-dagger-up.exe"},
 		{Name: "fleet-large-file-finder", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-intelligence/fleet-large-file-finder", Binary: "fleet-large-file-finder.exe"},
 		{Name: "fleet-daily-chronicle", Category: "intelligence", Version: "v1.0.0", Origin: "local-source", Package: "90000-Enablement-Labs/000-Tools/000-intelligence/fleet-daily-chronicle", Binary: "fleet-daily-chronicle.exe"},
 	}
@@ -76,10 +88,20 @@ func main() {
 	registry := &Registry{Symbols: make(map[string]string)}
 
 	for _, tool := range tools {
-		err := provisionTool(ctx, tool, basePath, logger)
-		if err != nil {
-			logger.Error("Failed to provision tool", "tool", tool.Name, "error", err)
-			continue
+		lastState, exists := state.Tools[tool.Name]
+		if exists && lastState.Version == tool.Version && tool.Version != "latest" {
+			// Skip if version matches and is not "latest"
+			logger.Debug("Tool version matches last run, skipping", "tool", tool.Name, "version", tool.Version)
+		} else {
+			err := provisionTool(ctx, tool, basePath, logger)
+			if err != nil {
+				logger.Error("Failed to provision tool", "tool", tool.Name, "error", err)
+				continue
+			}
+			state.Tools[tool.Name] = ToolState{
+				Version:   tool.Version,
+				Timestamp: time.Now(),
+			}
 		}
 
 		// Map for Symbol Table (Quick Lookup)
@@ -90,8 +112,23 @@ func main() {
 		registry.Symbols[tool.Name] = binPath
 	}
 
-	// Save Symbol Table (Registry)
+	// Save state and Registry
+	saveState(statePath, state)
 	saveRegistry(basePath, registry, logger)
+}
+
+func loadState(path string) ProvisionerState {
+	state := ProvisionerState{Tools: make(map[string]ToolState)}
+	data, err := os.ReadFile(path)
+	if err == nil {
+		json.Unmarshal(data, &state)
+	}
+	return state
+}
+
+func saveState(path string, state ProvisionerState) {
+	data, _ := json.MarshalIndent(state, "", "  ")
+	os.WriteFile(path, data, 0644)
 }
 
 func provisionTool(ctx context.Context, tool ToolDefinition, basePath string, logger *slog.Logger) error {
@@ -120,12 +157,12 @@ func provisionTool(ctx context.Context, tool ToolDefinition, basePath string, lo
 }
 
 func provisionExternal(tool ToolDefinition, toolDir string, binDir string, logger *slog.Logger) error {
-	if _, err := os.Stat(toolDir); err == nil {
-		logger.Info("Tool already exists, skipping download", "tool", tool.Name)
-		return createShim(tool, toolDir, binDir)
-	}
-
 	logger.Info("Downloading external tool", "tool", tool.Name, "url", tool.Package)
+	
+	// Clean up old dir to ensure fresh unzip
+	os.RemoveAll(toolDir)
+	os.MkdirAll(toolDir, 0755)
+
 	tmpZip := toolDir + ".zip"
 	if err := downloadFile(tool.Package, tmpZip); err != nil {
 		return err
@@ -133,7 +170,7 @@ func provisionExternal(tool ToolDefinition, toolDir string, binDir string, logge
 	defer os.Remove(tmpZip)
 
 	if err := unzip(tmpZip, toolDir); err != nil {
-		return err
+		return fmt.Errorf("failed to unzip %s: %w", tmpZip, err)
 	}
 
 	return createShim(tool, toolDir, binDir)
@@ -156,15 +193,22 @@ func provisionGHRelease(tool ToolDefinition, toolDir string, binDir string, logg
 	if strings.HasPrefix(tool.Package, "http") {
 		return provisionExternal(tool, toolDir, binDir, logger)
 	}
-	// Simple mock for GH Release asset discovery - for now we just log
-	logger.Warn("Complex GH-Release resolution not yet implemented, use direct URL in Package", "tool", tool.Name)
-	return nil
+	// Attempt to use 'gh' if available
+	logger.Info("Attempting GH-Release download via gh CLI", "tool", tool.Name, "repo", tool.Package)
+	os.MkdirAll(toolDir, 0755)
+	
+	// gh release download <tag> -R <repo> -p <pattern>
+	cmd := exec.Command("gh", "release", "download", tool.Version, "-R", tool.Package, "-p", "*.zip", "--dir", toolDir)
+	if out, err := cmd.CombinedOutput(); err != nil {
+		return fmt.Errorf("gh release download failed: %s: %w", string(out), err)
+	}
+
+	// This is a simplification; we'd need to find the zip inside toolDir and unzip it.
+	return createShim(tool, toolDir, binDir)
 }
 
 func provisionLocalSource(tool ToolDefinition, toolDir string, binDir string, basePath string, logger *slog.Logger) error {
 	logger.Info("Building local source", "tool", tool.Name, "src", tool.Package)
-	// basePath is .../000-Tools. Package is relative to .../90000-Enablement-Labs.
-	// Forge root is basePath/../.. i.e. OlympusForge root.
 	forgeRoot, _ := filepath.Abs(filepath.Join(basePath, "..", ".."))
 	absSrc := filepath.Join(forgeRoot, tool.Package)
 	os.MkdirAll(toolDir, 0755)
@@ -193,6 +237,17 @@ func provisionNPM(tool ToolDefinition, toolDir string, binDir string, logger *sl
 
 func createShim(tool ToolDefinition, toolDir string, binDir string) error {
 	binPath := filepath.Join(toolDir, tool.Binary)
+	// Check if binPath exists before creating shim
+	if _, err := os.Stat(binPath); err != nil {
+		// Look for it one level deeper if unzip was messy
+		files, _ := filepath.Glob(filepath.Join(toolDir, "*", tool.Binary))
+		if len(files) > 0 {
+			binPath = files[0]
+		} else {
+			return fmt.Errorf("could not find binary %q in %q", tool.Binary, toolDir)
+		}
+	}
+
 	relPath, _ := filepath.Rel(binDir, binPath)
 	shimPath := filepath.Join(binDir, tool.Name+".cmd")
 	return writeShim(shimPath, relPath)
@@ -204,11 +259,22 @@ func writeShim(path string, relTarget string) error {
 }
 
 func downloadFile(url string, dest string) error {
-	resp, err := http.Get(url)
+	// Set a User-Agent to avoid being blocked by some servers (like GitHub or Adoptium)
+	client := &http.Client{Timeout: 5 * time.Minute}
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil { return err }
+	req.Header.Set("User-Agent", "OlympusForge-Provisioner/2.0")
+
+	resp, err := client.Do(req)
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("failed to download: status %d", resp.StatusCode)
+	}
+
 	out, err := os.Create(dest)
 	if err != nil {
 		return err
@@ -224,8 +290,6 @@ func unzip(src, dest string) error {
 		return err
 	}
 	defer r.Close()
-
-	os.MkdirAll(dest, 0755)
 
 	for _, f := range r.File {
 		fpath := filepath.Join(dest, f.Name)
@@ -245,6 +309,7 @@ func unzip(src, dest string) error {
 
 		rc, err := f.Open()
 		if err != nil {
+			outFile.Close()
 			return err
 		}
 
