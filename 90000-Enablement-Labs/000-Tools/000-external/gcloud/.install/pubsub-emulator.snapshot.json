@@ -1,0 +1,36 @@
+{
+  "components": [
+    {
+      "data": {
+        "contents_checksum": "8a2352d79332f9c61dbfa992050cf9e1883c27dde993d8b3a22463ed88f8e634",
+        "source": "",
+        "type": "tar"
+      },
+      "dependencies": [
+        "core"
+      ],
+      "details": {
+        "description": "Provides the Pub/Sub emulator.",
+        "display_name": "Cloud Pub/Sub Emulator"
+      },
+      "gdu_only": false,
+      "id": "pubsub-emulator",
+      "is_configuration": false,
+      "is_hidden": false,
+      "is_required": false,
+      "platform": {},
+      "platform_required": false,
+      "version": {
+        "build_number": 20250923151237,
+        "version_string": "0.8.25"
+      }
+    }
+  ],
+  "revision": 20251117224618,
+  "schema_version": {
+    "no_update": false,
+    "url": "https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.tar.gz",
+    "version": 3
+  },
+  "version": "548.0.0"
+}
