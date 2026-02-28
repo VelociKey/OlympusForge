@@ -1,3 +1,3 @@
-module OlympusForge/90000-Enablement-Labs/000-Tools/000-intelligence/george-bootstrap
+module george-bootstrap
 
 go 1.25.7

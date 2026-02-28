@@ -6,7 +6,7 @@ import (
 
 	whisperv1 "OlympusGrammar/gen/v1/whisper/whisperv1connect"
 
-	"connectrpc.com/connect"
+	"connect"
 )
 
 // FleetWhisper is the forge-side bridge to the inter-agent event mesh.

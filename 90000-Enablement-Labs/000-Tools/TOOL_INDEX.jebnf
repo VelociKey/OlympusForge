@@ -1,5 +1,5 @@
 # Sovereign Tool Index (TOOL_INDEX.jebnf)
-# Generated: 2026-02-28T03:20:14-05:00
+# Generated: 2026-02-28T11:34:57-05:00
 
 ToolIndex {
     900-EventsBridge = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/900-EventsBridge.exe";
@@ -20,6 +20,7 @@ ToolIndex {
     StorageManager = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/StorageManager.exe";
     VaultBridge = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/VaultBridge.exe";
     VaultManager = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/VaultManager.exe";
+    aegis-auditor = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/aegis-auditor.exe";
     air = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/air.cmd";
     axe = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/axe.cmd";
     bigtable-emulator = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/bigtable-emulator.cmd";
@@ -30,6 +31,7 @@ ToolIndex {
     firebase = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/firebase.cmd";
     firestore-emulator = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/firestore-emulator.cmd";
     fleet-bootstrap = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-bootstrap.exe";
+    fleet-cat = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-cat.exe";
     fleet-census = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-census.exe";
     fleet-chronicle = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-chronicle.exe";
     fleet-commit = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-commit.cmd";
@@ -41,6 +43,7 @@ ToolIndex {
     fleet-find = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-find.exe";
     fleet-grep = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-grep.exe";
     fleet-impact = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-impact.exe";
+    fleet-import-normalizer = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-import-normalizer.exe";
     fleet-index = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-index.cmd";
     fleet-index = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-index.exe";
     fleet-large-file-finder = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-large-file-finder.cmd";
@@ -49,12 +52,15 @@ ToolIndex {
     fleet-materialize = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-materialize.exe";
     fleet-mesh-dispatch = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-mesh-dispatch.exe";
     fleet-publish = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-publish.cmd";
+    fleet-publish = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-publish.exe";
     fleet-purify-imports = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-purify-imports.exe";
+    fleet-remod = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-remod.exe";
     fleet-reorg = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-reorg.exe";
     fleet-substrate = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-substrate.cmd";
     fleet-tool-indexer = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-tool-indexer.exe";
     fleet-track = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-track.exe";
     fleet-verify-semantic = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-verify-semantic.exe";
+    fleet-workmodreset = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/fleet-workmodreset.exe";
     gcloud = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/gcloud.cmd";
     gemini-cli = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/gemini-cli.cmd";
     gemini = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/gemini.cmd";
@@ -77,6 +83,7 @@ ToolIndex {
     protoc-gen-dart = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/protoc-gen-dart.cmd";
     protoc-gen-go = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/protoc-gen-go.cmd";
     pubsub-emulator = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/pubsub-emulator.cmd";
+    scaffold-workspace = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/scaffold-workspace.exe";
     semgrep = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/semgrep.cmd";
     sovereign-refresh = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/sovereign-refresh.exe";
     spanner-emulator = "C:/aAntigravitySpace/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/spanner-emulator.cmd";

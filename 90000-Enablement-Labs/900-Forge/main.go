@@ -10,9 +10,9 @@ import (
 	"syscall"
 	"time"
 
-	"connectrpc.com/connect"
-	"golang.org/x/net/http2"
-	"golang.org/x/net/http2/h2c"
+	"connect"
+	"x/net/http2"
+	"x/net/http2/h2c"
 
 	olympusv1 "Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympus/v1"
 	olympusv1connect "Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympus/v1/olympusv1connect"

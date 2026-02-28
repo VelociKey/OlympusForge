@@ -19,7 +19,7 @@ import (
 
 	"io"
 
-	"connectrpc.com/connect"
+	"connect"
 	"go.opentelemetry.io/otel/attribute"
 )
 
