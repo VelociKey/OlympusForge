@@ -1,6 +1,6 @@
 module mcp-toolbox
 
-go 1.24.4
+go 1.26.0
 
 require (
 	github.com/googleapis/mcp-toolbox-sdk-go v0.2.0

@@ -1,6 +1,6 @@
 module google.golang.org/genai
 
-go 1.24
+go 1.26.0
 
 retract v1.11.0 // Retracted due to breaking change on GenerateVideos
 

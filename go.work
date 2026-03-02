@@ -1,8 +1,10 @@
-go 1.25.7
+go 1.26.0
 
 use (
-	.
-	./82000-Toolchain-Fleet/fleet-import-fixer
-	./82000-Toolchain-Fleet/fleet-pub-overrider
-	./82000-Toolchain-Fleet/fleet-scaffold-ui
+        .
+        ./82000-Toolchain-Fleet/fleet-bootstrap
+        ./82000-Toolchain-Fleet/fleet-findTool
+        ./82000-Toolchain-Fleet/fleet-import-fixer
+        ./82000-Toolchain-Fleet/fleet-pub-overrider
+        ./82000-Toolchain-Fleet/fleet-scaffold-ui
 )

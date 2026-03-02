@@ -126,6 +126,15 @@ func main() {
 	// Save state and Registry
 	saveState(statePath, state)
 	saveRegistry(basePath, registry, logger)
+
+	// Post-Provisioning: Rebuild mPSH Tool Index for O(1) lookup
+	logger.Info("Triggering mPSH Tool Index rebuild (fleet-findTool)")
+	rebuildCmd := exec.Command("fleet-findTool.exe", "-root", filepath.Join(basePath, "..", "..", ".."), "-rebuild")
+	if out, err := rebuildCmd.CombinedOutput(); err != nil {
+		logger.Warn("Failed to rebuild mPSH index", "error", err, "output", string(out))
+	} else {
+		logger.Info("mPSH Tool Index successfully synchronized")
+	}
 }
 
 func loadState(path string) ProvisionerState {

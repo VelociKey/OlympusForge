@@ -340,5 +340,14 @@ linter:
 		}
 	}
 
+	if strings.Contains(source, "MEMORY_LANCEDB.jebnf") {
+		return `{
+    "table_name": "sovereign_events",
+    "dimensions": 1536,
+    "vector_type": "float32",
+    "storage_root": "00SDLC/Olympus2/C0500-Agent-Intelligence-Outputs/lancedb"
+}`, nil
+	}
+
 	return "", fmt.Errorf("transformer %q not yet implemented for source %q and target %q", transformer, source, target)
 }

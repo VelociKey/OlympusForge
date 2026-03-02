@@ -1,2 +1,2 @@
 @echo off
-"%~dp0..\000-foundation\go\bin\go.exe" %*
+"%~dp0..\..\..\81000-Toolchain-External\go\bin\go.exe" %*
