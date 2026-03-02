@@ -55,7 +55,7 @@ const (
 	connectUnaryMessageQueryParameter     = "message"
 	connectUnaryBase64QueryParameter      = "base64"
 	connectUnaryCompressionQueryParameter = "compression"
-	connectUnaryConnectQueryParameter     = "olympus.fleet/ext/connectrpc/connect-go"
+	connectUnaryConnectQueryParameter     = "connectrpc.com/connect"
 	connectUnaryConnectQueryValue         = "v" + connectProtocolVersion
 )
 

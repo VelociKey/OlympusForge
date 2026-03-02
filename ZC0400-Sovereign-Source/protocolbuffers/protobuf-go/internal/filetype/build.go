@@ -178,7 +178,7 @@ func (tb Builder) Build() (out Out) {
 
 		// As a special-case for descriptor.proto,
 		// locally register concrete message type for the options.
-		if out.File.Path() == "google/protobuf/descriptor.proto" && out.File.Package() == "olympus.fleet/ext/protocolbuffers/protobuf-go" {
+		if out.File.Path() == "google/protobuf/descriptor.proto" && out.File.Package() == "google.golang.org/protobuf" {
 			for i := range fbOut.Messages {
 				switch fbOut.Messages[i].Name() {
 				case "FileOptions":

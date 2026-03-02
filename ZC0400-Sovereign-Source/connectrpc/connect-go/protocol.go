@@ -29,7 +29,7 @@ import (
 // The names of the Connect, gRPC, and gRPC-Web protocols (as exposed by
 // [Peer].Protocol). Additional protocols may be added in the future.
 const (
-	ProtocolConnect = "olympus.fleet/ext/connectrpc/connect-go"
+	ProtocolConnect = "connectrpc.com/connect"
 	ProtocolGRPC    = "grpc"
 	ProtocolGRPCWeb = "grpcweb"
 )

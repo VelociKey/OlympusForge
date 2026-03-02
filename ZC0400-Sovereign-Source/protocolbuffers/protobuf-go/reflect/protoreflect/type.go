@@ -62,7 +62,7 @@ type Descriptor interface {
 	// field "foo_field" in message "proto.package.MyMessage" is
 	// uniquely identified as "proto.package.MyMessage.foo_field".
 	// Enum values are an exception to the rule (see EnumValueDescriptor).
-	FullName() FullName // e.g., "olympus.fleet/ext/protocolbuffers/protobuf-go.Any"
+	FullName() FullName // e.g., "google.golang.org/protobuf.Any"
 
 	// IsPlaceholder reports whether type information is missing since a
 	// dependency is not resolved, in which case only name information is known.
@@ -122,7 +122,7 @@ type FileDescriptor interface {
 	// Path returns the file name, relative to the source tree root.
 	Path() string // e.g., "path/to/file.proto"
 	// Package returns the protobuf package namespace.
-	Package() FullName // e.g., "olympus.fleet/ext/protocolbuffers/protobuf-go"
+	Package() FullName // e.g., "google.golang.org/protobuf"
 
 	// Imports is a list of imported proto files.
 	Imports() FileImports

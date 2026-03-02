@@ -15,14 +15,14 @@ const File_google_protobuf_source_context_proto = "google/protobuf/source_contex
 // Names for google.protobuf.SourceContext.
 const (
 	SourceContext_message_name     protoreflect.Name     = "SourceContext"
-	SourceContext_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceContext"
+	SourceContext_message_fullname protoreflect.FullName = "google.golang.org/protobuf.SourceContext"
 )
 
 // Field names for google.protobuf.SourceContext.
 const (
 	SourceContext_FileName_field_name protoreflect.Name = "file_name"
 
-	SourceContext_FileName_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceContext.file_name"
+	SourceContext_FileName_field_fullname protoreflect.FullName = "google.golang.org/protobuf.SourceContext.file_name"
 )
 
 // Field numbers for google.protobuf.SourceContext.

@@ -1321,7 +1321,7 @@ value: "\x80"
 			}
 			return &pb2.KnownTypes{
 				OptAny: &anypb.Any{
-					TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Any",
+					TypeUrl: "google.golang.org/protobuf.Any",
 					Value:   b2,
 				},
 			}
@@ -1393,7 +1393,7 @@ value: "\x80"
 			}
 			return &pb2.KnownTypes{
 				OptAny: &anypb.Any{
-					TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Any",
+					TypeUrl: "google.golang.org/protobuf.Any",
 					Value:   b2,
 				},
 			}
@@ -1420,7 +1420,7 @@ value: "\x80"
 			}
 			return &pb2.KnownTypes{
 				OptAny: &anypb.Any{
-					TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Any",
+					TypeUrl: "google.golang.org/protobuf.Any",
 					Value:   b,
 				},
 			}

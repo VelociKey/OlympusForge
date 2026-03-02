@@ -38,7 +38,7 @@ func TestErrorNilUnderlying(t *testing.T) {
 	assert.Nil(t, detailErr)
 	err.AddDetail(detail)
 	assert.Equal(t, len(err.Details()), 1)
-	assert.Equal(t, err.Details()[0].Type(), "olympus.fleet/ext/protocolbuffers/protobuf-go.Empty")
+	assert.Equal(t, err.Details()[0].Type(), "google.golang.org/protobuf.Empty")
 	err.Meta().Set("Foo", "bar")
 	assert.Equal(t, err.Meta().Get("Foo"), "bar")
 	assert.Equal(t, CodeOf(err), CodeUnknown)

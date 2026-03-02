@@ -125,7 +125,7 @@ func TestEdition2024Attributes(t *testing.T) {
 		Dependency: []string{"google/protobuf/descriptor.proto"},
 		Extension: []*descriptorpb.FieldDescriptorProto{
 			{
-				Extendee: proto.String("olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions"),
+				Extendee: proto.String("google.golang.org/protobuf.FileOptions"),
 				Name:     proto.String("foo_option"),
 				Type:     descriptorpb.FieldDescriptorProto_TYPE_STRING.Enum(),
 				Label:    descriptorpb.FieldDescriptorProto_LABEL_OPTIONAL.Enum(),

@@ -444,7 +444,7 @@ type Names interface {
 // with a '.' delimiter placed between each [Name].
 //
 // This should not have any leading or trailing dots.
-type FullName string // e.g., "olympus.fleet/ext/protocolbuffers/protobuf-go.Field.Kind"
+type FullName string // e.g., "google.golang.org/protobuf.Field.Kind"
 
 // IsValid reports whether s is a syntactically valid full name.
 // An empty full name is invalid.

@@ -8,4 +8,4 @@ package genid
 
 import "google.golang.org/protobuf/reflect/protoreflect"
 
-const GoogleProtobuf_package protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go"
+const GoogleProtobuf_package protoreflect.FullName = "google.golang.org/protobuf"

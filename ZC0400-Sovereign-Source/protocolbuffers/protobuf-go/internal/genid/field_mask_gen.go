@@ -15,14 +15,14 @@ const File_google_protobuf_field_mask_proto = "google/protobuf/field_mask.proto"
 // Names for google.protobuf.FieldMask.
 const (
 	FieldMask_message_name     protoreflect.Name     = "FieldMask"
-	FieldMask_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldMask"
+	FieldMask_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldMask"
 )
 
 // Field names for google.protobuf.FieldMask.
 const (
 	FieldMask_Paths_field_name protoreflect.Name = "paths"
 
-	FieldMask_Paths_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldMask.paths"
+	FieldMask_Paths_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldMask.paths"
 )
 
 // Field numbers for google.protobuf.FieldMask.

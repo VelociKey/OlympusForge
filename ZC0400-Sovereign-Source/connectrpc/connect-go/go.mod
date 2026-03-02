@@ -1,4 +1,4 @@
-module olympus.fleet/ext/connectrpc/connect-go
+module connectrpc.com/connect
 
 go 1.24.0
 

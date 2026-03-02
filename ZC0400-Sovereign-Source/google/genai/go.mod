@@ -1,4 +1,4 @@
-module olympus.fleet/google-genai
+module google.golang.org/genai
 
 go 1.24
 

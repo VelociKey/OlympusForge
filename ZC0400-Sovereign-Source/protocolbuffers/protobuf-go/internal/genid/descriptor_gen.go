@@ -14,7 +14,7 @@ const File_google_protobuf_descriptor_proto = "google/protobuf/descriptor.proto"
 
 // Full and short names for google.protobuf.Edition.
 const (
-	Edition_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.Edition"
+	Edition_enum_fullname = "google.golang.org/protobuf.Edition"
 	Edition_enum_name     = "Edition"
 )
 
@@ -37,7 +37,7 @@ const (
 
 // Full and short names for google.protobuf.SymbolVisibility.
 const (
-	SymbolVisibility_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.SymbolVisibility"
+	SymbolVisibility_enum_fullname = "google.golang.org/protobuf.SymbolVisibility"
 	SymbolVisibility_enum_name     = "SymbolVisibility"
 )
 
@@ -51,14 +51,14 @@ const (
 // Names for google.protobuf.FileDescriptorSet.
 const (
 	FileDescriptorSet_message_name     protoreflect.Name     = "FileDescriptorSet"
-	FileDescriptorSet_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorSet"
+	FileDescriptorSet_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorSet"
 )
 
 // Field names for google.protobuf.FileDescriptorSet.
 const (
 	FileDescriptorSet_File_field_name protoreflect.Name = "file"
 
-	FileDescriptorSet_File_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorSet.file"
+	FileDescriptorSet_File_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorSet.file"
 )
 
 // Field numbers for google.protobuf.FileDescriptorSet.
@@ -69,7 +69,7 @@ const (
 // Names for google.protobuf.FileDescriptorProto.
 const (
 	FileDescriptorProto_message_name     protoreflect.Name     = "FileDescriptorProto"
-	FileDescriptorProto_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto"
+	FileDescriptorProto_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto"
 )
 
 // Field names for google.protobuf.FileDescriptorProto.
@@ -89,20 +89,20 @@ const (
 	FileDescriptorProto_Syntax_field_name           protoreflect.Name = "syntax"
 	FileDescriptorProto_Edition_field_name          protoreflect.Name = "edition"
 
-	FileDescriptorProto_Name_field_fullname             protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.name"
-	FileDescriptorProto_Package_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.package"
-	FileDescriptorProto_Dependency_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.dependency"
-	FileDescriptorProto_PublicDependency_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.public_dependency"
-	FileDescriptorProto_WeakDependency_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.weak_dependency"
-	FileDescriptorProto_OptionDependency_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.option_dependency"
-	FileDescriptorProto_MessageType_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.message_type"
-	FileDescriptorProto_EnumType_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.enum_type"
-	FileDescriptorProto_Service_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.service"
-	FileDescriptorProto_Extension_field_fullname        protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.extension"
-	FileDescriptorProto_Options_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.options"
-	FileDescriptorProto_SourceCodeInfo_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.source_code_info"
-	FileDescriptorProto_Syntax_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.syntax"
-	FileDescriptorProto_Edition_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileDescriptorProto.edition"
+	FileDescriptorProto_Name_field_fullname             protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.name"
+	FileDescriptorProto_Package_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.package"
+	FileDescriptorProto_Dependency_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.dependency"
+	FileDescriptorProto_PublicDependency_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.public_dependency"
+	FileDescriptorProto_WeakDependency_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.weak_dependency"
+	FileDescriptorProto_OptionDependency_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.option_dependency"
+	FileDescriptorProto_MessageType_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.message_type"
+	FileDescriptorProto_EnumType_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.enum_type"
+	FileDescriptorProto_Service_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.service"
+	FileDescriptorProto_Extension_field_fullname        protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.extension"
+	FileDescriptorProto_Options_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.options"
+	FileDescriptorProto_SourceCodeInfo_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.source_code_info"
+	FileDescriptorProto_Syntax_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.syntax"
+	FileDescriptorProto_Edition_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.FileDescriptorProto.edition"
 )
 
 // Field numbers for google.protobuf.FileDescriptorProto.
@@ -126,7 +126,7 @@ const (
 // Names for google.protobuf.DescriptorProto.
 const (
 	DescriptorProto_message_name     protoreflect.Name     = "DescriptorProto"
-	DescriptorProto_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto"
+	DescriptorProto_message_fullname protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto"
 )
 
 // Field names for google.protobuf.DescriptorProto.
@@ -143,17 +143,17 @@ const (
 	DescriptorProto_ReservedName_field_name   protoreflect.Name = "reserved_name"
 	DescriptorProto_Visibility_field_name     protoreflect.Name = "visibility"
 
-	DescriptorProto_Name_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.name"
-	DescriptorProto_Field_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.field"
-	DescriptorProto_Extension_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.extension"
-	DescriptorProto_NestedType_field_fullname     protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.nested_type"
-	DescriptorProto_EnumType_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.enum_type"
-	DescriptorProto_ExtensionRange_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.extension_range"
-	DescriptorProto_OneofDecl_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.oneof_decl"
-	DescriptorProto_Options_field_fullname        protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.options"
-	DescriptorProto_ReservedRange_field_fullname  protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.reserved_range"
-	DescriptorProto_ReservedName_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.reserved_name"
-	DescriptorProto_Visibility_field_fullname     protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.visibility"
+	DescriptorProto_Name_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.name"
+	DescriptorProto_Field_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.field"
+	DescriptorProto_Extension_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.extension"
+	DescriptorProto_NestedType_field_fullname     protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.nested_type"
+	DescriptorProto_EnumType_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.enum_type"
+	DescriptorProto_ExtensionRange_field_fullname protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.extension_range"
+	DescriptorProto_OneofDecl_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.oneof_decl"
+	DescriptorProto_Options_field_fullname        protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.options"
+	DescriptorProto_ReservedRange_field_fullname  protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.reserved_range"
+	DescriptorProto_ReservedName_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.reserved_name"
+	DescriptorProto_Visibility_field_fullname     protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.visibility"
 )
 
 // Field numbers for google.protobuf.DescriptorProto.
@@ -174,7 +174,7 @@ const (
 // Names for google.protobuf.DescriptorProto.ExtensionRange.
 const (
 	DescriptorProto_ExtensionRange_message_name     protoreflect.Name     = "ExtensionRange"
-	DescriptorProto_ExtensionRange_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.ExtensionRange"
+	DescriptorProto_ExtensionRange_message_fullname protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.ExtensionRange"
 )
 
 // Field names for google.protobuf.DescriptorProto.ExtensionRange.
@@ -183,9 +183,9 @@ const (
 	DescriptorProto_ExtensionRange_End_field_name     protoreflect.Name = "end"
 	DescriptorProto_ExtensionRange_Options_field_name protoreflect.Name = "options"
 
-	DescriptorProto_ExtensionRange_Start_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.ExtensionRange.start"
-	DescriptorProto_ExtensionRange_End_field_fullname     protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.ExtensionRange.end"
-	DescriptorProto_ExtensionRange_Options_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.ExtensionRange.options"
+	DescriptorProto_ExtensionRange_Start_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.ExtensionRange.start"
+	DescriptorProto_ExtensionRange_End_field_fullname     protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.ExtensionRange.end"
+	DescriptorProto_ExtensionRange_Options_field_fullname protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.ExtensionRange.options"
 )
 
 // Field numbers for google.protobuf.DescriptorProto.ExtensionRange.
@@ -198,7 +198,7 @@ const (
 // Names for google.protobuf.DescriptorProto.ReservedRange.
 const (
 	DescriptorProto_ReservedRange_message_name     protoreflect.Name     = "ReservedRange"
-	DescriptorProto_ReservedRange_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.ReservedRange"
+	DescriptorProto_ReservedRange_message_fullname protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.ReservedRange"
 )
 
 // Field names for google.protobuf.DescriptorProto.ReservedRange.
@@ -206,8 +206,8 @@ const (
 	DescriptorProto_ReservedRange_Start_field_name protoreflect.Name = "start"
 	DescriptorProto_ReservedRange_End_field_name   protoreflect.Name = "end"
 
-	DescriptorProto_ReservedRange_Start_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.ReservedRange.start"
-	DescriptorProto_ReservedRange_End_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.DescriptorProto.ReservedRange.end"
+	DescriptorProto_ReservedRange_Start_field_fullname protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.ReservedRange.start"
+	DescriptorProto_ReservedRange_End_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.DescriptorProto.ReservedRange.end"
 )
 
 // Field numbers for google.protobuf.DescriptorProto.ReservedRange.
@@ -219,7 +219,7 @@ const (
 // Names for google.protobuf.ExtensionRangeOptions.
 const (
 	ExtensionRangeOptions_message_name     protoreflect.Name     = "ExtensionRangeOptions"
-	ExtensionRangeOptions_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions"
+	ExtensionRangeOptions_message_fullname protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions"
 )
 
 // Field names for google.protobuf.ExtensionRangeOptions.
@@ -229,10 +229,10 @@ const (
 	ExtensionRangeOptions_Features_field_name            protoreflect.Name = "features"
 	ExtensionRangeOptions_Verification_field_name        protoreflect.Name = "verification"
 
-	ExtensionRangeOptions_UninterpretedOption_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.uninterpreted_option"
-	ExtensionRangeOptions_Declaration_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.declaration"
-	ExtensionRangeOptions_Features_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.features"
-	ExtensionRangeOptions_Verification_field_fullname        protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.verification"
+	ExtensionRangeOptions_UninterpretedOption_field_fullname protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.uninterpreted_option"
+	ExtensionRangeOptions_Declaration_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.declaration"
+	ExtensionRangeOptions_Features_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.features"
+	ExtensionRangeOptions_Verification_field_fullname        protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.verification"
 )
 
 // Field numbers for google.protobuf.ExtensionRangeOptions.
@@ -245,7 +245,7 @@ const (
 
 // Full and short names for google.protobuf.ExtensionRangeOptions.VerificationState.
 const (
-	ExtensionRangeOptions_VerificationState_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.VerificationState"
+	ExtensionRangeOptions_VerificationState_enum_fullname = "google.golang.org/protobuf.ExtensionRangeOptions.VerificationState"
 	ExtensionRangeOptions_VerificationState_enum_name     = "VerificationState"
 )
 
@@ -258,7 +258,7 @@ const (
 // Names for google.protobuf.ExtensionRangeOptions.Declaration.
 const (
 	ExtensionRangeOptions_Declaration_message_name     protoreflect.Name     = "Declaration"
-	ExtensionRangeOptions_Declaration_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.Declaration"
+	ExtensionRangeOptions_Declaration_message_fullname protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.Declaration"
 )
 
 // Field names for google.protobuf.ExtensionRangeOptions.Declaration.
@@ -269,11 +269,11 @@ const (
 	ExtensionRangeOptions_Declaration_Reserved_field_name protoreflect.Name = "reserved"
 	ExtensionRangeOptions_Declaration_Repeated_field_name protoreflect.Name = "repeated"
 
-	ExtensionRangeOptions_Declaration_Number_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.Declaration.number"
-	ExtensionRangeOptions_Declaration_FullName_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.Declaration.full_name"
-	ExtensionRangeOptions_Declaration_Type_field_fullname     protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.Declaration.type"
-	ExtensionRangeOptions_Declaration_Reserved_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.Declaration.reserved"
-	ExtensionRangeOptions_Declaration_Repeated_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ExtensionRangeOptions.Declaration.repeated"
+	ExtensionRangeOptions_Declaration_Number_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.Declaration.number"
+	ExtensionRangeOptions_Declaration_FullName_field_fullname protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.Declaration.full_name"
+	ExtensionRangeOptions_Declaration_Type_field_fullname     protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.Declaration.type"
+	ExtensionRangeOptions_Declaration_Reserved_field_fullname protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.Declaration.reserved"
+	ExtensionRangeOptions_Declaration_Repeated_field_fullname protoreflect.FullName = "google.golang.org/protobuf.ExtensionRangeOptions.Declaration.repeated"
 )
 
 // Field numbers for google.protobuf.ExtensionRangeOptions.Declaration.
@@ -288,7 +288,7 @@ const (
 // Names for google.protobuf.FieldDescriptorProto.
 const (
 	FieldDescriptorProto_message_name     protoreflect.Name     = "FieldDescriptorProto"
-	FieldDescriptorProto_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto"
+	FieldDescriptorProto_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto"
 )
 
 // Field names for google.protobuf.FieldDescriptorProto.
@@ -305,17 +305,17 @@ const (
 	FieldDescriptorProto_Options_field_name        protoreflect.Name = "options"
 	FieldDescriptorProto_Proto3Optional_field_name protoreflect.Name = "proto3_optional"
 
-	FieldDescriptorProto_Name_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.name"
-	FieldDescriptorProto_Number_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.number"
-	FieldDescriptorProto_Label_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.label"
-	FieldDescriptorProto_Type_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.type"
-	FieldDescriptorProto_TypeName_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.type_name"
-	FieldDescriptorProto_Extendee_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.extendee"
-	FieldDescriptorProto_DefaultValue_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.default_value"
-	FieldDescriptorProto_OneofIndex_field_fullname     protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.oneof_index"
-	FieldDescriptorProto_JsonName_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.json_name"
-	FieldDescriptorProto_Options_field_fullname        protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.options"
-	FieldDescriptorProto_Proto3Optional_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.proto3_optional"
+	FieldDescriptorProto_Name_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.name"
+	FieldDescriptorProto_Number_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.number"
+	FieldDescriptorProto_Label_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.label"
+	FieldDescriptorProto_Type_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.type"
+	FieldDescriptorProto_TypeName_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.type_name"
+	FieldDescriptorProto_Extendee_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.extendee"
+	FieldDescriptorProto_DefaultValue_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.default_value"
+	FieldDescriptorProto_OneofIndex_field_fullname     protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.oneof_index"
+	FieldDescriptorProto_JsonName_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.json_name"
+	FieldDescriptorProto_Options_field_fullname        protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.options"
+	FieldDescriptorProto_Proto3Optional_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldDescriptorProto.proto3_optional"
 )
 
 // Field numbers for google.protobuf.FieldDescriptorProto.
@@ -335,7 +335,7 @@ const (
 
 // Full and short names for google.protobuf.FieldDescriptorProto.Type.
 const (
-	FieldDescriptorProto_Type_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.Type"
+	FieldDescriptorProto_Type_enum_fullname = "google.golang.org/protobuf.FieldDescriptorProto.Type"
 	FieldDescriptorProto_Type_enum_name     = "Type"
 )
 
@@ -363,7 +363,7 @@ const (
 
 // Full and short names for google.protobuf.FieldDescriptorProto.Label.
 const (
-	FieldDescriptorProto_Label_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldDescriptorProto.Label"
+	FieldDescriptorProto_Label_enum_fullname = "google.golang.org/protobuf.FieldDescriptorProto.Label"
 	FieldDescriptorProto_Label_enum_name     = "Label"
 )
 
@@ -377,7 +377,7 @@ const (
 // Names for google.protobuf.OneofDescriptorProto.
 const (
 	OneofDescriptorProto_message_name     protoreflect.Name     = "OneofDescriptorProto"
-	OneofDescriptorProto_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.OneofDescriptorProto"
+	OneofDescriptorProto_message_fullname protoreflect.FullName = "google.golang.org/protobuf.OneofDescriptorProto"
 )
 
 // Field names for google.protobuf.OneofDescriptorProto.
@@ -385,8 +385,8 @@ const (
 	OneofDescriptorProto_Name_field_name    protoreflect.Name = "name"
 	OneofDescriptorProto_Options_field_name protoreflect.Name = "options"
 
-	OneofDescriptorProto_Name_field_fullname    protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.OneofDescriptorProto.name"
-	OneofDescriptorProto_Options_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.OneofDescriptorProto.options"
+	OneofDescriptorProto_Name_field_fullname    protoreflect.FullName = "google.golang.org/protobuf.OneofDescriptorProto.name"
+	OneofDescriptorProto_Options_field_fullname protoreflect.FullName = "google.golang.org/protobuf.OneofDescriptorProto.options"
 )
 
 // Field numbers for google.protobuf.OneofDescriptorProto.
@@ -398,7 +398,7 @@ const (
 // Names for google.protobuf.EnumDescriptorProto.
 const (
 	EnumDescriptorProto_message_name     protoreflect.Name     = "EnumDescriptorProto"
-	EnumDescriptorProto_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto"
+	EnumDescriptorProto_message_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto"
 )
 
 // Field names for google.protobuf.EnumDescriptorProto.
@@ -410,12 +410,12 @@ const (
 	EnumDescriptorProto_ReservedName_field_name  protoreflect.Name = "reserved_name"
 	EnumDescriptorProto_Visibility_field_name    protoreflect.Name = "visibility"
 
-	EnumDescriptorProto_Name_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto.name"
-	EnumDescriptorProto_Value_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto.value"
-	EnumDescriptorProto_Options_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto.options"
-	EnumDescriptorProto_ReservedRange_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto.reserved_range"
-	EnumDescriptorProto_ReservedName_field_fullname  protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto.reserved_name"
-	EnumDescriptorProto_Visibility_field_fullname    protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto.visibility"
+	EnumDescriptorProto_Name_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto.name"
+	EnumDescriptorProto_Value_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto.value"
+	EnumDescriptorProto_Options_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto.options"
+	EnumDescriptorProto_ReservedRange_field_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto.reserved_range"
+	EnumDescriptorProto_ReservedName_field_fullname  protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto.reserved_name"
+	EnumDescriptorProto_Visibility_field_fullname    protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto.visibility"
 )
 
 // Field numbers for google.protobuf.EnumDescriptorProto.
@@ -431,7 +431,7 @@ const (
 // Names for google.protobuf.EnumDescriptorProto.EnumReservedRange.
 const (
 	EnumDescriptorProto_EnumReservedRange_message_name     protoreflect.Name     = "EnumReservedRange"
-	EnumDescriptorProto_EnumReservedRange_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto.EnumReservedRange"
+	EnumDescriptorProto_EnumReservedRange_message_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto.EnumReservedRange"
 )
 
 // Field names for google.protobuf.EnumDescriptorProto.EnumReservedRange.
@@ -439,8 +439,8 @@ const (
 	EnumDescriptorProto_EnumReservedRange_Start_field_name protoreflect.Name = "start"
 	EnumDescriptorProto_EnumReservedRange_End_field_name   protoreflect.Name = "end"
 
-	EnumDescriptorProto_EnumReservedRange_Start_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto.EnumReservedRange.start"
-	EnumDescriptorProto_EnumReservedRange_End_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumDescriptorProto.EnumReservedRange.end"
+	EnumDescriptorProto_EnumReservedRange_Start_field_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto.EnumReservedRange.start"
+	EnumDescriptorProto_EnumReservedRange_End_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.EnumDescriptorProto.EnumReservedRange.end"
 )
 
 // Field numbers for google.protobuf.EnumDescriptorProto.EnumReservedRange.
@@ -452,7 +452,7 @@ const (
 // Names for google.protobuf.EnumValueDescriptorProto.
 const (
 	EnumValueDescriptorProto_message_name     protoreflect.Name     = "EnumValueDescriptorProto"
-	EnumValueDescriptorProto_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueDescriptorProto"
+	EnumValueDescriptorProto_message_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumValueDescriptorProto"
 )
 
 // Field names for google.protobuf.EnumValueDescriptorProto.
@@ -461,9 +461,9 @@ const (
 	EnumValueDescriptorProto_Number_field_name  protoreflect.Name = "number"
 	EnumValueDescriptorProto_Options_field_name protoreflect.Name = "options"
 
-	EnumValueDescriptorProto_Name_field_fullname    protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueDescriptorProto.name"
-	EnumValueDescriptorProto_Number_field_fullname  protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueDescriptorProto.number"
-	EnumValueDescriptorProto_Options_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueDescriptorProto.options"
+	EnumValueDescriptorProto_Name_field_fullname    protoreflect.FullName = "google.golang.org/protobuf.EnumValueDescriptorProto.name"
+	EnumValueDescriptorProto_Number_field_fullname  protoreflect.FullName = "google.golang.org/protobuf.EnumValueDescriptorProto.number"
+	EnumValueDescriptorProto_Options_field_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumValueDescriptorProto.options"
 )
 
 // Field numbers for google.protobuf.EnumValueDescriptorProto.
@@ -476,7 +476,7 @@ const (
 // Names for google.protobuf.ServiceDescriptorProto.
 const (
 	ServiceDescriptorProto_message_name     protoreflect.Name     = "ServiceDescriptorProto"
-	ServiceDescriptorProto_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ServiceDescriptorProto"
+	ServiceDescriptorProto_message_fullname protoreflect.FullName = "google.golang.org/protobuf.ServiceDescriptorProto"
 )
 
 // Field names for google.protobuf.ServiceDescriptorProto.
@@ -485,9 +485,9 @@ const (
 	ServiceDescriptorProto_Method_field_name  protoreflect.Name = "method"
 	ServiceDescriptorProto_Options_field_name protoreflect.Name = "options"
 
-	ServiceDescriptorProto_Name_field_fullname    protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ServiceDescriptorProto.name"
-	ServiceDescriptorProto_Method_field_fullname  protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ServiceDescriptorProto.method"
-	ServiceDescriptorProto_Options_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ServiceDescriptorProto.options"
+	ServiceDescriptorProto_Name_field_fullname    protoreflect.FullName = "google.golang.org/protobuf.ServiceDescriptorProto.name"
+	ServiceDescriptorProto_Method_field_fullname  protoreflect.FullName = "google.golang.org/protobuf.ServiceDescriptorProto.method"
+	ServiceDescriptorProto_Options_field_fullname protoreflect.FullName = "google.golang.org/protobuf.ServiceDescriptorProto.options"
 )
 
 // Field numbers for google.protobuf.ServiceDescriptorProto.
@@ -500,7 +500,7 @@ const (
 // Names for google.protobuf.MethodDescriptorProto.
 const (
 	MethodDescriptorProto_message_name     protoreflect.Name     = "MethodDescriptorProto"
-	MethodDescriptorProto_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodDescriptorProto"
+	MethodDescriptorProto_message_fullname protoreflect.FullName = "google.golang.org/protobuf.MethodDescriptorProto"
 )
 
 // Field names for google.protobuf.MethodDescriptorProto.
@@ -512,12 +512,12 @@ const (
 	MethodDescriptorProto_ClientStreaming_field_name protoreflect.Name = "client_streaming"
 	MethodDescriptorProto_ServerStreaming_field_name protoreflect.Name = "server_streaming"
 
-	MethodDescriptorProto_Name_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodDescriptorProto.name"
-	MethodDescriptorProto_InputType_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodDescriptorProto.input_type"
-	MethodDescriptorProto_OutputType_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodDescriptorProto.output_type"
-	MethodDescriptorProto_Options_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodDescriptorProto.options"
-	MethodDescriptorProto_ClientStreaming_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodDescriptorProto.client_streaming"
-	MethodDescriptorProto_ServerStreaming_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodDescriptorProto.server_streaming"
+	MethodDescriptorProto_Name_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.MethodDescriptorProto.name"
+	MethodDescriptorProto_InputType_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.MethodDescriptorProto.input_type"
+	MethodDescriptorProto_OutputType_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.MethodDescriptorProto.output_type"
+	MethodDescriptorProto_Options_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.MethodDescriptorProto.options"
+	MethodDescriptorProto_ClientStreaming_field_fullname protoreflect.FullName = "google.golang.org/protobuf.MethodDescriptorProto.client_streaming"
+	MethodDescriptorProto_ServerStreaming_field_fullname protoreflect.FullName = "google.golang.org/protobuf.MethodDescriptorProto.server_streaming"
 )
 
 // Field numbers for google.protobuf.MethodDescriptorProto.
@@ -533,7 +533,7 @@ const (
 // Names for google.protobuf.FileOptions.
 const (
 	FileOptions_message_name     protoreflect.Name     = "FileOptions"
-	FileOptions_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions"
+	FileOptions_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FileOptions"
 )
 
 // Field names for google.protobuf.FileOptions.
@@ -560,27 +560,27 @@ const (
 	FileOptions_Features_field_name                  protoreflect.Name = "features"
 	FileOptions_UninterpretedOption_field_name       protoreflect.Name = "uninterpreted_option"
 
-	FileOptions_JavaPackage_field_fullname               protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.java_package"
-	FileOptions_JavaOuterClassname_field_fullname        protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.java_outer_classname"
-	FileOptions_JavaMultipleFiles_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.java_multiple_files"
-	FileOptions_JavaGenerateEqualsAndHash_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.java_generate_equals_and_hash"
-	FileOptions_JavaStringCheckUtf8_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.java_string_check_utf8"
-	FileOptions_OptimizeFor_field_fullname               protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.optimize_for"
-	FileOptions_GoPackage_field_fullname                 protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.go_package"
-	FileOptions_CcGenericServices_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.cc_generic_services"
-	FileOptions_JavaGenericServices_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.java_generic_services"
-	FileOptions_PyGenericServices_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.py_generic_services"
-	FileOptions_Deprecated_field_fullname                protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.deprecated"
-	FileOptions_CcEnableArenas_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.cc_enable_arenas"
-	FileOptions_ObjcClassPrefix_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.objc_class_prefix"
-	FileOptions_CsharpNamespace_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.csharp_namespace"
-	FileOptions_SwiftPrefix_field_fullname               protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.swift_prefix"
-	FileOptions_PhpClassPrefix_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.php_class_prefix"
-	FileOptions_PhpNamespace_field_fullname              protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.php_namespace"
-	FileOptions_PhpMetadataNamespace_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.php_metadata_namespace"
-	FileOptions_RubyPackage_field_fullname               protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.ruby_package"
-	FileOptions_Features_field_fullname                  protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.features"
-	FileOptions_UninterpretedOption_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.uninterpreted_option"
+	FileOptions_JavaPackage_field_fullname               protoreflect.FullName = "google.golang.org/protobuf.FileOptions.java_package"
+	FileOptions_JavaOuterClassname_field_fullname        protoreflect.FullName = "google.golang.org/protobuf.FileOptions.java_outer_classname"
+	FileOptions_JavaMultipleFiles_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.FileOptions.java_multiple_files"
+	FileOptions_JavaGenerateEqualsAndHash_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FileOptions.java_generate_equals_and_hash"
+	FileOptions_JavaStringCheckUtf8_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.FileOptions.java_string_check_utf8"
+	FileOptions_OptimizeFor_field_fullname               protoreflect.FullName = "google.golang.org/protobuf.FileOptions.optimize_for"
+	FileOptions_GoPackage_field_fullname                 protoreflect.FullName = "google.golang.org/protobuf.FileOptions.go_package"
+	FileOptions_CcGenericServices_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.FileOptions.cc_generic_services"
+	FileOptions_JavaGenericServices_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.FileOptions.java_generic_services"
+	FileOptions_PyGenericServices_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.FileOptions.py_generic_services"
+	FileOptions_Deprecated_field_fullname                protoreflect.FullName = "google.golang.org/protobuf.FileOptions.deprecated"
+	FileOptions_CcEnableArenas_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.FileOptions.cc_enable_arenas"
+	FileOptions_ObjcClassPrefix_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.FileOptions.objc_class_prefix"
+	FileOptions_CsharpNamespace_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.FileOptions.csharp_namespace"
+	FileOptions_SwiftPrefix_field_fullname               protoreflect.FullName = "google.golang.org/protobuf.FileOptions.swift_prefix"
+	FileOptions_PhpClassPrefix_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.FileOptions.php_class_prefix"
+	FileOptions_PhpNamespace_field_fullname              protoreflect.FullName = "google.golang.org/protobuf.FileOptions.php_namespace"
+	FileOptions_PhpMetadataNamespace_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.FileOptions.php_metadata_namespace"
+	FileOptions_RubyPackage_field_fullname               protoreflect.FullName = "google.golang.org/protobuf.FileOptions.ruby_package"
+	FileOptions_Features_field_fullname                  protoreflect.FullName = "google.golang.org/protobuf.FileOptions.features"
+	FileOptions_UninterpretedOption_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.FileOptions.uninterpreted_option"
 )
 
 // Field numbers for google.protobuf.FileOptions.
@@ -610,7 +610,7 @@ const (
 
 // Full and short names for google.protobuf.FileOptions.OptimizeMode.
 const (
-	FileOptions_OptimizeMode_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FileOptions.OptimizeMode"
+	FileOptions_OptimizeMode_enum_fullname = "google.golang.org/protobuf.FileOptions.OptimizeMode"
 	FileOptions_OptimizeMode_enum_name     = "OptimizeMode"
 )
 
@@ -624,7 +624,7 @@ const (
 // Names for google.protobuf.MessageOptions.
 const (
 	MessageOptions_message_name     protoreflect.Name     = "MessageOptions"
-	MessageOptions_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MessageOptions"
+	MessageOptions_message_fullname protoreflect.FullName = "google.golang.org/protobuf.MessageOptions"
 )
 
 // Field names for google.protobuf.MessageOptions.
@@ -637,13 +637,13 @@ const (
 	MessageOptions_Features_field_name                           protoreflect.Name = "features"
 	MessageOptions_UninterpretedOption_field_name                protoreflect.Name = "uninterpreted_option"
 
-	MessageOptions_MessageSetWireFormat_field_fullname               protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MessageOptions.message_set_wire_format"
-	MessageOptions_NoStandardDescriptorAccessor_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MessageOptions.no_standard_descriptor_accessor"
-	MessageOptions_Deprecated_field_fullname                         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MessageOptions.deprecated"
-	MessageOptions_MapEntry_field_fullname                           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MessageOptions.map_entry"
-	MessageOptions_DeprecatedLegacyJsonFieldConflicts_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MessageOptions.deprecated_legacy_json_field_conflicts"
-	MessageOptions_Features_field_fullname                           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MessageOptions.features"
-	MessageOptions_UninterpretedOption_field_fullname                protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MessageOptions.uninterpreted_option"
+	MessageOptions_MessageSetWireFormat_field_fullname               protoreflect.FullName = "google.golang.org/protobuf.MessageOptions.message_set_wire_format"
+	MessageOptions_NoStandardDescriptorAccessor_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.MessageOptions.no_standard_descriptor_accessor"
+	MessageOptions_Deprecated_field_fullname                         protoreflect.FullName = "google.golang.org/protobuf.MessageOptions.deprecated"
+	MessageOptions_MapEntry_field_fullname                           protoreflect.FullName = "google.golang.org/protobuf.MessageOptions.map_entry"
+	MessageOptions_DeprecatedLegacyJsonFieldConflicts_field_fullname protoreflect.FullName = "google.golang.org/protobuf.MessageOptions.deprecated_legacy_json_field_conflicts"
+	MessageOptions_Features_field_fullname                           protoreflect.FullName = "google.golang.org/protobuf.MessageOptions.features"
+	MessageOptions_UninterpretedOption_field_fullname                protoreflect.FullName = "google.golang.org/protobuf.MessageOptions.uninterpreted_option"
 )
 
 // Field numbers for google.protobuf.MessageOptions.
@@ -660,7 +660,7 @@ const (
 // Names for google.protobuf.FieldOptions.
 const (
 	FieldOptions_message_name     protoreflect.Name     = "FieldOptions"
-	FieldOptions_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions"
+	FieldOptions_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldOptions"
 )
 
 // Field names for google.protobuf.FieldOptions.
@@ -680,20 +680,20 @@ const (
 	FieldOptions_FeatureSupport_field_name      protoreflect.Name = "feature_support"
 	FieldOptions_UninterpretedOption_field_name protoreflect.Name = "uninterpreted_option"
 
-	FieldOptions_Ctype_field_fullname               protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.ctype"
-	FieldOptions_Packed_field_fullname              protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.packed"
-	FieldOptions_Jstype_field_fullname              protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.jstype"
-	FieldOptions_Lazy_field_fullname                protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.lazy"
-	FieldOptions_UnverifiedLazy_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.unverified_lazy"
-	FieldOptions_Deprecated_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.deprecated"
-	FieldOptions_Weak_field_fullname                protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.weak"
-	FieldOptions_DebugRedact_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.debug_redact"
-	FieldOptions_Retention_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.retention"
-	FieldOptions_Targets_field_fullname             protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.targets"
-	FieldOptions_EditionDefaults_field_fullname     protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.edition_defaults"
-	FieldOptions_Features_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.features"
-	FieldOptions_FeatureSupport_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.feature_support"
-	FieldOptions_UninterpretedOption_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.uninterpreted_option"
+	FieldOptions_Ctype_field_fullname               protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.ctype"
+	FieldOptions_Packed_field_fullname              protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.packed"
+	FieldOptions_Jstype_field_fullname              protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.jstype"
+	FieldOptions_Lazy_field_fullname                protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.lazy"
+	FieldOptions_UnverifiedLazy_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.unverified_lazy"
+	FieldOptions_Deprecated_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.deprecated"
+	FieldOptions_Weak_field_fullname                protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.weak"
+	FieldOptions_DebugRedact_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.debug_redact"
+	FieldOptions_Retention_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.retention"
+	FieldOptions_Targets_field_fullname             protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.targets"
+	FieldOptions_EditionDefaults_field_fullname     protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.edition_defaults"
+	FieldOptions_Features_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.features"
+	FieldOptions_FeatureSupport_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.feature_support"
+	FieldOptions_UninterpretedOption_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.uninterpreted_option"
 )
 
 // Field numbers for google.protobuf.FieldOptions.
@@ -716,7 +716,7 @@ const (
 
 // Full and short names for google.protobuf.FieldOptions.CType.
 const (
-	FieldOptions_CType_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.CType"
+	FieldOptions_CType_enum_fullname = "google.golang.org/protobuf.FieldOptions.CType"
 	FieldOptions_CType_enum_name     = "CType"
 )
 
@@ -729,7 +729,7 @@ const (
 
 // Full and short names for google.protobuf.FieldOptions.JSType.
 const (
-	FieldOptions_JSType_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.JSType"
+	FieldOptions_JSType_enum_fullname = "google.golang.org/protobuf.FieldOptions.JSType"
 	FieldOptions_JSType_enum_name     = "JSType"
 )
 
@@ -742,7 +742,7 @@ const (
 
 // Full and short names for google.protobuf.FieldOptions.OptionRetention.
 const (
-	FieldOptions_OptionRetention_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.OptionRetention"
+	FieldOptions_OptionRetention_enum_fullname = "google.golang.org/protobuf.FieldOptions.OptionRetention"
 	FieldOptions_OptionRetention_enum_name     = "OptionRetention"
 )
 
@@ -755,7 +755,7 @@ const (
 
 // Full and short names for google.protobuf.FieldOptions.OptionTargetType.
 const (
-	FieldOptions_OptionTargetType_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.OptionTargetType"
+	FieldOptions_OptionTargetType_enum_fullname = "google.golang.org/protobuf.FieldOptions.OptionTargetType"
 	FieldOptions_OptionTargetType_enum_name     = "OptionTargetType"
 )
 
@@ -776,7 +776,7 @@ const (
 // Names for google.protobuf.FieldOptions.EditionDefault.
 const (
 	FieldOptions_EditionDefault_message_name     protoreflect.Name     = "EditionDefault"
-	FieldOptions_EditionDefault_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.EditionDefault"
+	FieldOptions_EditionDefault_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.EditionDefault"
 )
 
 // Field names for google.protobuf.FieldOptions.EditionDefault.
@@ -784,8 +784,8 @@ const (
 	FieldOptions_EditionDefault_Edition_field_name protoreflect.Name = "edition"
 	FieldOptions_EditionDefault_Value_field_name   protoreflect.Name = "value"
 
-	FieldOptions_EditionDefault_Edition_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.EditionDefault.edition"
-	FieldOptions_EditionDefault_Value_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.EditionDefault.value"
+	FieldOptions_EditionDefault_Edition_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.EditionDefault.edition"
+	FieldOptions_EditionDefault_Value_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.EditionDefault.value"
 )
 
 // Field numbers for google.protobuf.FieldOptions.EditionDefault.
@@ -797,7 +797,7 @@ const (
 // Names for google.protobuf.FieldOptions.FeatureSupport.
 const (
 	FieldOptions_FeatureSupport_message_name     protoreflect.Name     = "FeatureSupport"
-	FieldOptions_FeatureSupport_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.FeatureSupport"
+	FieldOptions_FeatureSupport_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.FeatureSupport"
 )
 
 // Field names for google.protobuf.FieldOptions.FeatureSupport.
@@ -807,10 +807,10 @@ const (
 	FieldOptions_FeatureSupport_DeprecationWarning_field_name protoreflect.Name = "deprecation_warning"
 	FieldOptions_FeatureSupport_EditionRemoved_field_name     protoreflect.Name = "edition_removed"
 
-	FieldOptions_FeatureSupport_EditionIntroduced_field_fullname  protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.FeatureSupport.edition_introduced"
-	FieldOptions_FeatureSupport_EditionDeprecated_field_fullname  protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.FeatureSupport.edition_deprecated"
-	FieldOptions_FeatureSupport_DeprecationWarning_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.FeatureSupport.deprecation_warning"
-	FieldOptions_FeatureSupport_EditionRemoved_field_fullname     protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FieldOptions.FeatureSupport.edition_removed"
+	FieldOptions_FeatureSupport_EditionIntroduced_field_fullname  protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.FeatureSupport.edition_introduced"
+	FieldOptions_FeatureSupport_EditionDeprecated_field_fullname  protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.FeatureSupport.edition_deprecated"
+	FieldOptions_FeatureSupport_DeprecationWarning_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.FeatureSupport.deprecation_warning"
+	FieldOptions_FeatureSupport_EditionRemoved_field_fullname     protoreflect.FullName = "google.golang.org/protobuf.FieldOptions.FeatureSupport.edition_removed"
 )
 
 // Field numbers for google.protobuf.FieldOptions.FeatureSupport.
@@ -824,7 +824,7 @@ const (
 // Names for google.protobuf.OneofOptions.
 const (
 	OneofOptions_message_name     protoreflect.Name     = "OneofOptions"
-	OneofOptions_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.OneofOptions"
+	OneofOptions_message_fullname protoreflect.FullName = "google.golang.org/protobuf.OneofOptions"
 )
 
 // Field names for google.protobuf.OneofOptions.
@@ -832,8 +832,8 @@ const (
 	OneofOptions_Features_field_name            protoreflect.Name = "features"
 	OneofOptions_UninterpretedOption_field_name protoreflect.Name = "uninterpreted_option"
 
-	OneofOptions_Features_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.OneofOptions.features"
-	OneofOptions_UninterpretedOption_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.OneofOptions.uninterpreted_option"
+	OneofOptions_Features_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.OneofOptions.features"
+	OneofOptions_UninterpretedOption_field_fullname protoreflect.FullName = "google.golang.org/protobuf.OneofOptions.uninterpreted_option"
 )
 
 // Field numbers for google.protobuf.OneofOptions.
@@ -845,7 +845,7 @@ const (
 // Names for google.protobuf.EnumOptions.
 const (
 	EnumOptions_message_name     protoreflect.Name     = "EnumOptions"
-	EnumOptions_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumOptions"
+	EnumOptions_message_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumOptions"
 )
 
 // Field names for google.protobuf.EnumOptions.
@@ -856,11 +856,11 @@ const (
 	EnumOptions_Features_field_name                           protoreflect.Name = "features"
 	EnumOptions_UninterpretedOption_field_name                protoreflect.Name = "uninterpreted_option"
 
-	EnumOptions_AllowAlias_field_fullname                         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumOptions.allow_alias"
-	EnumOptions_Deprecated_field_fullname                         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumOptions.deprecated"
-	EnumOptions_DeprecatedLegacyJsonFieldConflicts_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumOptions.deprecated_legacy_json_field_conflicts"
-	EnumOptions_Features_field_fullname                           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumOptions.features"
-	EnumOptions_UninterpretedOption_field_fullname                protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumOptions.uninterpreted_option"
+	EnumOptions_AllowAlias_field_fullname                         protoreflect.FullName = "google.golang.org/protobuf.EnumOptions.allow_alias"
+	EnumOptions_Deprecated_field_fullname                         protoreflect.FullName = "google.golang.org/protobuf.EnumOptions.deprecated"
+	EnumOptions_DeprecatedLegacyJsonFieldConflicts_field_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumOptions.deprecated_legacy_json_field_conflicts"
+	EnumOptions_Features_field_fullname                           protoreflect.FullName = "google.golang.org/protobuf.EnumOptions.features"
+	EnumOptions_UninterpretedOption_field_fullname                protoreflect.FullName = "google.golang.org/protobuf.EnumOptions.uninterpreted_option"
 )
 
 // Field numbers for google.protobuf.EnumOptions.
@@ -875,7 +875,7 @@ const (
 // Names for google.protobuf.EnumValueOptions.
 const (
 	EnumValueOptions_message_name     protoreflect.Name     = "EnumValueOptions"
-	EnumValueOptions_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueOptions"
+	EnumValueOptions_message_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumValueOptions"
 )
 
 // Field names for google.protobuf.EnumValueOptions.
@@ -886,11 +886,11 @@ const (
 	EnumValueOptions_FeatureSupport_field_name      protoreflect.Name = "feature_support"
 	EnumValueOptions_UninterpretedOption_field_name protoreflect.Name = "uninterpreted_option"
 
-	EnumValueOptions_Deprecated_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueOptions.deprecated"
-	EnumValueOptions_Features_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueOptions.features"
-	EnumValueOptions_DebugRedact_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueOptions.debug_redact"
-	EnumValueOptions_FeatureSupport_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueOptions.feature_support"
-	EnumValueOptions_UninterpretedOption_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.EnumValueOptions.uninterpreted_option"
+	EnumValueOptions_Deprecated_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.EnumValueOptions.deprecated"
+	EnumValueOptions_Features_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.EnumValueOptions.features"
+	EnumValueOptions_DebugRedact_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.EnumValueOptions.debug_redact"
+	EnumValueOptions_FeatureSupport_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.EnumValueOptions.feature_support"
+	EnumValueOptions_UninterpretedOption_field_fullname protoreflect.FullName = "google.golang.org/protobuf.EnumValueOptions.uninterpreted_option"
 )
 
 // Field numbers for google.protobuf.EnumValueOptions.
@@ -905,7 +905,7 @@ const (
 // Names for google.protobuf.ServiceOptions.
 const (
 	ServiceOptions_message_name     protoreflect.Name     = "ServiceOptions"
-	ServiceOptions_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ServiceOptions"
+	ServiceOptions_message_fullname protoreflect.FullName = "google.golang.org/protobuf.ServiceOptions"
 )
 
 // Field names for google.protobuf.ServiceOptions.
@@ -914,9 +914,9 @@ const (
 	ServiceOptions_Deprecated_field_name          protoreflect.Name = "deprecated"
 	ServiceOptions_UninterpretedOption_field_name protoreflect.Name = "uninterpreted_option"
 
-	ServiceOptions_Features_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ServiceOptions.features"
-	ServiceOptions_Deprecated_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ServiceOptions.deprecated"
-	ServiceOptions_UninterpretedOption_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.ServiceOptions.uninterpreted_option"
+	ServiceOptions_Features_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.ServiceOptions.features"
+	ServiceOptions_Deprecated_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.ServiceOptions.deprecated"
+	ServiceOptions_UninterpretedOption_field_fullname protoreflect.FullName = "google.golang.org/protobuf.ServiceOptions.uninterpreted_option"
 )
 
 // Field numbers for google.protobuf.ServiceOptions.
@@ -929,7 +929,7 @@ const (
 // Names for google.protobuf.MethodOptions.
 const (
 	MethodOptions_message_name     protoreflect.Name     = "MethodOptions"
-	MethodOptions_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodOptions"
+	MethodOptions_message_fullname protoreflect.FullName = "google.golang.org/protobuf.MethodOptions"
 )
 
 // Field names for google.protobuf.MethodOptions.
@@ -939,10 +939,10 @@ const (
 	MethodOptions_Features_field_name            protoreflect.Name = "features"
 	MethodOptions_UninterpretedOption_field_name protoreflect.Name = "uninterpreted_option"
 
-	MethodOptions_Deprecated_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodOptions.deprecated"
-	MethodOptions_IdempotencyLevel_field_fullname    protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodOptions.idempotency_level"
-	MethodOptions_Features_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodOptions.features"
-	MethodOptions_UninterpretedOption_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodOptions.uninterpreted_option"
+	MethodOptions_Deprecated_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.MethodOptions.deprecated"
+	MethodOptions_IdempotencyLevel_field_fullname    protoreflect.FullName = "google.golang.org/protobuf.MethodOptions.idempotency_level"
+	MethodOptions_Features_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.MethodOptions.features"
+	MethodOptions_UninterpretedOption_field_fullname protoreflect.FullName = "google.golang.org/protobuf.MethodOptions.uninterpreted_option"
 )
 
 // Field numbers for google.protobuf.MethodOptions.
@@ -955,7 +955,7 @@ const (
 
 // Full and short names for google.protobuf.MethodOptions.IdempotencyLevel.
 const (
-	MethodOptions_IdempotencyLevel_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.MethodOptions.IdempotencyLevel"
+	MethodOptions_IdempotencyLevel_enum_fullname = "google.golang.org/protobuf.MethodOptions.IdempotencyLevel"
 	MethodOptions_IdempotencyLevel_enum_name     = "IdempotencyLevel"
 )
 
@@ -969,7 +969,7 @@ const (
 // Names for google.protobuf.UninterpretedOption.
 const (
 	UninterpretedOption_message_name     protoreflect.Name     = "UninterpretedOption"
-	UninterpretedOption_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption"
+	UninterpretedOption_message_fullname protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption"
 )
 
 // Field names for google.protobuf.UninterpretedOption.
@@ -982,13 +982,13 @@ const (
 	UninterpretedOption_StringValue_field_name      protoreflect.Name = "string_value"
 	UninterpretedOption_AggregateValue_field_name   protoreflect.Name = "aggregate_value"
 
-	UninterpretedOption_Name_field_fullname             protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.name"
-	UninterpretedOption_IdentifierValue_field_fullname  protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.identifier_value"
-	UninterpretedOption_PositiveIntValue_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.positive_int_value"
-	UninterpretedOption_NegativeIntValue_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.negative_int_value"
-	UninterpretedOption_DoubleValue_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.double_value"
-	UninterpretedOption_StringValue_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.string_value"
-	UninterpretedOption_AggregateValue_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.aggregate_value"
+	UninterpretedOption_Name_field_fullname             protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.name"
+	UninterpretedOption_IdentifierValue_field_fullname  protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.identifier_value"
+	UninterpretedOption_PositiveIntValue_field_fullname protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.positive_int_value"
+	UninterpretedOption_NegativeIntValue_field_fullname protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.negative_int_value"
+	UninterpretedOption_DoubleValue_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.double_value"
+	UninterpretedOption_StringValue_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.string_value"
+	UninterpretedOption_AggregateValue_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.aggregate_value"
 )
 
 // Field numbers for google.protobuf.UninterpretedOption.
@@ -1005,7 +1005,7 @@ const (
 // Names for google.protobuf.UninterpretedOption.NamePart.
 const (
 	UninterpretedOption_NamePart_message_name     protoreflect.Name     = "NamePart"
-	UninterpretedOption_NamePart_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.NamePart"
+	UninterpretedOption_NamePart_message_fullname protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.NamePart"
 )
 
 // Field names for google.protobuf.UninterpretedOption.NamePart.
@@ -1013,8 +1013,8 @@ const (
 	UninterpretedOption_NamePart_NamePart_field_name    protoreflect.Name = "name_part"
 	UninterpretedOption_NamePart_IsExtension_field_name protoreflect.Name = "is_extension"
 
-	UninterpretedOption_NamePart_NamePart_field_fullname    protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.NamePart.name_part"
-	UninterpretedOption_NamePart_IsExtension_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.UninterpretedOption.NamePart.is_extension"
+	UninterpretedOption_NamePart_NamePart_field_fullname    protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.NamePart.name_part"
+	UninterpretedOption_NamePart_IsExtension_field_fullname protoreflect.FullName = "google.golang.org/protobuf.UninterpretedOption.NamePart.is_extension"
 )
 
 // Field numbers for google.protobuf.UninterpretedOption.NamePart.
@@ -1026,7 +1026,7 @@ const (
 // Names for google.protobuf.FeatureSet.
 const (
 	FeatureSet_message_name     protoreflect.Name     = "FeatureSet"
-	FeatureSet_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet"
+	FeatureSet_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FeatureSet"
 )
 
 // Field names for google.protobuf.FeatureSet.
@@ -1040,14 +1040,14 @@ const (
 	FeatureSet_EnforceNamingStyle_field_name      protoreflect.Name = "enforce_naming_style"
 	FeatureSet_DefaultSymbolVisibility_field_name protoreflect.Name = "default_symbol_visibility"
 
-	FeatureSet_FieldPresence_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.field_presence"
-	FeatureSet_EnumType_field_fullname                protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.enum_type"
-	FeatureSet_RepeatedFieldEncoding_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.repeated_field_encoding"
-	FeatureSet_Utf8Validation_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.utf8_validation"
-	FeatureSet_MessageEncoding_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.message_encoding"
-	FeatureSet_JsonFormat_field_fullname              protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.json_format"
-	FeatureSet_EnforceNamingStyle_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.enforce_naming_style"
-	FeatureSet_DefaultSymbolVisibility_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.default_symbol_visibility"
+	FeatureSet_FieldPresence_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.FeatureSet.field_presence"
+	FeatureSet_EnumType_field_fullname                protoreflect.FullName = "google.golang.org/protobuf.FeatureSet.enum_type"
+	FeatureSet_RepeatedFieldEncoding_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.FeatureSet.repeated_field_encoding"
+	FeatureSet_Utf8Validation_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.FeatureSet.utf8_validation"
+	FeatureSet_MessageEncoding_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.FeatureSet.message_encoding"
+	FeatureSet_JsonFormat_field_fullname              protoreflect.FullName = "google.golang.org/protobuf.FeatureSet.json_format"
+	FeatureSet_EnforceNamingStyle_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.FeatureSet.enforce_naming_style"
+	FeatureSet_DefaultSymbolVisibility_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FeatureSet.default_symbol_visibility"
 )
 
 // Field numbers for google.protobuf.FeatureSet.
@@ -1064,7 +1064,7 @@ const (
 
 // Full and short names for google.protobuf.FeatureSet.FieldPresence.
 const (
-	FeatureSet_FieldPresence_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.FieldPresence"
+	FeatureSet_FieldPresence_enum_fullname = "google.golang.org/protobuf.FeatureSet.FieldPresence"
 	FeatureSet_FieldPresence_enum_name     = "FieldPresence"
 )
 
@@ -1078,7 +1078,7 @@ const (
 
 // Full and short names for google.protobuf.FeatureSet.EnumType.
 const (
-	FeatureSet_EnumType_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.EnumType"
+	FeatureSet_EnumType_enum_fullname = "google.golang.org/protobuf.FeatureSet.EnumType"
 	FeatureSet_EnumType_enum_name     = "EnumType"
 )
 
@@ -1091,7 +1091,7 @@ const (
 
 // Full and short names for google.protobuf.FeatureSet.RepeatedFieldEncoding.
 const (
-	FeatureSet_RepeatedFieldEncoding_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.RepeatedFieldEncoding"
+	FeatureSet_RepeatedFieldEncoding_enum_fullname = "google.golang.org/protobuf.FeatureSet.RepeatedFieldEncoding"
 	FeatureSet_RepeatedFieldEncoding_enum_name     = "RepeatedFieldEncoding"
 )
 
@@ -1104,7 +1104,7 @@ const (
 
 // Full and short names for google.protobuf.FeatureSet.Utf8Validation.
 const (
-	FeatureSet_Utf8Validation_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.Utf8Validation"
+	FeatureSet_Utf8Validation_enum_fullname = "google.golang.org/protobuf.FeatureSet.Utf8Validation"
 	FeatureSet_Utf8Validation_enum_name     = "Utf8Validation"
 )
 
@@ -1117,7 +1117,7 @@ const (
 
 // Full and short names for google.protobuf.FeatureSet.MessageEncoding.
 const (
-	FeatureSet_MessageEncoding_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.MessageEncoding"
+	FeatureSet_MessageEncoding_enum_fullname = "google.golang.org/protobuf.FeatureSet.MessageEncoding"
 	FeatureSet_MessageEncoding_enum_name     = "MessageEncoding"
 )
 
@@ -1130,7 +1130,7 @@ const (
 
 // Full and short names for google.protobuf.FeatureSet.JsonFormat.
 const (
-	FeatureSet_JsonFormat_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.JsonFormat"
+	FeatureSet_JsonFormat_enum_fullname = "google.golang.org/protobuf.FeatureSet.JsonFormat"
 	FeatureSet_JsonFormat_enum_name     = "JsonFormat"
 )
 
@@ -1143,7 +1143,7 @@ const (
 
 // Full and short names for google.protobuf.FeatureSet.EnforceNamingStyle.
 const (
-	FeatureSet_EnforceNamingStyle_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.EnforceNamingStyle"
+	FeatureSet_EnforceNamingStyle_enum_fullname = "google.golang.org/protobuf.FeatureSet.EnforceNamingStyle"
 	FeatureSet_EnforceNamingStyle_enum_name     = "EnforceNamingStyle"
 )
 
@@ -1157,12 +1157,12 @@ const (
 // Names for google.protobuf.FeatureSet.VisibilityFeature.
 const (
 	FeatureSet_VisibilityFeature_message_name     protoreflect.Name     = "VisibilityFeature"
-	FeatureSet_VisibilityFeature_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.VisibilityFeature"
+	FeatureSet_VisibilityFeature_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FeatureSet.VisibilityFeature"
 )
 
 // Full and short names for google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility.
 const (
-	FeatureSet_VisibilityFeature_DefaultSymbolVisibility_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSet.VisibilityFeature.DefaultSymbolVisibility"
+	FeatureSet_VisibilityFeature_DefaultSymbolVisibility_enum_fullname = "google.golang.org/protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility"
 	FeatureSet_VisibilityFeature_DefaultSymbolVisibility_enum_name     = "DefaultSymbolVisibility"
 )
 
@@ -1178,7 +1178,7 @@ const (
 // Names for google.protobuf.FeatureSetDefaults.
 const (
 	FeatureSetDefaults_message_name     protoreflect.Name     = "FeatureSetDefaults"
-	FeatureSetDefaults_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSetDefaults"
+	FeatureSetDefaults_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FeatureSetDefaults"
 )
 
 // Field names for google.protobuf.FeatureSetDefaults.
@@ -1187,9 +1187,9 @@ const (
 	FeatureSetDefaults_MinimumEdition_field_name protoreflect.Name = "minimum_edition"
 	FeatureSetDefaults_MaximumEdition_field_name protoreflect.Name = "maximum_edition"
 
-	FeatureSetDefaults_Defaults_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSetDefaults.defaults"
-	FeatureSetDefaults_MinimumEdition_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSetDefaults.minimum_edition"
-	FeatureSetDefaults_MaximumEdition_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSetDefaults.maximum_edition"
+	FeatureSetDefaults_Defaults_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.FeatureSetDefaults.defaults"
+	FeatureSetDefaults_MinimumEdition_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FeatureSetDefaults.minimum_edition"
+	FeatureSetDefaults_MaximumEdition_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FeatureSetDefaults.maximum_edition"
 )
 
 // Field numbers for google.protobuf.FeatureSetDefaults.
@@ -1202,7 +1202,7 @@ const (
 // Names for google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.
 const (
 	FeatureSetDefaults_FeatureSetEditionDefault_message_name     protoreflect.Name     = "FeatureSetEditionDefault"
-	FeatureSetDefaults_FeatureSetEditionDefault_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSetDefaults.FeatureSetEditionDefault"
+	FeatureSetDefaults_FeatureSetEditionDefault_message_fullname protoreflect.FullName = "google.golang.org/protobuf.FeatureSetDefaults.FeatureSetEditionDefault"
 )
 
 // Field names for google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.
@@ -1211,9 +1211,9 @@ const (
 	FeatureSetDefaults_FeatureSetEditionDefault_OverridableFeatures_field_name protoreflect.Name = "overridable_features"
 	FeatureSetDefaults_FeatureSetEditionDefault_FixedFeatures_field_name       protoreflect.Name = "fixed_features"
 
-	FeatureSetDefaults_FeatureSetEditionDefault_Edition_field_fullname             protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSetDefaults.FeatureSetEditionDefault.edition"
-	FeatureSetDefaults_FeatureSetEditionDefault_OverridableFeatures_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSetDefaults.FeatureSetEditionDefault.overridable_features"
-	FeatureSetDefaults_FeatureSetEditionDefault_FixedFeatures_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.FeatureSetDefaults.FeatureSetEditionDefault.fixed_features"
+	FeatureSetDefaults_FeatureSetEditionDefault_Edition_field_fullname             protoreflect.FullName = "google.golang.org/protobuf.FeatureSetDefaults.FeatureSetEditionDefault.edition"
+	FeatureSetDefaults_FeatureSetEditionDefault_OverridableFeatures_field_fullname protoreflect.FullName = "google.golang.org/protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridable_features"
+	FeatureSetDefaults_FeatureSetEditionDefault_FixedFeatures_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixed_features"
 )
 
 // Field numbers for google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.
@@ -1226,14 +1226,14 @@ const (
 // Names for google.protobuf.SourceCodeInfo.
 const (
 	SourceCodeInfo_message_name     protoreflect.Name     = "SourceCodeInfo"
-	SourceCodeInfo_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceCodeInfo"
+	SourceCodeInfo_message_fullname protoreflect.FullName = "google.golang.org/protobuf.SourceCodeInfo"
 )
 
 // Field names for google.protobuf.SourceCodeInfo.
 const (
 	SourceCodeInfo_Location_field_name protoreflect.Name = "location"
 
-	SourceCodeInfo_Location_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceCodeInfo.location"
+	SourceCodeInfo_Location_field_fullname protoreflect.FullName = "google.golang.org/protobuf.SourceCodeInfo.location"
 )
 
 // Field numbers for google.protobuf.SourceCodeInfo.
@@ -1244,7 +1244,7 @@ const (
 // Names for google.protobuf.SourceCodeInfo.Location.
 const (
 	SourceCodeInfo_Location_message_name     protoreflect.Name     = "Location"
-	SourceCodeInfo_Location_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceCodeInfo.Location"
+	SourceCodeInfo_Location_message_fullname protoreflect.FullName = "google.golang.org/protobuf.SourceCodeInfo.Location"
 )
 
 // Field names for google.protobuf.SourceCodeInfo.Location.
@@ -1255,11 +1255,11 @@ const (
 	SourceCodeInfo_Location_TrailingComments_field_name        protoreflect.Name = "trailing_comments"
 	SourceCodeInfo_Location_LeadingDetachedComments_field_name protoreflect.Name = "leading_detached_comments"
 
-	SourceCodeInfo_Location_Path_field_fullname                    protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceCodeInfo.Location.path"
-	SourceCodeInfo_Location_Span_field_fullname                    protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceCodeInfo.Location.span"
-	SourceCodeInfo_Location_LeadingComments_field_fullname         protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceCodeInfo.Location.leading_comments"
-	SourceCodeInfo_Location_TrailingComments_field_fullname        protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceCodeInfo.Location.trailing_comments"
-	SourceCodeInfo_Location_LeadingDetachedComments_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.SourceCodeInfo.Location.leading_detached_comments"
+	SourceCodeInfo_Location_Path_field_fullname                    protoreflect.FullName = "google.golang.org/protobuf.SourceCodeInfo.Location.path"
+	SourceCodeInfo_Location_Span_field_fullname                    protoreflect.FullName = "google.golang.org/protobuf.SourceCodeInfo.Location.span"
+	SourceCodeInfo_Location_LeadingComments_field_fullname         protoreflect.FullName = "google.golang.org/protobuf.SourceCodeInfo.Location.leading_comments"
+	SourceCodeInfo_Location_TrailingComments_field_fullname        protoreflect.FullName = "google.golang.org/protobuf.SourceCodeInfo.Location.trailing_comments"
+	SourceCodeInfo_Location_LeadingDetachedComments_field_fullname protoreflect.FullName = "google.golang.org/protobuf.SourceCodeInfo.Location.leading_detached_comments"
 )
 
 // Field numbers for google.protobuf.SourceCodeInfo.Location.
@@ -1274,14 +1274,14 @@ const (
 // Names for google.protobuf.GeneratedCodeInfo.
 const (
 	GeneratedCodeInfo_message_name     protoreflect.Name     = "GeneratedCodeInfo"
-	GeneratedCodeInfo_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.GeneratedCodeInfo"
+	GeneratedCodeInfo_message_fullname protoreflect.FullName = "google.golang.org/protobuf.GeneratedCodeInfo"
 )
 
 // Field names for google.protobuf.GeneratedCodeInfo.
 const (
 	GeneratedCodeInfo_Annotation_field_name protoreflect.Name = "annotation"
 
-	GeneratedCodeInfo_Annotation_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.GeneratedCodeInfo.annotation"
+	GeneratedCodeInfo_Annotation_field_fullname protoreflect.FullName = "google.golang.org/protobuf.GeneratedCodeInfo.annotation"
 )
 
 // Field numbers for google.protobuf.GeneratedCodeInfo.
@@ -1292,7 +1292,7 @@ const (
 // Names for google.protobuf.GeneratedCodeInfo.Annotation.
 const (
 	GeneratedCodeInfo_Annotation_message_name     protoreflect.Name     = "Annotation"
-	GeneratedCodeInfo_Annotation_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.GeneratedCodeInfo.Annotation"
+	GeneratedCodeInfo_Annotation_message_fullname protoreflect.FullName = "google.golang.org/protobuf.GeneratedCodeInfo.Annotation"
 )
 
 // Field names for google.protobuf.GeneratedCodeInfo.Annotation.
@@ -1303,11 +1303,11 @@ const (
 	GeneratedCodeInfo_Annotation_End_field_name        protoreflect.Name = "end"
 	GeneratedCodeInfo_Annotation_Semantic_field_name   protoreflect.Name = "semantic"
 
-	GeneratedCodeInfo_Annotation_Path_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.GeneratedCodeInfo.Annotation.path"
-	GeneratedCodeInfo_Annotation_SourceFile_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.GeneratedCodeInfo.Annotation.source_file"
-	GeneratedCodeInfo_Annotation_Begin_field_fullname      protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.GeneratedCodeInfo.Annotation.begin"
-	GeneratedCodeInfo_Annotation_End_field_fullname        protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.GeneratedCodeInfo.Annotation.end"
-	GeneratedCodeInfo_Annotation_Semantic_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.GeneratedCodeInfo.Annotation.semantic"
+	GeneratedCodeInfo_Annotation_Path_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.GeneratedCodeInfo.Annotation.path"
+	GeneratedCodeInfo_Annotation_SourceFile_field_fullname protoreflect.FullName = "google.golang.org/protobuf.GeneratedCodeInfo.Annotation.source_file"
+	GeneratedCodeInfo_Annotation_Begin_field_fullname      protoreflect.FullName = "google.golang.org/protobuf.GeneratedCodeInfo.Annotation.begin"
+	GeneratedCodeInfo_Annotation_End_field_fullname        protoreflect.FullName = "google.golang.org/protobuf.GeneratedCodeInfo.Annotation.end"
+	GeneratedCodeInfo_Annotation_Semantic_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.GeneratedCodeInfo.Annotation.semantic"
 )
 
 // Field numbers for google.protobuf.GeneratedCodeInfo.Annotation.
@@ -1321,7 +1321,7 @@ const (
 
 // Full and short names for google.protobuf.GeneratedCodeInfo.Annotation.Semantic.
 const (
-	GeneratedCodeInfo_Annotation_Semantic_enum_fullname = "olympus.fleet/ext/protocolbuffers/protobuf-go.GeneratedCodeInfo.Annotation.Semantic"
+	GeneratedCodeInfo_Annotation_Semantic_enum_fullname = "google.golang.org/protobuf.GeneratedCodeInfo.Annotation.Semantic"
 	GeneratedCodeInfo_Annotation_Semantic_enum_name     = "Semantic"
 )
 

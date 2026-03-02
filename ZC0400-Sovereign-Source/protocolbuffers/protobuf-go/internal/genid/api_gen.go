@@ -15,7 +15,7 @@ const File_google_protobuf_api_proto = "google/protobuf/api.proto"
 // Names for google.protobuf.Api.
 const (
 	Api_message_name     protoreflect.Name     = "Api"
-	Api_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Api"
+	Api_message_fullname protoreflect.FullName = "google.golang.org/protobuf.Api"
 )
 
 // Field names for google.protobuf.Api.
@@ -29,14 +29,14 @@ const (
 	Api_Syntax_field_name        protoreflect.Name = "syntax"
 	Api_Edition_field_name       protoreflect.Name = "edition"
 
-	Api_Name_field_fullname          protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Api.name"
-	Api_Methods_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Api.methods"
-	Api_Options_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Api.options"
-	Api_Version_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Api.version"
-	Api_SourceContext_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Api.source_context"
-	Api_Mixins_field_fullname        protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Api.mixins"
-	Api_Syntax_field_fullname        protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Api.syntax"
-	Api_Edition_field_fullname       protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Api.edition"
+	Api_Name_field_fullname          protoreflect.FullName = "google.golang.org/protobuf.Api.name"
+	Api_Methods_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.Api.methods"
+	Api_Options_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.Api.options"
+	Api_Version_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.Api.version"
+	Api_SourceContext_field_fullname protoreflect.FullName = "google.golang.org/protobuf.Api.source_context"
+	Api_Mixins_field_fullname        protoreflect.FullName = "google.golang.org/protobuf.Api.mixins"
+	Api_Syntax_field_fullname        protoreflect.FullName = "google.golang.org/protobuf.Api.syntax"
+	Api_Edition_field_fullname       protoreflect.FullName = "google.golang.org/protobuf.Api.edition"
 )
 
 // Field numbers for google.protobuf.Api.
@@ -54,7 +54,7 @@ const (
 // Names for google.protobuf.Method.
 const (
 	Method_message_name     protoreflect.Name     = "Method"
-	Method_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Method"
+	Method_message_fullname protoreflect.FullName = "google.golang.org/protobuf.Method"
 )
 
 // Field names for google.protobuf.Method.
@@ -68,14 +68,14 @@ const (
 	Method_Syntax_field_name            protoreflect.Name = "syntax"
 	Method_Edition_field_name           protoreflect.Name = "edition"
 
-	Method_Name_field_fullname              protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Method.name"
-	Method_RequestTypeUrl_field_fullname    protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Method.request_type_url"
-	Method_RequestStreaming_field_fullname  protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Method.request_streaming"
-	Method_ResponseTypeUrl_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Method.response_type_url"
-	Method_ResponseStreaming_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Method.response_streaming"
-	Method_Options_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Method.options"
-	Method_Syntax_field_fullname            protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Method.syntax"
-	Method_Edition_field_fullname           protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Method.edition"
+	Method_Name_field_fullname              protoreflect.FullName = "google.golang.org/protobuf.Method.name"
+	Method_RequestTypeUrl_field_fullname    protoreflect.FullName = "google.golang.org/protobuf.Method.request_type_url"
+	Method_RequestStreaming_field_fullname  protoreflect.FullName = "google.golang.org/protobuf.Method.request_streaming"
+	Method_ResponseTypeUrl_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.Method.response_type_url"
+	Method_ResponseStreaming_field_fullname protoreflect.FullName = "google.golang.org/protobuf.Method.response_streaming"
+	Method_Options_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.Method.options"
+	Method_Syntax_field_fullname            protoreflect.FullName = "google.golang.org/protobuf.Method.syntax"
+	Method_Edition_field_fullname           protoreflect.FullName = "google.golang.org/protobuf.Method.edition"
 )
 
 // Field numbers for google.protobuf.Method.
@@ -93,7 +93,7 @@ const (
 // Names for google.protobuf.Mixin.
 const (
 	Mixin_message_name     protoreflect.Name     = "Mixin"
-	Mixin_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Mixin"
+	Mixin_message_fullname protoreflect.FullName = "google.golang.org/protobuf.Mixin"
 )
 
 // Field names for google.protobuf.Mixin.
@@ -101,8 +101,8 @@ const (
 	Mixin_Name_field_name protoreflect.Name = "name"
 	Mixin_Root_field_name protoreflect.Name = "root"
 
-	Mixin_Name_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Mixin.name"
-	Mixin_Root_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Mixin.root"
+	Mixin_Name_field_fullname protoreflect.FullName = "google.golang.org/protobuf.Mixin.name"
+	Mixin_Root_field_fullname protoreflect.FullName = "google.golang.org/protobuf.Mixin.root"
 )
 
 // Field numbers for google.protobuf.Mixin.

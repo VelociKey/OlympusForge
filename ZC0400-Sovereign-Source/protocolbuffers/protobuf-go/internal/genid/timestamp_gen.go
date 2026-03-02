@@ -15,7 +15,7 @@ const File_google_protobuf_timestamp_proto = "google/protobuf/timestamp.proto"
 // Names for google.protobuf.Timestamp.
 const (
 	Timestamp_message_name     protoreflect.Name     = "Timestamp"
-	Timestamp_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Timestamp"
+	Timestamp_message_fullname protoreflect.FullName = "google.golang.org/protobuf.Timestamp"
 )
 
 // Field names for google.protobuf.Timestamp.
@@ -23,8 +23,8 @@ const (
 	Timestamp_Seconds_field_name protoreflect.Name = "seconds"
 	Timestamp_Nanos_field_name   protoreflect.Name = "nanos"
 
-	Timestamp_Seconds_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Timestamp.seconds"
-	Timestamp_Nanos_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Timestamp.nanos"
+	Timestamp_Seconds_field_fullname protoreflect.FullName = "google.golang.org/protobuf.Timestamp.seconds"
+	Timestamp_Nanos_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.Timestamp.nanos"
 )
 
 // Field numbers for google.protobuf.Timestamp.

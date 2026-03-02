@@ -434,7 +434,7 @@ func rangeTopLevelDescriptors(fd protoreflect.FileDescriptor, f func(protoreflec
 // The [Types] type implements this interface.
 type MessageTypeResolver interface {
 	// FindMessageByName looks up a message by its full name.
-	// E.g., "olympus.fleet/ext/protocolbuffers/protobuf-go.Any"
+	// E.g., "google.golang.org/protobuf.Any"
 	//
 	// This return (nil, NotFound) if not found.
 	FindMessageByName(message protoreflect.FullName) (protoreflect.MessageType, error)
@@ -588,7 +588,7 @@ func (r *Types) register(kind string, desc protoreflect.Descriptor, typ any) err
 }
 
 // FindEnumByName looks up an enum by its full name.
-// E.g., "olympus.fleet/ext/protocolbuffers/protobuf-go.Field.Kind".
+// E.g., "google.golang.org/protobuf.Field.Kind".
 //
 // This returns (nil, [NotFound]) if not found.
 func (r *Types) FindEnumByName(enum protoreflect.FullName) (protoreflect.EnumType, error) {
@@ -609,7 +609,7 @@ func (r *Types) FindEnumByName(enum protoreflect.FullName) (protoreflect.EnumTyp
 }
 
 // FindMessageByName looks up a message by its full name,
-// e.g. "olympus.fleet/ext/protocolbuffers/protobuf-go.Any".
+// e.g. "google.golang.org/protobuf.Any".
 //
 // This returns (nil, [NotFound]) if not found.
 func (r *Types) FindMessageByName(message protoreflect.FullName) (protoreflect.MessageType, error) {

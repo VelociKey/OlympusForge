@@ -58,7 +58,7 @@ func BenchmarkConnect(b *testing.B) {
 		name string
 		opts []connect.ClientOption
 	}{{
-		name: "olympus.fleet/ext/connectrpc/connect-go",
+		name: "connectrpc.com/connect",
 		opts: []connect.ClientOption{},
 	}, {
 		name: "grpc",

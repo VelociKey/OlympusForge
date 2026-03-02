@@ -1728,7 +1728,7 @@ func TestMarshal(t *testing.T) {
 				t.Fatalf("error in binary marshaling message for Any.value: %v", err)
 			}
 			return &anypb.Any{
-				TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.StringValue",
+				TypeUrl: "google.golang.org/protobuf.StringValue",
 				Value:   bytes.Replace(b, []byte("abcd"), []byte("abc\xff"), -1),
 			}
 		}(),
@@ -1742,12 +1742,12 @@ func TestMarshal(t *testing.T) {
 				t.Fatalf("error in binary marshaling message for Any.value: %v", err)
 			}
 			return &anypb.Any{
-				TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Int64Value",
+				TypeUrl: "google.golang.org/protobuf.Int64Value",
 				Value:   b,
 			}
 		}(),
 		want: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Int64Value",
+  "@type": "google.golang.org/protobuf.Int64Value",
   "value": "42"
 }`,
 	}, {
@@ -1836,12 +1836,12 @@ func TestMarshal(t *testing.T) {
 				t.Fatalf("error in binary marshaling message for Any.value: %v", err)
 			}
 			return &anypb.Any{
-				TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Struct",
+				TypeUrl: "google.golang.org/protobuf.Struct",
 				Value:   b,
 			}
 		}(),
 		want: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Struct",
+  "@type": "google.golang.org/protobuf.Struct",
   "value": {
     "bool": true,
     "null": null,
@@ -1896,7 +1896,7 @@ func TestMarshal(t *testing.T) {
 			},
 			OptEmpty: &emptypb.Empty{},
 			OptAny: &anypb.Any{
-				TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Empty",
+				TypeUrl: "google.golang.org/protobuf.Empty",
 			},
 			OptFieldmask: &fieldmaskpb.FieldMask{
 				Paths: []string{"foo_bar", "bar_foo"},
@@ -1926,7 +1926,7 @@ func TestMarshal(t *testing.T) {
   "optValue": "world",
   "optEmpty": {},
   "optAny": {
-    "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Empty"
+    "@type": "google.golang.org/protobuf.Empty"
   },
   "optFieldmask": "fooBar,barFoo"
 }`,

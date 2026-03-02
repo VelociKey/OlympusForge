@@ -46,7 +46,7 @@ func NewTypes(f *protoregistry.Files) *Types {
 }
 
 // FindEnumByName looks up an enum by its full name;
-// e.g., "olympus.fleet/ext/protocolbuffers/protobuf-go.Field.Kind".
+// e.g., "google.golang.org/protobuf.Field.Kind".
 //
 // This returns (nil, [protoregistry.NotFound]) if not found.
 func (t *Types) FindEnumByName(name protoreflect.FullName) (protoreflect.EnumType, error) {
@@ -97,7 +97,7 @@ func (t *Types) FindExtensionByNumber(message protoreflect.FullName, field proto
 }
 
 // FindMessageByName looks up a message by its full name;
-// e.g. "olympus.fleet/ext/protocolbuffers/protobuf-go.Any".
+// e.g. "google.golang.org/protobuf.Any".
 //
 // This returns (nil, [protoregistry.NotFound]) if not found.
 func (t *Types) FindMessageByName(name protoreflect.FullName) (protoreflect.MessageType, error) {

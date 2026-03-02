@@ -538,7 +538,7 @@ func protoc(args ...string) {
 // generateIdentifiers generates an internal package for descriptor.proto
 // and well-known types.
 func generateIdentifiers(gen *protogen.Plugin, file *protogen.File) {
-	if file.Desc.Package() != "olympus.fleet/ext/protocolbuffers/protobuf-go" && file.Desc.Package() != "pb" {
+	if file.Desc.Package() != "google.golang.org/protobuf" && file.Desc.Package() != "pb" {
 		return
 	}
 

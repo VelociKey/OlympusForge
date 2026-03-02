@@ -77,6 +77,6 @@ var sink bool
 
 func BenchmarkFullNameIsValid(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		sink = FullName("olympus.fleet/ext/protocolbuffers/protobuf-go.Any").IsValid()
+		sink = FullName("google.golang.org/protobuf.Any").IsValid()
 	}
 }

@@ -15,5 +15,5 @@ const File_google_protobuf_empty_proto = "google/protobuf/empty.proto"
 // Names for google.protobuf.Empty.
 const (
 	Empty_message_name     protoreflect.Name     = "Empty"
-	Empty_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Empty"
+	Empty_message_fullname protoreflect.FullName = "google.golang.org/protobuf.Empty"
 )

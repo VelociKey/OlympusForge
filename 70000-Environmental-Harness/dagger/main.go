@@ -3,17 +3,20 @@ package main
 import (
 	"context"
 	"path/filepath"
+	"dagger/olympusforge/internal/dagger"
 )
 
 type Olympusforge struct{}
 
-// BuildGo compiles Go source from the provided directory into a Windows binary.
-func (m *Olympusforge) BuildGo(ctx context.Context, src *dagger.Directory, path string) *dagger.File {
+// BuildGo compiles a specific Go module into a Windows binary.
+func (m *Olympusforge) BuildGo(ctx context.Context, src *dagger.Directory, modulePath string) *dagger.File {
 	return dag.Container().
 		From("golang:1.25-alpine").
 		WithDirectory("/src", src).
 		WithWorkdir("/src").
-		WithExec([]string{"go", "build", "-o", "/out/app.exe", path}).
+		// Point to the root go.work but build only the target
+		WithEnvVariable("GOWORK", "/src/go.work").
+		WithExec([]string{"go", "build", "-v", "-mod=readonly", "-o", "/out/app.exe", "./"+modulePath}).
 		File("/out/app.exe")
 }
 

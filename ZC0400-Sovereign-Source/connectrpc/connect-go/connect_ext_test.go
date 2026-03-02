@@ -656,7 +656,7 @@ func TestServer(t *testing.T) {
 			testCumSum(t, client, bidi)
 			testErrors(t, client)
 		}
-		t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+		t.Run("connectrpc.com/connect", func(t *testing.T) {
 			t.Run("proto", func(t *testing.T) {
 				run(t)
 			})
@@ -930,7 +930,7 @@ func TestErrorHeaderPropagation(t *testing.T) {
 			})
 		})
 	}
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		client := pingv1connect.NewPingServiceClient(server.Client(), server.URL())
 		testServices(t, client)
@@ -1008,7 +1008,7 @@ func TestHeaderHost(t *testing.T) {
 		assert.Equal(t, response.Header().Get(key), "")
 	}
 
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		server := newHTTP2Server(t)
 		client := pingv1connect.NewPingServiceClient(server.Client(), server.URL())
@@ -1497,7 +1497,7 @@ func TestHandlerWithReadMaxBytes(t *testing.T) {
 		server := memhttptest.NewServer(t, mux)
 		return server
 	}
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		server := newHTTP2Server(t)
 		client := pingv1connect.NewPingServiceClient(server.Client(), server.URL())
@@ -1578,7 +1578,7 @@ func TestHandlerWithHTTPMaxBytes(t *testing.T) {
 			assert.Equal(t, connect.CodeOf(err), connect.CodeResourceExhausted)
 		})
 	}
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		server := memhttptest.NewServer(t, mux)
 		client := pingv1connect.NewPingServiceClient(server.Client(), server.URL())
@@ -1674,7 +1674,7 @@ func TestClientWithReadMaxBytes(t *testing.T) {
 			assert.Equal(t, err.Error(), fmt.Sprintf("resource_exhausted: message size %d is larger than configured max %d", expectedSize, readMaxBytes))
 		})
 	}
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		client := pingv1connect.NewPingServiceClient(serverUncompressed.Client(), serverUncompressed.URL(), connect.WithReadMaxBytes(readMaxBytes))
 		readMaxBytesMatrix(t, client, false)
@@ -1776,7 +1776,7 @@ func TestHandlerWithSendMaxBytes(t *testing.T) {
 		server := memhttptest.NewServer(t, mux)
 		return server
 	}
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		server := newHTTP2Server(t, false, sendMaxBytes)
 		client := pingv1connect.NewPingServiceClient(server.Client(), server.URL())
@@ -1867,7 +1867,7 @@ func TestClientWithSendMaxBytes(t *testing.T) {
 			}
 		})
 	}
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		sendMaxBytes := 1024
 		client := pingv1connect.NewPingServiceClient(server.Client(), server.URL(), connect.WithSendMaxBytes(sendMaxBytes))
@@ -1937,7 +1937,7 @@ func TestBidiStreamServerSendsFirstMessage(t *testing.T) {
 		case <-headersSent:
 		}
 	}
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		run(t)
 	})
@@ -2272,7 +2272,7 @@ func TestUnflushableResponseWriter(t *testing.T) {
 		name    string
 		options []connect.ClientOption
 	}{
-		{"olympus.fleet/ext/connectrpc/connect-go", nil},
+		{"connectrpc.com/connect", nil},
 		{"grpc", []connect.ClientOption{connect.WithGRPC()}},
 		{"grpcweb", []connect.ClientOption{connect.WithGRPCWeb()}},
 	}
@@ -2404,7 +2404,7 @@ func TestAllowCustomUserAgent(t *testing.T) {
 		protocol string
 		opts     []connect.ClientOption
 	}{
-		{"olympus.fleet/ext/connectrpc/connect-go", nil},
+		{"connectrpc.com/connect", nil},
 		{"grpc", []connect.ClientOption{connect.WithGRPC()}},
 		{"grpcweb", []connect.ClientOption{connect.WithGRPCWeb()}},
 	}
@@ -2913,7 +2913,7 @@ func TestSetProtocolHeaders(t *testing.T) {
 		clientOption      connect.ClientOption
 		expectContentType string
 	}{{
-		name:              "olympus.fleet/ext/connectrpc/connect-go",
+		name:              "connectrpc.com/connect",
 		expectContentType: "application/proto",
 	}, {
 		name:              "grpc",
@@ -3351,7 +3351,7 @@ func TestCallInfoHeadersOnError(t *testing.T) {
 		})
 	}
 
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		client := pingv1connectsimple.NewPingServiceClient(server.Client(), server.URL())
 		testCallInfoHeaders(t, client, connect.ProtocolConnect)

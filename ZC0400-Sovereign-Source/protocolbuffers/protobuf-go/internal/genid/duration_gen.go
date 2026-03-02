@@ -15,7 +15,7 @@ const File_google_protobuf_duration_proto = "google/protobuf/duration.proto"
 // Names for google.protobuf.Duration.
 const (
 	Duration_message_name     protoreflect.Name     = "Duration"
-	Duration_message_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Duration"
+	Duration_message_fullname protoreflect.FullName = "google.golang.org/protobuf.Duration"
 )
 
 // Field names for google.protobuf.Duration.
@@ -23,8 +23,8 @@ const (
 	Duration_Seconds_field_name protoreflect.Name = "seconds"
 	Duration_Nanos_field_name   protoreflect.Name = "nanos"
 
-	Duration_Seconds_field_fullname protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Duration.seconds"
-	Duration_Nanos_field_fullname   protoreflect.FullName = "olympus.fleet/ext/protocolbuffers/protobuf-go.Duration.nanos"
+	Duration_Seconds_field_fullname protoreflect.FullName = "google.golang.org/protobuf.Duration.seconds"
+	Duration_Nanos_field_fullname   protoreflect.FullName = "google.golang.org/protobuf.Duration.nanos"
 )
 
 // Field numbers for google.protobuf.Duration.

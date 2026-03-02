@@ -963,7 +963,7 @@ func TestNewFileProto3OptionalExt(t *testing.T) {
 		File: []*descriptorpb.FileDescriptorProto{
 			mustParseFile(`
 				name: "google/protobuf/descriptor.proto"
-				package: "olympus.fleet/ext/protocolbuffers/protobuf-go"
+				package: "google.golang.org/protobuf"
 				message_type: [{
 					name: "EnumValueOptions"
 					extension_range: [{start:1 end:536870912}]

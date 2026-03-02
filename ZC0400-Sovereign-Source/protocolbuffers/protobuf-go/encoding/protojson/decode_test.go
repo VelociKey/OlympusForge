@@ -2244,7 +2244,7 @@ func TestUnmarshal(t *testing.T) {
 		desc:         "Any with StringValue containing invalid UTF8",
 		inputMessage: &anypb.Any{},
 		inputText: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.StringValue",
+  "@type": "google.golang.org/protobuf.StringValue",
   "value": "` + "abc\xff" + `"
 }`,
 		wantErr: `(line 3:12): invalid UTF-8`,
@@ -2252,7 +2252,7 @@ func TestUnmarshal(t *testing.T) {
 		desc:         "Any with Int64Value",
 		inputMessage: &anypb.Any{},
 		inputText: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Int64Value",
+  "@type": "google.golang.org/protobuf.Int64Value",
   "value": "42"
 }`,
 		wantMessage: func() proto.Message {
@@ -2262,7 +2262,7 @@ func TestUnmarshal(t *testing.T) {
 				t.Fatalf("error in binary marshaling message for Any.value: %v", err)
 			}
 			return &anypb.Any{
-				TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Int64Value",
+				TypeUrl: "google.golang.org/protobuf.Int64Value",
 				Value:   b,
 			}
 		}(),
@@ -2270,7 +2270,7 @@ func TestUnmarshal(t *testing.T) {
 		desc:         "Any with invalid Int64Value",
 		inputMessage: &anypb.Any{},
 		inputText: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Int64Value",
+  "@type": "google.golang.org/protobuf.Int64Value",
   "value": "forty-two"
 }`,
 		wantErr: `(line 3:12): invalid value for int64 field value: "forty-two"`,
@@ -2278,7 +2278,7 @@ func TestUnmarshal(t *testing.T) {
 		desc:         "Any with invalid UInt64Value",
 		inputMessage: &anypb.Any{},
 		inputText: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.UInt64Value",
+  "@type": "google.golang.org/protobuf.UInt64Value",
   "value": -42
 }`,
 		wantErr: `(line 3:12): invalid value for uint64 field value: -42`,
@@ -2304,7 +2304,7 @@ func TestUnmarshal(t *testing.T) {
 		desc:         "Any with Value of StringValue",
 		inputMessage: &anypb.Any{},
 		inputText: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Value",
+  "@type": "google.golang.org/protobuf.Value",
   "value": "` + "abc\xff" + `"
 }`,
 		wantErr: `(line 3:12): invalid UTF-8`,
@@ -2312,7 +2312,7 @@ func TestUnmarshal(t *testing.T) {
 		desc:         "Any with Value of NullValue",
 		inputMessage: &anypb.Any{},
 		inputText: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Value",
+  "@type": "google.golang.org/protobuf.Value",
   "value": null
 }`,
 		wantMessage: func() proto.Message {
@@ -2322,7 +2322,7 @@ func TestUnmarshal(t *testing.T) {
 				t.Fatalf("error in binary marshaling message for Any.value: %v", err)
 			}
 			return &anypb.Any{
-				TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Value",
+				TypeUrl: "google.golang.org/protobuf.Value",
 				Value:   b,
 			}
 		}(),
@@ -2330,7 +2330,7 @@ func TestUnmarshal(t *testing.T) {
 		desc:         "Any with Struct",
 		inputMessage: &anypb.Any{},
 		inputText: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Struct",
+  "@type": "google.golang.org/protobuf.Struct",
   "value": {
     "bool": true,
     "null": null,
@@ -2362,7 +2362,7 @@ func TestUnmarshal(t *testing.T) {
 				t.Fatalf("error in binary marshaling message for Any.value: %v", err)
 			}
 			return &anypb.Any{
-				TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Struct",
+				TypeUrl: "google.golang.org/protobuf.Struct",
 				Value:   b,
 			}
 		}(),
@@ -2385,7 +2385,7 @@ func TestUnmarshal(t *testing.T) {
 		desc:         "Any with duplicate @type",
 		inputMessage: &anypb.Any{},
 		inputText: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.StringValue",
+  "@type": "google.golang.org/protobuf.StringValue",
   "value": "hello",
   "@type": "pb2.Nested"
 }`,
@@ -2394,7 +2394,7 @@ func TestUnmarshal(t *testing.T) {
 		desc:         "Any with duplicate value",
 		inputMessage: &anypb.Any{},
 		inputText: `{
-  "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.StringValue",
+  "@type": "google.golang.org/protobuf.StringValue",
   "value": "hello",
   "value": "world"
 }`,
@@ -2414,7 +2414,7 @@ func TestUnmarshal(t *testing.T) {
 		inputText: `{
   "@type": "pb2.KnownTypes",
   "optAny": {
-    "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.StringValue",
+    "@type": "google.golang.org/protobuf.StringValue",
     "value": "` + "abc\xff" + `"
   }
 }`,
@@ -2446,7 +2446,7 @@ func TestUnmarshal(t *testing.T) {
   "optValue": "world",
   "optEmpty": {},
   "optAny": {
-    "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Empty",
+    "@type": "google.golang.org/protobuf.Empty",
     "value": {}
   },
   "optFieldmask": "fooBar,barFoo"
@@ -2489,7 +2489,7 @@ func TestUnmarshal(t *testing.T) {
 			},
 			OptEmpty: &emptypb.Empty{},
 			OptAny: &anypb.Any{
-				TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Empty",
+				TypeUrl: "google.golang.org/protobuf.Empty",
 			},
 			OptFieldmask: &fieldmaskpb.FieldMask{
 				Paths: []string{"foo_bar", "bar_foo"},
@@ -2522,7 +2522,7 @@ func TestUnmarshal(t *testing.T) {
   "optValue": "world",
   "optEmpty": {},
   "optAny": {
-    "@type": "olympus.fleet/ext/protocolbuffers/protobuf-go.Empty",
+    "@type": "google.golang.org/protobuf.Empty",
     "value": {}
   },
   "optFieldmask": "fooBar,barFoo"
@@ -2565,7 +2565,7 @@ func TestUnmarshal(t *testing.T) {
 			},
 			OptEmpty: &emptypb.Empty{},
 			OptAny: &anypb.Any{
-				TypeUrl: "olympus.fleet/ext/protocolbuffers/protobuf-go.Empty",
+				TypeUrl: "google.golang.org/protobuf.Empty",
 			},
 			OptFieldmask: &fieldmaskpb.FieldMask{
 				Paths: []string{"foo_bar", "bar_foo"},

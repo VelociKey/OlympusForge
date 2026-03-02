@@ -1,4 +1,4 @@
-module olympus.fleet/ext/protocolbuffers/protobuf-go
+module google.golang.org/protobuf
 
 go 1.23
 

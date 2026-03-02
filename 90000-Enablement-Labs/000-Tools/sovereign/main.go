@@ -19,7 +19,7 @@ import (
 
 	"io"
 
-	"olympus.fleet/ext/connectrpc/connect-go"
+	"connectrpc.com/connect"
 	"go.opentelemetry.io/otel/attribute"
 )
 

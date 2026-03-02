@@ -174,7 +174,7 @@ func (o Options) rangeMessage(p *protopath.Values, m protoreflect.Message, push,
 
 func (o Options) rangeAnyMessage(p *protopath.Values, m protoreflect.Message, push, pop func(protopath.Values) error) (ok bool, err error) {
 	md := m.Descriptor()
-	if md.FullName() != "olympus.fleet/ext/protocolbuffers/protobuf-go.Any" {
+	if md.FullName() != "google.golang.org/protobuf.Any" {
 		return false, nil
 	}
 

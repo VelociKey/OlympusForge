@@ -42,7 +42,7 @@
 //
 //   - package_suffix: To generate into a sub-package of the package containing the
 //     base .pb.go files using the given suffix. An empty suffix denotes to
-//     generate into the same package as the base pb.go files. Default is "olympus.fleet/ext/connectrpc/connect-go".
+//     generate into the same package as the base pb.go files. Default is "connectrpc.com/connect".
 //
 // For example, to generate into the same package as the base .pb.go files:
 //
@@ -88,7 +88,7 @@ const (
 	connectPackage = protogen.GoImportPath("connectrpc.com/connect")
 
 	generatedFilenameExtension = ".connect.go"
-	defaultPackageSuffix       = "olympus.fleet/ext/connectrpc/connect-go"
+	defaultPackageSuffix       = "connectrpc.com/connect"
 	packageSuffixFlagName      = "package_suffix"
 	simpleFlagName             = "simple"
 

@@ -143,7 +143,7 @@ func TestClientPeer(t *testing.T) {
 		})
 	}
 
-	t.Run("olympus.fleet/ext/connectrpc/connect-go", func(t *testing.T) {
+	t.Run("connectrpc.com/connect", func(t *testing.T) {
 		t.Parallel()
 		run(t, http.MethodPost)
 	})
