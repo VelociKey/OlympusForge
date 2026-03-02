@@ -3,7 +3,8 @@ go 1.26.0
 use (
         .
         ./82000-Toolchain-Fleet/fleet-bootstrap
-        ./82000-Toolchain-Fleet/fleet-findTool
+        ./82000-Toolchain-Fleet/gemaid-finder
+        ./82000-Toolchain-Fleet/gemaid-purify
         ./82000-Toolchain-Fleet/fleet-import-fixer
         ./82000-Toolchain-Fleet/fleet-pub-overrider
         ./82000-Toolchain-Fleet/fleet-scaffold-ui

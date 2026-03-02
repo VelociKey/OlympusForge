@@ -1,2 +1,2 @@
 @echo off
-"%~dp0..\000-authoring\protoc-gen-connect-go.exe" %*
+"%~dp0..\..\..\81000-Toolchain-External\google\bin\protoc-gen-connect-go.exe" %*
