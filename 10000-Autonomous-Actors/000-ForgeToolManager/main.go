@@ -40,7 +40,7 @@ func syncTool(t Tool) error {
 		slog.Info("📥 Forge: Tool missing, invoking Master Provisioner...", "name", t.Name, "path", absPath)
 		
 		// Run the central provisioner
-		provisionerPath := "C:/aAntigravitySpace/Olympus2/90000-Enablement-Labs/910-provisioner/main.go"
+		provisionerPath := "C:/aAntigravitySpace/olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/910-provisioner/main.go"
 		cmd := exec.Command("go", "run", provisionerPath)
 		cmd.Dir = "C:/aAntigravitySpace" // Fleet root
 		cmd.Stdout = os.Stdout

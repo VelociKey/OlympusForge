@@ -3,7 +3,7 @@ package parser
 import (
 	"fmt"
 
-	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
+	"OlympusForge/20000-Context-Bridges/000-olympus.fleet/00SDLC/OlympusFabric/P0000-pkg/000-ir"
 )
 
 type Parser struct {

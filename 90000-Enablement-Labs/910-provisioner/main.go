@@ -236,8 +236,8 @@ func provisionLocalSource(ctx context.Context, tool ToolDefinition, toolDir stri
 
 	// Special case for tools that have cross-workspace dependencies beyond just mod files
 	if tool.Name == "fleet-index" {
-		includes = append(includes, "Olympus2/90000-Enablement-Labs/P0000-pkg/000-search/**")
-		includes = append(includes, "Olympus2/00000-Identity-Foundations/**")
+		includes = append(includes, "olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0000-pkg/000-search/**")
+		includes = append(includes, "olympus.fleet/00SDLC/Olympus2/00000-Identity-Foundations/**")
 	}
 
 	src := client.Host().Directory(rootPath, dagger.HostDirectoryOpts{

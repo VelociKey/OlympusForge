@@ -1,7 +1,7 @@
 package generator
 
 import (
-	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
+	"OlympusForge/20000-Context-Bridges/000-olympus.fleet/00SDLC/OlympusFabric/P0000-pkg/000-ir"
 )
 
 // Generator is the interface that all output formatters must implement

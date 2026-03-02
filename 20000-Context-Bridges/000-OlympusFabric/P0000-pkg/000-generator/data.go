@@ -3,7 +3,7 @@ package generator
 import (
 	"encoding/json"
 
-	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
+	"olympus.fleet/00SDLC/OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
 	"gopkg.in/yaml.v3"
 )
 

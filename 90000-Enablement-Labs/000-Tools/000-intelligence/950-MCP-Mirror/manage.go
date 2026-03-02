@@ -86,7 +86,7 @@ func runInstall() {
 
 	// Note: We'd need to build the inspector binary first if we wanted a direct shim,
 	// but for now we'll shim the go run command.
-	content := fmt.Sprintf("@echo off\ngo run \"%%~dp0../../../../OlympusForge/%s/mcp-go/test/inspector/main.go\" %%*\n", zcDir)
+	content := fmt.Sprintf("@echo off\ngo run \"%%~dp0../../../../olympus.fleet/00SDLC/OlympusForge/%s/mcp-go/test/inspector/main.go\" %%*\n", zcDir)
 	os.WriteFile(shimPath, []byte(content), 0755)
 
 	fmt.Printf("✅ Shim created: %s\n", shimPath)

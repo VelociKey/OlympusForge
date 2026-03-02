@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
+	"OlympusForge/20000-Context-Bridges/000-olympus.fleet/00SDLC/OlympusFabric/P0000-pkg/000-ir"
 )
 
 // PSGenerator (PowerShell Generator) produces scripts to materialize file structures.

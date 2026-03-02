@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"dagger.io/dagger"
-	"Olympus2/90000-Enablement-Labs/P0000-pkg/000-vault"
+	"olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0000-pkg/000-vault"
 )
 
 // buildGeorgeHardened implements the Pure-Wasm architecture for George.
@@ -15,7 +15,7 @@ func (m *AihubForge) buildGeorgeHardened(ctx context.Context, client *dagger.Cli
 	fmt.Println("⚒️ Forge: Pure-Wasm Hardened Build [George]")
 
 	// 1. Acquire George SOUL (context)
-	soulPath := "George/C0100-Configuration-Registry/POLICY.jebnf"
+	soulPath := "olympus.fleet/20POSI/George/C0100-Configuration-Registry/POLICY.jebnf"
 	soulFile := src.File(soulPath)
 	soulContent, err := soulFile.Contents(ctx)
 	if err != nil {
@@ -42,8 +42,8 @@ func (m *AihubForge) buildGeorgeHardened(ctx context.Context, client *dagger.Cli
 		WithDirectory("/src", src).
 		WithNewFile("/src/go.work", m.minimalGoWork("George")).
 		WithEnvVariable("GOWORK", "/src/go.work").
-		WithWorkdir("/src/George/10000-Autonomous-Actors/10700-Processing-Engines/10710-Reasoning-Inference").
-		WithNewFile("/src/George/10000-Autonomous-Actors/10700-Processing-Engines/10710-Reasoning-Inference/inference/sealed_soul.jebnf", sealedJeBNF).
+		WithWorkdir("/src/olympus.fleet/20POSI/George/10000-Autonomous-Actors/10700-Processing-Engines/10710-Reasoning-Inference").
+		WithNewFile("/src/olympus.fleet/20POSI/George/10000-Autonomous-Actors/10700-Processing-Engines/10710-Reasoning-Inference/inference/sealed_soul.jebnf", sealedJeBNF).
 		WithExec([]string{"go", "build", "-o", "/out/george.wasm", "."}).
 		File("/out/george.wasm")
 
@@ -53,7 +53,7 @@ func (m *AihubForge) buildGeorgeHardened(ctx context.Context, client *dagger.Cli
 		WithDirectory("/src", src).
 		WithNewFile("/src/go.work", m.minimalGoWork("George")).
 		WithEnvVariable("GOWORK", "/src/go.work").
-		WithWorkdir("/src/George/10000-Autonomous-Actors/10700-Processing-Engines/10710-Reasoning-Inference").
+		WithWorkdir("/src/olympus.fleet/20POSI/George/10000-Autonomous-Actors/10700-Processing-Engines/10710-Reasoning-Inference").
 		WithExec([]string{"go", "build", "-o", "/out/george-reasoning-linux", "."}).
 		File("/out/george-reasoning-linux")
 
@@ -64,7 +64,7 @@ func (m *AihubForge) buildGeorgeHardened(ctx context.Context, client *dagger.Cli
 	// Use standard Flutter image (Dagger-managed)
 	flutterBuild := client.Container().From("ghcr.io/cirruslabs/flutter:stable").
 		WithDirectory("/src", src).
-		WithWorkdir("/src/George/40000-Communication-Contracts/410-InteractionSurface").
+		WithWorkdir("/src/olympus.fleet/20POSI/George/40000-Communication-Contracts/410-InteractionSurface").
 		WithExec([]string{"mkdir", "-p", "assets/wasm"}).
 		WithFile("assets/wasm/george.wasm", goWasm).
 		WithExec([]string{"flutter", "config", "--enable-web"}).
@@ -78,9 +78,9 @@ func (m *AihubForge) buildGeorgeHardened(ctx context.Context, client *dagger.Cli
 	// It relies on host-mounted Ollama for intelligence.
 	image := client.Container().From("nginx:alpine").
 		WithExec([]string{"apk", "--no-cache", "add", "ca-certificates", "curl"}).
-		WithFile("/etc/nginx/nginx.conf", src.File("George/nginx.conf")).
+		WithFile("/etc/nginx/nginx.conf", src.File("olympus.fleet/20POSI/George/nginx.conf")).
 		WithDirectory("/usr/share/nginx/html", flutterBuild).
-		WithFile("/entrypoint.sh", src.File("George/entrypoint.sh")).
+		WithFile("/entrypoint.sh", src.File("olympus.fleet/20POSI/George/entrypoint.sh")).
 		WithExec([]string{"chmod", "+x", "/entrypoint.sh"}).
 		// CDE Injection: Add Backend Binary
 		WithDirectory("/artifacts", client.Directory()).
@@ -90,12 +90,12 @@ func (m *AihubForge) buildGeorgeHardened(ctx context.Context, client *dagger.Cli
 		WithDirectory("/src/go", src, dagger.ContainerWithDirectoryOpts{
 			Include: []string{
 				"go.work",
-				"George/",
+				"olympus.fleet/20POSI/George/",
 			},
 			Exclude: []string{
-				"George/40000-Communication-Contracts/410-InteractionSurface/build",
-				"George/40000-Communication-Contracts/410-InteractionSurface/.dart_tool",
-				"George/.git",
+				"olympus.fleet/20POSI/George/40000-Communication-Contracts/410-InteractionSurface/build",
+				"olympus.fleet/20POSI/George/40000-Communication-Contracts/410-InteractionSurface/.dart_tool",
+				"olympus.fleet/20POSI/George/.git",
 			},
 		}).
 		WithEntrypoint([]string{"/entrypoint.sh"})

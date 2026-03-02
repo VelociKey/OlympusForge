@@ -58,6 +58,7 @@ Intelligence {
     Tool gnd_satchel_tool { version = "v1.0.0"; origin = "local-source"; package = "GND-Freight/90000-Enablement-Labs/000-Tools/gnd-satchel-tool"; binary = "gnd-satchel-tool.exe" }
     Tool gnd_bale { version = "v1.0.0"; origin = "local-source"; package = "GND-Freight/90000-Enablement-Labs/000-Tools/gnd-bale"; binary = "gnd-bale.exe" }
     Tool ollama { version = "latest"; origin = "external"; package = "https://ollama.com/download/ollama-windows-amd64.zip"; binary = "ollama.exe" }
+    Tool genai { version = "latest"; origin = "go-install"; package = "github.com/google/generative-ai-go/genai@latest"; binary = "google.genai" }
 }
 
 Infrastructure {

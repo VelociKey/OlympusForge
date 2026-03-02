@@ -17,7 +17,7 @@ type Tool struct {
 }
 
 var ToolStack = []Tool{
-	{Name: "Olympus2/buf", Type: "Olympus2/bin", Path: "Olympus2/C0400-Artifacts/Tools/authoring/buf.exe"},
+	{Name: "olympus.fleet/00SDLC/Olympus2/buf", Type: "olympus.fleet/00SDLC/Olympus2/bin", Path: "olympus.fleet/00SDLC/Olympus2/C0400-Artifacts/Tools/authoring/buf.exe"},
 	{Name: "gcloud", Type: "external", InstallCmd: "gcloud components update --quiet"},
 	{Name: "firebase", Type: "npm", InstallCmd: "npm install -g firebase-tools"},
 	{Name: "ollama-models", Type: "model", InstallCmd: "ollama pull gemma2:2b"},

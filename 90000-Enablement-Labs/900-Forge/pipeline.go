@@ -63,22 +63,24 @@ func (m *AihubForge) Build(ctx context.Context, target string, workspace string)
 	src := client.Host().Directory("../../..", dagger.HostDirectoryOpts{
 		Include: []string{
 			workspace + "/**",
-			"Olympus2/**",
-			"OlympusForge/90000-Enablement-Labs/900-Forge/**", // Only include the build tool itself
-			"OlympusForge/bin/linux/flutter/**",               // Include Fleet Flutter SDK
-			"OlympusGrammar/**",
-			"OlympusAtelier/**",
+			"olympus.fleet/00SDLC/Olympus2/**",
+			"olympus.fleet/00SDLC/OlympusForge/81000-Tools/**",                     // New Authority Tools
+			"olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0000-pkg/**",                       // New Authority Packages
+			"olympus.fleet/00SDLC/OlympusForge/90000-Enablement-Labs/900-Forge/**", // The build tool itself
+			"olympus.fleet/00SDLC/OlympusForge/bin/linux/flutter/**",               // Include Fleet Flutter SDK
+			"olympus.fleet/00SDLC/OlympusGrammar/**",
+			"olympus.fleet/00SDLC/OlympusAtelier/**",
 		},
 		Exclude: []string{
 			"**/node_modules",
 			"**/.git",
 			"**/.gemini/tmp",
-			"Olympus2/gen",
-			"Olympus2/gen/**",
-			"Olympus2/C0990-Ephemeral-Scratch", // Massive scratch space
-			"Olympus2/C0400-Artifact-Repository",
+			"olympus.fleet/00SDLC/Olympus2/gen",
+			"olympus.fleet/00SDLC/Olympus2/gen/**",
+			"olympus.fleet/00SDLC/Olympus2/C0990-Ephemeral-Scratch", // Massive scratch space
+			"olympus.fleet/00SDLC/Olympus2/C0400-Artifact-Repository",
 			"**/*.exe",
-			"OlympusForge/models", // Double-check exclusion
+			"olympus.fleet/00SDLC/OlympusForge/models", // Double-check exclusion
 			"go.work",
 			"go.sum",
 		},
@@ -150,17 +152,17 @@ func (m *AihubForge) Assess(ctx context.Context, workspace string) error {
 	src := client.Host().Directory("../../..", dagger.HostDirectoryOpts{
 		Include: []string{
 			workspace + "/**",
-			"Olympus2/**",
-			"OlympusForge/**",
-			"OlympusGrammar/**",
-			"OlympusAtelier/**",
+			"olympus.fleet/00SDLC/Olympus2/**",
+			"olympus.fleet/00SDLC/OlympusForge/**",
+			"olympus.fleet/00SDLC/OlympusGrammar/**",
+			"olympus.fleet/00SDLC/OlympusAtelier/**",
 		},
 		Exclude: []string{
 			"**/node_modules",
 			"**/.git",
 			"**/.gemini/tmp",
-			"Olympus2/gen",
-			"Olympus2/gen/**",
+			"olympus.fleet/00SDLC/Olympus2/gen",
+			"olympus.fleet/00SDLC/Olympus2/gen/**",
 			"**/*.exe",
 			"go.work",
 			"go.sum",

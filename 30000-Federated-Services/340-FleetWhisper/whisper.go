@@ -4,9 +4,9 @@ import (
 	"context"
 	"log/slog"
 
-	whisperv1 "OlympusGrammar/gen/v1/whisper/whisperv1connect"
+	whisperv1 "olympus.fleet/00SDLC/OlympusGrammar/gen/v1/whisper/whisperv1connect"
 
-	"connect"
+	"olympus.fleet/ext/connectrpc/connect-go"
 )
 
 // FleetWhisper is the forge-side bridge to the inter-agent event mesh.

@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
+	"olympus.fleet/00SDLC/OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
 )
 
 // Materializer handles the physical creation of files and directories from IR

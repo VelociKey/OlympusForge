@@ -9,17 +9,17 @@ import (
 	"path/filepath"
 	"time"
 
-	econotel "Olympus2/90000-Enablement-Labs/P0000-pkg/000-econotel"
-	fleet "OlympusForge/00000-Identity-Foundations/P0000-pkg/000-fleet"
+	econotel "olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0000-pkg/000-econotel"
+	fleet "olympus.fleet/00SDLC/OlympusForge/00000-Identity-Foundations/P0000-pkg/000-fleet"
 
-	reasoningv1 "OlympusGrammar/gen/v1/reasoning"
-	reasoningv1connect "OlympusGrammar/gen/v1/reasoning/reasoningv1connect"
+	reasoningv1 "olympus.fleet/00SDLC/OlympusGrammar/gen/v1/reasoning"
+	reasoningv1connect "olympus.fleet/00SDLC/OlympusGrammar/gen/v1/reasoning/reasoningv1connect"
 
 	"net/http"
 
 	"io"
 
-	"connect"
+	"olympus.fleet/ext/connectrpc/connect-go"
 	"go.opentelemetry.io/otel/attribute"
 )
 

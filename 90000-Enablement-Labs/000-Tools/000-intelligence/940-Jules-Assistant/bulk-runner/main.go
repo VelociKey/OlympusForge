@@ -36,7 +36,7 @@ func main() {
 		root = parent
 	}
 
-	julesPath := filepath.Join(root, "OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/jules.cmd")
+	julesPath := filepath.Join(root, "olympus.fleet/00SDLC/OlympusForge/90000-Enablement-Labs/000-Tools/000-bin/jules.cmd")
 	if _, err := os.Stat(julesPath); err != nil {
 		logger.Error("Jules shim not found", "path", julesPath)
 		os.Exit(1)
@@ -65,7 +65,7 @@ func main() {
 			cmd := exec.Command(julesPath, "/generate:tests", "--target="+path, "--type=unit,integration")
 
 			// Capture output to a log file
-			logDir := filepath.Join(root, "Olympus2/C0500-Agent-Intelligence-Outputs/LPSV")
+			logDir := filepath.Join(root, "olympus.fleet/00SDLC/Olympus2/C0500-Agent-Intelligence-Outputs/LPSV")
 			os.MkdirAll(logDir, 0755)
 			logFile := filepath.Join(logDir, "jules_"+filepath.Base(path)+".log")
 			f, _ := os.Create(logFile)

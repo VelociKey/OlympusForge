@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
+	"olympus.fleet/00SDLC/OlympusForge/20000-Context-Bridges/000-OlympusFabric/P0000-pkg/000-ir"
 )
 
 type PEGGenerator struct{}
