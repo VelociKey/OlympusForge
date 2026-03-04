@@ -27,7 +27,8 @@ tmp/
 .history/
 
 # --- Large Binaries & Tooling (CRITICAL: DO NOT COMMIT) ---
-# Maps to 90000-Enablement/Tools
+# Maps to 81000-Toolchain-External and 90000-Enablement/Tools
+81000-Toolchain-External/
 **/Tools/
 **/sdk/
 **/jvm-sdk/
@@ -171,6 +172,3 @@ test_output.txt
 !*.mission
 !C0100-Configuration-Registry/
 !C0700-System-Operations/
-
-# --- Sovereign Toolchain (DO NOT COMMIT) ---
-81000-Toolchain-External/
