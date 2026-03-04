@@ -1,7 +1,0 @@
-≡ƒÜÇ Olympus Fleet Bootstrap: Sovereign Alignment
-≡ƒöì Checking: Podman Desktop... INSTALLED
-≡ƒöì Checking: Go Runtime... INSTALLED
-≡ƒöì Checking: Git CLI... INSTALLED
-≡ƒÉ│ Initializing fresh Podman Machine (Capped at 50GB)... FAILED or ALREADY EXISTS: exit status 125
-
-Γ£à Bootstrap sequence complete.
