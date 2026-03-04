@@ -17,14 +17,14 @@ func main() {
 		root = filepath.Dir(wd)
 	}
 
-	forgePkg := filepath.Join(root, "OlympusForge", "90000-Enablement-Labs", "900-Forge")
+	forgePkg := filepath.Join(root, "00SDLC", "OlympusForge", "90000-Enablement-Labs", "900-Forge")
 
-	fmt.Println("⚒️ Building OlympusForge via Forge Pipeline...")
-	
+	fmt.Println("🔨 Building OlympusForge via Forge Pipeline...")
+
 	// For OlympusForge, we typically want to 'Assess' or build specific tools.
 	// For now, we default to 'native' build or assessment.
-	// We use '-workspace OlympusForge' to target this workspace context.
-	cmd := exec.Command("go", "run", forgePkg, "-target", "native", "-workspace", "OlympusForge")
+	// We use '-workspace 00SDLC/OlympusForge' to target this workspace context.
+	cmd := exec.Command("go", "run", forgePkg, "-target", "native", "-workspace", "00SDLC/OlympusForge")
 	cmd.Dir = root
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

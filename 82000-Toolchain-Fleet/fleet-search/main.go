@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"google.golang.org/genai"
-	"olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0000-pkg/000-search"
+	search "olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0900-Labs/190-Search"
 )
 
 func main() {

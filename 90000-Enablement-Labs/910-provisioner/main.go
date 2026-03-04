@@ -116,9 +116,9 @@ func main() {
 
 	// Re-add symbols for all tools in registry even if we didn't provision them this run
 	for _, t := range allTools {
-		binPath := filepath.Join(basePath, "000-bin", t.Name+".cmd")
+		binPath := filepath.Join(basePath, "990-Execution-Hub", t.Name+".cmd")
 		if runtime.GOOS != "windows" {
-			binPath = filepath.Join(basePath, "000-bin", t.Name)
+			binPath = filepath.Join(basePath, "990-Execution-Hub", t.Name)
 		}
 		registry.Symbols[t.Name] = binPath
 	}
@@ -155,7 +155,7 @@ func provisionTool(ctx context.Context, tool ToolDefinition, basePath string, lo
 	categoryDir := filepath.Join(basePath, "000-"+tool.Category)
 	os.MkdirAll(categoryDir, 0755)
 
-	binDir := filepath.Join(basePath, "000-bin")
+	binDir := filepath.Join(basePath, "990-Execution-Hub")
 	os.MkdirAll(binDir, 0755)
 
 	toolDir := filepath.Join(categoryDir, tool.Name)

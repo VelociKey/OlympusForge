@@ -171,3 +171,6 @@ test_output.txt
 !*.mission
 !C0100-Configuration-Registry/
 !C0700-System-Operations/
+
+# --- Sovereign Toolchain (DO NOT COMMIT) ---
+81000-Toolchain-External/

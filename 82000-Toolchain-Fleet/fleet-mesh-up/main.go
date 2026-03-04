@@ -33,7 +33,7 @@ func main() {
 		{
 			Name:    "MCP-Gateway",
 			SrcDir:  "00SDLC/OlympusMCP/10000-Autonomous-Actors/MCPGateway",
-			BinPath: "00SDLC/OlympusForge/82000-Toolchain-Fleet/mcp-gateway.exe",
+			BinPath: "olympus.fleet/00SDLC/OlympusForge/82000-Toolchain-Fleet/mcp-gateway.exe",
 			Args:    []string{"-backend", "http://localhost:8091"}, // Default to SDLCBackend
 		},
 		{

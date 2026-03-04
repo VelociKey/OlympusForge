@@ -25,7 +25,7 @@ func main() {
 	fmt.Printf("🚀 Starting jeBNF-Driven Pub Overrider in: %s\n", rootDir)
 
 	// Load overrides from the fleet registry
-	overrides, err := loadRegistryOverrides("00SDLC/OlympusForge/C0100-Configuration-Registry/DEPENDENCIES.jebnf")
+	overrides, err := loadRegistryOverrides("olympus.fleet/00SDLC/OlympusForge/C0100-Configuration-Registry/DEPENDENCIES.jebnf")
 	if err != nil {
 		log.Fatalf("Fatal: Could not load registry: %v", err)
 	}

@@ -85,12 +85,12 @@ Library "cronet-http" {
 Tool "buf" {
     Owner = "bufbuild";
     Repo  = "buf";
-    Version = "v1.50.0";
+    Version = "v1.66.0";
     BinaryName = "buf.exe";
-    LocalPath = "./81000-Toolchain-External/bufbuild/buf.exe";
+    LocalPath = "./81000-Toolchain-External/bufbuild/buf.exe"; 
 
-    ReleaseDate    = "2026-02-10";
-    IngestDate     = "2026-03-01";
+    ReleaseDate    = "2026-02-25";
+    IngestDate     = "2026-03-03";
     OwnerSignature = "SHA256:fd0d3a38... (Original GitHub Binary Hash)";
 
     CVE_Status = "CLEARED";
@@ -99,12 +99,12 @@ Tool "buf" {
 Tool "trivy" {
     Owner = "aquasecurity";
     Repo  = "trivy";
-    Version = "v0.59.1";
+    Version = "v0.69.3";
     BinaryName = "trivy.exe";
     LocalPath = "./81000-Toolchain-External/aquasecurity/trivy.exe";
 
-    ReleaseDate    = "2026-02-25";
-    IngestDate     = "2026-03-01";
+    ReleaseDate    = "2026-03-03";
+    IngestDate     = "2026-03-03";
     OwnerSignature = "SHA256:c13eae49... (Original GitHub Binary Hash)";
 
     CVE_Status = "CLEARED";
@@ -113,17 +113,16 @@ Tool "trivy" {
 Tool "cosign" {
     Owner = "sigstore";
     Repo  = "cosign";
-    Version = "v2.4.1";
+    Version = "v3.0.5";
     BinaryName = "cosign.exe";
     LocalPath = "./81000-Toolchain-External/sigstore/cosign.exe";
 
-    ReleaseDate    = "2026-01-15";
-    IngestDate     = "2026-03-01";
+    ReleaseDate    = "2026-02-20";
+    IngestDate     = "2026-03-03";
     OwnerSignature = "SHA256:b8cf13ee... (Original GitHub Binary Hash)";
 
     CVE_Status = "CLEARED";
 }
-
 Tool "flutter" {
     Owner = "google";
     Repo  = "flutter";

@@ -14,10 +14,10 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
-	olympusv1 "olympus.fleet/00SDLC/Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympus/v1"
-	olympusv1connect "olympus.fleet/00SDLC/Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/000-gen/olympus/v1/olympusv1connect"
-	mesh "olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0000-pkg/000-mesh"
-	whisper "olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0000-pkg/000-whisper"
+	olympusv1 "olympus.fleet/00SDLC/Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/400-Gen/olympus/v1"
+	olympusv1connect "olympus.fleet/00SDLC/Olympus2/40000-Communication-Contracts/430-Protocol-Definitions/400-Gen/olympus/v1/olympusv1connect"
+	mesh "olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0900-Labs/150-Mesh"
+	whisper "olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0900-Labs/220-Whisper"
 )
 
 var Root = getEnv("WORKSPACE_ROOT", "c:\\aAntigravitySpace\\OlympusForge")

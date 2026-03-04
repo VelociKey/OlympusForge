@@ -263,6 +263,10 @@ func synthesizeContent(source string, target string, transformer string) (string
             "-OpenClaw"
         ]
     },
+    "go.goroot": "C:\\aAntigravitySpace\\00SDLC\\OlympusForge\\81000-Toolchain-External\\go",
+    "go.alternateTools": {
+        "go": "C:\\aAntigravitySpace\\00SDLC\\OlympusForge\\81000-Toolchain-External\\go\\bin\\go.exe"
+    },
     "search.exclude": {
         "**/OpenClaw/**": true
     },

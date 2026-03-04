@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"dagger.io/dagger"
-	"olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0000-pkg/000-vault"
+	"olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0900-Labs/210-Vault"
 )
 
 // buildGeorgeHardened implements the Pure-Wasm architecture for George.

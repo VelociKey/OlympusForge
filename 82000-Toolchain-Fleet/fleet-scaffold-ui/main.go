@@ -25,12 +25,12 @@ func main() {
 		os.Exit(1)
 	}
 
-	registry, err := loadRegistry("00SDLC/OlympusForge/C0100-Configuration-Registry/DEPENDENCIES.jebnf")
+	registry, err := loadRegistry("olympus.fleet/00SDLC/OlympusForge/C0100-Configuration-Registry/DEPENDENCIES.jebnf")
 	if err != nil {
 		log.Fatalf("Fatal: Could not load registry: %v", err)
 	}
 
-	templatePath := "00SDLC/OlympusForge/82000-Toolchain-Fleet/templates/flutter-sovereign"
+	templatePath := "olympus.fleet/00SDLC/OlympusForge/82000-Toolchain-Fleet/templates/flutter-sovereign"
 	
 	fmt.Printf("🎨 Scaffolding Sovereign UI into: %s\n", *dest)
 

@@ -1,0 +1,10 @@
+# Cycle Metrics for Sovereign Agent (v1)
+Cycle "L-104-XXXX" {
+    Mission "Autonomous execution of [OBJECTIVE]"
+    Status "IDLE"
+    
+    SubCycle "Bootstrap" {
+        Goal "Agent initialization and environment check."
+        ActualWork "0m"
+    }
+}

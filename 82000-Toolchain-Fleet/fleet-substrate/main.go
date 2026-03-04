@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0000-pkg/000-substrate"
+	substrate "olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0900-Labs/200-Substrate"
 )
 
 // fleet-substrate is a multi-call Wasm/Native binary.
