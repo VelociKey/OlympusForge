@@ -1,5 +1,0 @@
-# Trivy Config for Sovereign Agents
-Scan {
-  FilePattern "*.go"
-  SovereigntyCheck = true
-}

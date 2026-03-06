@@ -1,9 +1,0 @@
-﻿go 1.26.0
-
-use (
-        ./00SDLC/Olympus2
-        ./00SDLC/OlympusForge
-        ./00SDLC/OlympusGemAid
-        ./20POSI/George
-)
-
