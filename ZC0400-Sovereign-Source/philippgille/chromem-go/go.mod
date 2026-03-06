@@ -1,3 +1,0 @@
-module github.com/philippgille/chromem-go
-
-go 1.26.0

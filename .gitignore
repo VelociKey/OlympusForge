@@ -61,6 +61,8 @@ terraform.tfstate*
 
 # --- Labs & Enablers Bloat ---
 930-System-Enablers/
+ZC0400-Sovereign-Source/
+
 
 # --- IDE & OS (VS Code / JetBrains / Windows / macOS) ---
 .vscode/*
