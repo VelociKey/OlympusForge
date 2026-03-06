@@ -140,6 +140,23 @@ func (m *AihubForge) minimalGoWork(workspace string) string {
 	return strings.Join(lines, "\n")
 }
 
+// RustProof orchestrates the ADLC Phase 0 Proof.
+func (m *AihubForge) RustProof(ctx context.Context) error {
+	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
+	if err != nil {
+		return fmt.Errorf("failed to connect to dagger: %v", err)
+	}
+	defer client.Close()
+
+	src := client.Host().Directory("../../..", dagger.HostDirectoryOpts{
+		Include: []string{
+			"20POSI/George/90000-Enablement-Labs/ADLC-Proof/rust-hello/**",
+		},
+	})
+
+	return m.buildRustProof(ctx, client, src)
+}
+
 func (m *AihubForge) Assess(ctx context.Context, workspace string) error {
 	fmt.Printf("🔍 Forge: Connecting to Dagger for Assessment of %s...\n", workspace)
 	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))

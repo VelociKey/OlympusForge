@@ -6,14 +6,12 @@ require (
 	connectrpc.com/connect v1.19.1
 	dagger.io/dagger v0.20.0
 	go.opentelemetry.io/otel v1.40.0
-	golang.org/x/net v0.51.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
 	github.com/99designs/gqlgen v0.17.81 // indirect
 	github.com/Khan/genqlient v0.8.1 // indirect
-	github.com/adrg/xdg v0.5.3 // indirect
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
@@ -40,6 +38,7 @@ require (
 	go.opentelemetry.io/otel/sdk/metric v1.40.0 // indirect
 	go.opentelemetry.io/otel/trace v1.40.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.8.0 // indirect
+	golang.org/x/net v0.51.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.41.0 // indirect
 	golang.org/x/text v0.34.0 // indirect

@@ -11,10 +11,11 @@ func maincli() {
 	target := flag.String("target", "native", "build target (native, podman, gcp, all)")
 	workspace := flag.String("workspace", "", "workspace to build")
 	assess := flag.Bool("assess", false, "run maturity assessment instead of build")
+	rustProof := flag.Bool("rust-proof", false, "run ADLC Phase 0 Rust Proof (CYC-108)")
 	flag.Parse()
 
-	if *workspace == "" && *target != "all" && *workspace != "all" {
-		log.Fatal("workspace is required unless target is 'all'")
+	if !*rustProof && *workspace == "" && *target != "all" && *workspace != "all" {
+		log.Fatal("workspace is required unless target is 'all' or --rust-proof is set")
 	}
 
 	if *target == "gcp" {
@@ -29,6 +30,15 @@ func maincli() {
 
 	ctx := context.Background()
 	forge := &AihubForge{}
+
+	if *rustProof {
+		fmt.Println("🦀 Starting ADLC Phase 0 Rust Proof (CYC-108)...")
+		if err := forge.RustProof(ctx); err != nil {
+			log.Fatalf("❌ Rust Proof failed: %v", err)
+		}
+		fmt.Println("✅ Rust Proof completed successfully")
+		return
+	}
 
 	if *assess {
 		fmt.Printf("🛡️ Starting Athena Maturity Assessment for workspace: %s\n", *workspace)

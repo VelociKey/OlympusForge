@@ -56,8 +56,10 @@ func main() {
 
 	basePath, _ := os.Getwd()
 	// Root detection
-	if _, err := os.Stat("OlympusForge"); err == nil {
-		basePath = filepath.Join(basePath, "OlympusForge", "90000-Enablement-Labs", "000-Tools")
+	if _, err := os.Stat("00SDLC/OlympusForge"); err == nil {
+		basePath = filepath.Join(basePath, "00SDLC", "OlympusForge", "90000-Enablement-Labs", "000-Tools")
+	} else if _, err := os.Stat("90000-Enablement-Labs"); err == nil {
+		basePath = filepath.Join(basePath, "90000-Enablement-Labs", "000-Tools")
 	}
 
 	if *registryPath == "" {
@@ -181,17 +183,75 @@ func provisionExternal(tool ToolDefinition, toolDir string, binDir string, logge
 	os.RemoveAll(toolDir)
 	os.MkdirAll(toolDir, 0755)
 
-	tmpZip := toolDir + ".zip"
-	if err := downloadFile(tool.Package, tmpZip); err != nil {
+	ext := ".zip"
+	if strings.HasSuffix(tool.Package, ".tar.gz") {
+		ext = ".tar.gz"
+	}
+	tmpFile := toolDir + ext
+	if err := downloadFile(tool.Package, tmpFile); err != nil {
 		return err
 	}
-	defer os.Remove(tmpZip)
+	defer os.Remove(tmpFile)
 
-	if err := unzip(tmpZip, toolDir); err != nil {
-		return fmt.Errorf("failed to unzip %s: %w", tmpZip, err)
+	if strings.HasSuffix(tmpFile, ".zip") {
+		if err := unzip(tmpFile, toolDir); err != nil {
+			return fmt.Errorf("failed to unzip %s: %w", tmpFile, err)
+		}
+	} else if strings.HasSuffix(tmpFile, ".tar.gz") {
+		if err := untar(tmpFile, toolDir); err != nil {
+			return fmt.Errorf("failed to untar %s: %w", tmpFile, err)
+		}
+	}
+
+	// Purification Mandate (CYC-115)
+	if err := purify(toolDir, logger); err != nil {
+		logger.Warn("Purification step partially failed", "tool", tool.Name, "error", err)
 	}
 
 	return createShim(tool, toolDir, binDir)
+}
+
+func purify(toolDir string, logger *slog.Logger) error {
+	purgePatternsPath := filepath.Join("OlympusForge", "82000-Toolchain-Fleet", "PURGE_PATTERNS.jebnf")
+	// Try absolute path if relative fails
+	if _, err := os.Stat(purgePatternsPath); err != nil {
+		purgePatternsPath = "../../../82000-Toolchain-Fleet/PURGE_PATTERNS.jebnf"
+	}
+	
+	logger.Info("Purifying tool artifacts", "dir", toolDir)
+	
+	// Simple implementation: delete common test directories if they exist
+	testDirs := []string{"test", "testdata", "examples", "samples", ".github", "node_modules"}
+	for _, d := range testDirs {
+		path := filepath.Join(toolDir, d)
+		if _, err := os.Stat(path); err == nil {
+			os.RemoveAll(path)
+			logger.Debug("Purged directory", "path", d)
+		}
+	}
+	
+	// Delete test files and docs
+	filepath.WalkDir(toolDir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil { return err }
+		name := d.Name()
+		if strings.HasSuffix(name, "_test.go") || strings.HasSuffix(name, ".md") || 
+		   strings.HasPrefix(name, "LICENSE") || strings.HasPrefix(name, "PATENTS") {
+			os.Remove(path)
+		}
+		return nil
+	})
+	
+	return nil
+}
+
+func untar(src, dest string) error {
+	// Use system tar for simplicity in this environment
+	os.MkdirAll(dest, 0755)
+	cmd := exec.Command("tar", "-xzf", src, "-C", dest)
+	if out, err := cmd.CombinedOutput(); err != nil {
+		return fmt.Errorf("tar extraction failed: %s: %w", string(out), err)
+	}
+	return nil
 }
 
 func provisionGoInstall(tool ToolDefinition, toolDir string, binDir string, logger *slog.Logger) error {
@@ -294,8 +354,9 @@ func createShim(tool ToolDefinition, toolDir string, binDir string) error {
 	if _, err := os.Stat(binPath); err != nil {
 		// Try recursive search for the binary
 		found := ""
+		targetName := filepath.Base(tool.Binary)
 		filepath.WalkDir(toolDir, func(p string, d fs.DirEntry, err error) error {
-			if !d.IsDir() && d.Name() == tool.Binary {
+			if !d.IsDir() && d.Name() == targetName {
 				found = p
 				return filepath.SkipAll
 			}

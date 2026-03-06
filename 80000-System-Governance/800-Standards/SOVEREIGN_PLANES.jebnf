@@ -1,0 +1,120 @@
+# SOVEREIGN_PLANES.jebnf
+# Authoritative mapping of Fleet assets to their respective Planes.
+
+Plane "Product-Plane" {
+    id = "P1";
+    description = "Insulated Product Silos representing offerings for sale and their localized dependencies.";
+    
+    # Silo Rule: Each subdirectory in the Product Plane is insulated from others.
+    Mandate "Silo-Insulation" {
+        Effect = "No direct cross-silo references; Communication via Substrate interfaces only.";
+    }
+
+    # Promotion Rule: Products that are tools used by other workspaces.
+    Protocol "Artifact-Promotion" {
+        Effect = "Product binaries/libraries used as tools are exported to Plane 2 (Engine) or Plane 0 (Substrate).";
+        Discovery = "Promoted tools must be registered in the Authoritative Tool Index (TOOL_INDEX.jebnf).";
+        Insulation = "Source code remains in P1 Silo; usage is via binary/artifact lookup only.";
+    }
+
+    # Product Silos
+    Silos = [
+        "00SDLC",     # Software Development Life Cycle Platform
+        "10GNDT",     # Ground Truth Platform
+        "20POSI",     # Posturing/Persona Offerings (e.g., George)
+        "30INFR",     # Infrastructure Lifecycle Tools
+        "99PUBL"      # Public Outreach/Market Presence
+    ];
+}
+
+Plane "Intelligence-Plane" {
+    id = "P2";
+    description = "The Fleet Engine: Code that runs production and manages silos.";
+    
+    # Category 2.1: Forge Workers (Static Production)
+    # Purpose: The 'Craftsmen' that produce new artifacts (code, UI, agents).
+    Sublayer "Workers" {
+        Core = "OlympusForge";
+        Targets = ["materializers", "scaffolders", "agent-makers"];
+        Mandate = "Workers transform formal intent into physical structures.";
+    }
+
+    # Category 2.2: Sovereign Intermediaries (Runtime Runtime)
+    # Purpose: The 'Management Layer' that allows Agents to operate across the fleet.
+    Sublayer "Intermediaries" {
+        Core = "OlympusGemAid";
+        Targets = ["finders", "ordinators", "scm", "optimizers"];
+        Mandate = "Intermediaries bridge the gap between Substrate (P0) and Agents (P2.3).";
+    }
+
+    # Generic Search & Discovery (Universal Pattern)
+    Pattern "Universal-Discovery" {
+        Phase 1 = "O(1) mPSH Lookup (Primary Memory)";
+        Phase 2 = "Linear Search of ActiveBuffer (Parallel Buffer)";
+        Phase 3 = "On Buffer-Hit: Async mPSH Regeneration (Self-Optimizing)";
+        
+        # Action-Primary Mandate: Tools are identified by ID, but executed via Actions.
+        Mandate "Swiss-Army-Knife" {
+            Effect = "Map ToolID (e.g. 'cat') to <Binary> + <Action> (e.g. 'gemaid.exe cat')";
+            Benefit = "Reduces binary sprawl and ensures a single consistent runtime @BIN.";
+        }
+    }
+
+    # Applied Instance: Tool-Discovery
+    Instance "Tool-Finder-v1" {
+        Implementation = "Universal-Discovery";
+        TargetIndex = "@INDEX (TOOL_INDEX.jebnf)";
+        TargetBinaries = "@BIN (Unified Warehouse)";
+    }
+
+    # Applied Instance: Symbol-Discovery
+    Instance "Symbol-Finder-v1" {
+        Implementation = "Universal-Discovery";
+        TargetIndex = "FLEET_SYMBOLS.jebnf";
+    }
+
+    # Category 2.3: Fleet-Native Agents (Dynamic)
+    # Purpose: Agents we build to 'help with code production'.
+    Sublayer "Production-Agents" {
+        Personas = ["Antigravity", "Fleet-Production-Mesh"];
+        Efficiency = "Prioritize token consumption reduction via O(1) indexed lookups.";
+    }
+
+    # Category 2.4: Sovereign Knowledge Anchor (Reference Data)
+    # Purpose: The 'Memory' of the fleet: Architectural patterns, KIs, and jeBNF reference data.
+    Sublayer "Anchor" {
+        Core = "OlympusGemAid/K0000-KnowledgeAnchor";
+        Targets = ["knowledge-items", "pattern-libraries", "mantras"];
+        Mandate = "The Anchor provides the context and memory required for Agent autonomy.";
+    }
+}
+
+Plane "Substrate-Plane" {
+    id = "P0";
+    description = "The Hermetic Ground comprising external libraries, tools, and platform agents.";
+    
+    # External Foundation & Platform Agents
+    Ground = [
+        "81000-Toolchain-External/go",
+        "81000-Toolchain-External/trivy",
+        "81000-Toolchain-External/podman",
+        "External-Agents" [ "Gemini-CLI", "Jules", "Hermes" ]
+    ];
+
+    # Unified Warehouse Mandate
+    # All validated binaries, regardless of origin, must reside in the central locker.
+    Mandate "Unified-Warehouse" {
+        Location = "00SDLC/OlympusForge/82000-Toolchain-Fleet/bin";
+        Rule = "All executable paths in TOOL_INDEX.jebnf must point to this location.";
+    }
+}
+
+# Governance: Build & Promotion Protocol
+Protocol "Binary-First-Promotion" {
+    # Rule for Go-based tools across all Planes.
+    Mandate "Global-Build-Injection" {
+        Action = "Go binaries must be compiled directly into @BIN (Unified Warehouse).";
+        Constraint = "Source workspaces (P1/P2) must not contain build artifacts (no local ./bin).";
+        Mechanics = "go build -o @BIN/toolname.exe ./path/to/main";
+    }
+}

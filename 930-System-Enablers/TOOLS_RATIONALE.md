@@ -4,42 +4,71 @@ This document codifies the "Why" behind the Olympus toolchain. Every tool in our
 
 ---
 
-## 🏗️ 1. ExternalTools (The Hermetic Pillar)
-**Rationale**: Olympus must be a self-bootstrapping product. We do not rely on the customer's host OS for our engineering environment. We internalize third-party dependencies into the Forge to ensure deterministic builds and zero-drift deployments.
+## 🏛️ The Sovereign Trinity Architecture (v2.2)
 
-*   **Dagger**: The engine of our "Build Guardian." It ensures all artifacts are built in a clean-room environment.
-*   **Ollama/Gemma3**: Our local intelligence core. We run models locally to maintain data sovereignty and avoid third-party inference costs.
-*   **Go / Java / Flutter**: The foundational languages of our fleet. We version-lock these to ensure absolute symmetry across all workstations.
-*   **GCloud / Firebase**: The bridge to our cloud substrate. Internalized to ensure emulators are always available for local-first development.
-*   **LanceDB / DuckDB**: Specialized data engines for agent memory and high-performance local analytics.
+Following the fleet re-organization, we have categorized all assets into three functional layers:
 
-## 🛠️ 2. SupportTools (The Utility Pillar)
-**Rationale**: These tools provide the "Standard Gauge" for our data and security. They are the low-level enablers that allow high-level orchestrators to function.
+### **Decoupling Identity from Location**
+The fleet's organization into **Planes (P0, P1, P2)** defines governance and insulation, but **Discovery** is organizational-agnostic. Agents request tools by their **Canonical ID** (e.g., `trivy`), and the **Authoritative Index** handles the resolution to a physical path transparently.
 
-*   **Buf / protoc-gen-***: Ensures that our communication contracts (ConnectRPC) are strictly typed and generated across Go and Dart.
-*   **Trivy / Govulncheck / Cosign**: The "Verify, Seal, and Scan" gauntlet. Every entry into the fleet is cryptographically and logically validated.
-*   **JQ / Air / Delve**: Developer-experience tools optimized for the Sovereign workflow (JSON processing, live-reload, debugging).
-*   **Promptfoo / Genkit**: Specialized frameworks for testing and building the reasoning flows of our agents.
+### **1. The Substrate (P0 - Foundation)**
+*   **Purpose**: Hermetic external tools and libraries we depend upon.
+*   **Categories**: External libraries (Go, Java), Security (Trivy), Substrate management (Podman).
 
-## 🤖 3. AidGeminiTools (The Agent Pillar)
-**Rationale**: These are the "Super-Tools" used by Gemini-CLI and Antigravity. They transform the fleet from a set of files into a living, graph-aware intelligence.
+### **2. The Engine (P2 - Intelligence)**
+*   **Purpose**: The internal power of the fleet. Separated by **Role**:
+    *   **Forge Workers**: Tools that "produce other things" (Materializers, Scaffolders).
+    *   **Sovereign Intermediaries (GemAids)**: The runtime layer (Finders, Orchestrators, SCM, Sanitization).
+    - **Production Agents**: Autonomous personas like Gemini-CLI that orchestrate the Workers and Intermediaries.
 
-*   **fleet-coord-sync**: Automates the complex plumbing of `go.work` at O(1) efficiency.
-*   **fleet-track**: Captures the "Semantic History" (the why) of our development, including economic labor metrics.
-*   **fleet-impact**: Uses topological analysis to predict the "Blast Radius" of a code change.
-*   **fleet-census**: Provides quantitative validation of our AI-assisted labor efficiency.
-*   **fleet-chronicle**: Synthesizes Tracy Kidder style narratives to keep stakeholders aligned with the technical struggle.
-
-## 📦 4. InternalTools (The Product Pillar)
-**Rationale**: These are the actual binaries built from our source code. They represent the "Deliverable Value" of the Olympus project.
-
-*   **GCP Managers**: Autonomous actors that manage cloud infrastructure.
-*   **InteractionSurface (Vision)**: The high-fidelity UI for human-agent interaction.
-
-## 🧠 5. AgentTools (The Runtime Pillar)
-**Rationale**: To maintain sovereignty, our agents must have functional runtimes that are independent of the SDLC tools. 
-
-*   **George / Jules / Gemini-CLI**: These represent the specific agent personas. We separate their functional code from their management logic to allow them to evolve independently.
+### **3. The Silos (P1 - Products)**
+*   **Purpose**: Revenue-generating deliverables. (e.g., 00SDLC, 30INFR).
+*   **Insulation Mandate**: Each product area is a separate silo. Subdirectories are strictly insulated from each other to prevent dependency drift and maximize deliverable autonomy.
 
 ---
-*Created by the Conductor Agent-Mesh (Feb 27, 2026)*
+
+## 🏗️ 1. ExternalTools (The Hermetic Pillar - P0)
+**Rationale**: We do not rely on the customer's host OS. This includes third-party languages and pre-existing platform agents.
+
+*   **Go / Java / Flutter**: Foundational languages. (P0)
+*   **External Agents**: Gemini-CLI, Jules, Hermes. These are the external cognitive powers we bring into the fleet.
+*   **Trivy / Govulncheck**: Security gauntlet. (P0)
+
+## 🛠️ 2. Helper Tools (The Utility Pillar - P2)
+**Rationale**: Static builders and platform abstractions.
+
+*   **OlympusFabric**: Formal grammar manufacturing.
+*   **OlympusGemAid**: The **Sovereign Runtime Environment**.
+    - **gemaid-finder**: Unified discovery (Discovery + Search).
+    - **gemaid-run**: Execution orchestrator (@RUN).
+    - **gemaid-scm**: Platform-agnostic Git porcelain (Commit/Publish).
+    - **gemaid-sanitize**: Automatic fleet-wide Version and Import synching.
+
+## 🤖 3. Production Agents (The Agent Pillar - P2)
+**Rationale**: Autonomous actors we build ourselves to automate the SDLC and help with code production.
+
+*   **Antigravity**: The cross-workspace orchestrator.
+*   **Fleet-Native Mesh**: Agents designed specifically for Olympus production.
+
+## 📦 4. Product Offerings (The Silo Pillar - P1)
+**Rationale**: Revenue-generating deliverables organized in insulated zones.
+
+*   **00SDLC**: The Software Development Life Cycle Platform.
+*   **30INFR**: Infrastructure-as-a-Product.
+
+## 🚀 5. Silo-to-Tool Promotion
+**Rationale**: Some products created within silos are tools that must be used by other parts of the fleet. We promote these to the "Engine" (P2) or "Substrate" (P0) to ensure utility without breaking source-level insulation.
+
+*   **Rule**: The product source stays in its Silo (P1).
+*   **Action**: The *built artifact* (binary/library) is injected directly into the **Unified Warehouse** (`@BIN`).
+*   **Result**: Other workspaces consume the *tool* from the warehouse, never the *source*, maintaining strict P1 insulation.
+
+## ⚙️ 6. Unified Build Injection
+**Rationale**: To prevent environment drift, we maintain a strict separation between **Source Code** and **Executable Binaries**.
+
+*   **Global Mandate**: No workspace should contain its own `bin` directory or locals artifacts.
+*   **Go Protocol**: Build commands must use `-o @BIN/toolname` to inject artifacts into the central locker.
+*   **Workspace Integrity**: The `go.work` and `go.mod` files govern the *logical* relationships, while the Warehouse governs the *physical* execution.
+
+---
+*Updated for Unified Warehouse Governance (March 2026)*

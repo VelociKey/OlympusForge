@@ -64,3 +64,16 @@ Intelligence {
 Infrastructure {
     Tool gradle { version = "8.13"; origin = "external"; package = "https://services.gradle.org/distributions/gradle-8.13-bin.zip"; binary = "bin/gradle.bat" }
 }
+
+SovereignSubstrate {
+    Tool rust { version = "1.85.1"; origin = "external"; package = "https://static.rust-lang.org/dist/rust-1.85.1-x86_64-pc-windows-msvc.tar.gz"; binary = "rustc/bin/rustc.exe" }
+    Tool nix { version = "2.22.1"; origin = "external"; package = "https://github.com/DeterminateSystems/nix-installer/releases/download/v0.32.0/nix-installer-x86_64-windows.exe"; binary = "nix-installer.exe" }
+    Tool fluentci { version = "v0.15.4"; origin = "gh-release"; package = "https://github.com/fluentci-io/fluentci/releases/download/v0.15.4/fluentci_x86_64-pc-windows-msvc.zip"; binary = "fluentci.exe" }
+}
+
+RustFriends {
+    Tool nextest { version = "latest"; origin = "gh-release"; package = "nextest-rs/nextest"; binary = "cargo-nextest.exe" }
+    Tool cargo_deny { version = "latest"; origin = "gh-release"; package = "EmbarkStudios/cargo-deny"; binary = "cargo-deny.exe" }
+    Tool cargo_audit { version = "latest"; origin = "gh-release"; package = "rustsec/rustsec"; binary = "cargo-audit.exe" }
+    Tool cosign { version = "v2.4.1"; origin = "gh-release"; package = "sigstore/cosign"; binary = "cosign-windows-amd64.exe" }
+}

@@ -25,4 +25,9 @@ ToolState {
     "java" = "25";
     "flutter" = "stable";
     "golangci-lint" = "latest";
+    "rust" = "1.85.1 (SHA256:3ee4f01660ebc3b68bdc6c15d208dc0ec22ef34f3cc0355e9e7a3689fe7b788f)";
+    "cargo" = "1.85.1 (SHA256:72b3873cba19ddc043ecc70721af69709890eed8597d020896222f3aa442e634)";
+    "nextest" = "latest (SHA256:08db4ce6f04bc8fb00e4196ac653e8f796e72666d1e871382013ecb32368280d)";
+    "cargo-deny" = "0.16.4 (SHA256:f998b8e3bae1038fabe9b6c97812cb2305e28f7b778328cd82f67367442cbcdb)";
+    "cargo-audit" = "0.22.1 (SHA256:5d1bed21399eeac00bd0e72420ac6fbc0f537030fbb3c11fcd4534fe2d8eaa52)";
 }
