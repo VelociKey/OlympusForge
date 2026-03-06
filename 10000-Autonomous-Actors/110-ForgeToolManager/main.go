@@ -4,7 +4,6 @@ import (
 	"log/slog"
 	"os"
 	"os/exec"
-	"path/filepath"
 )
 
 type Tool struct {
@@ -13,11 +12,13 @@ type Tool struct {
 	BinPath string
 }
 
+// Tools managed by the Forge Tool Manager.
+// Paths are relative to the root of the workspace (OlympusForge).
 var Tools = []Tool{
-	{Name: "buf", Version: "v1.34.0", BinPath: "000-Tools/authoring/buf.exe"},
-	{Name: "golangci-lint", Version: "v1.59.1", BinPath: "000-Tools/authoring/golangci-lint.exe"},
-	{Name: "air", Version: "v1.52.2", BinPath: "000-Tools/authoring/air.exe"},
-	{Name: "dagger", Version: "v0.19.11", BinPath: "000-Tools/infrastructure/dagger.exe"},
+	{Name: "buf", Version: "v1.50.0", BinPath: "../../81000-Toolchain-External/bufbuild/bin/buf.exe"},
+	{Name: "cosign", Version: "v2.4.1", BinPath: "../../81000-Toolchain-External/sigstore/bin/cosign.exe"},
+	{Name: "protoc-gen-go", Version: "v1.36.1", BinPath: "../../81000-Toolchain-External/google/bin/protoc-gen-go.exe"},
+	{Name: "protoc-gen-connect-go", Version: "v1.18.1", BinPath: "../../81000-Toolchain-External/connectrpc/bin/protoc-gen-connect-go.exe"},
 }
 
 func main() {
@@ -34,14 +35,13 @@ func main() {
 }
 
 func syncTool(t Tool) error {
-	// Root is relative to workspace
-	absPath, _ := filepath.Abs(filepath.Join("../../90000-Enablement-Labs", t.BinPath))
-	if _, err := os.Stat(absPath); os.IsNotExist(err) {
-		slog.Info("📥 Forge: Tool missing, invoking Master Provisioner...", "name", t.Name, "path", absPath)
+	// Paths are relative to the workspace root
+	if _, err := os.Stat(t.BinPath); os.IsNotExist(err) {
+		slog.Info("📥 Forge: Tool missing, invoking Fleet Bootstrap...", "name", t.Name, "path", t.BinPath)
 		
-		// Run the central provisioner
-		provisionerPath := "C:/aAntigravitySpace/olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/910-provisioner/main.go"
-		cmd := exec.Command("go", "run", provisionerPath)
+		// Run the central bootstrap tool
+		bootstrapPath := "../../82000-Toolchain-Fleet/fleet-bootstrap/main.go" 
+		cmd := exec.Command("go", "run", bootstrapPath, "--install", "--update")
 		cmd.Dir = "C:/aAntigravitySpace" // Fleet root
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr

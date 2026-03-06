@@ -20,10 +20,10 @@ Foundation {
 }
 
 Engineering {
-    Tool buf { version = "v1.50.0"; origin = "go-install"; package = "github.com/bufbuild/buf/cmd/buf@v1.50.0"; binary = "buf.exe" }
+    Tool buf { version = "v1.50.0"; origin = "go-install"; package = "github.com/bufbuild/buf/cmd/buf@v1.50.0"; binary = "81000-Toolchain-External/bufbuild/bin/buf.exe" }
     Tool air { version = "v1.64.5"; origin = "go-install"; package = "github.com/air-verse/air@v1.64.5"; binary = "air.exe" }
-    Tool protoc_gen_go { version = "v1.36.1"; origin = "go-install"; package = "google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.1"; binary = "protoc-gen-go.exe" }
-    Tool protoc_gen_connect_go { version = "v1.18.1"; origin = "go-install"; package = "connectrpc.com/connect/cmd/protoc-gen-connect-go@v1.18.1"; binary = "protoc-gen-connect-go.exe" }
+    Tool protoc_gen_go { version = "v1.36.1"; origin = "go-install"; package = "google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.1"; binary = "81000-Toolchain-External/google/bin/protoc-gen-go.exe" }
+    Tool protoc_gen_connect_go { version = "v1.18.1"; origin = "go-install"; package = "connectrpc.com/connect/cmd/protoc-gen-connect-go@v1.18.1"; binary = "81000-Toolchain-External/connectrpc/bin/protoc-gen-connect-go.exe" }
     Tool flutter { version = "3.29.0"; origin = "external"; package = "https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.29.0-stable.zip"; binary = "bin/flutter.bat" }
 }
 

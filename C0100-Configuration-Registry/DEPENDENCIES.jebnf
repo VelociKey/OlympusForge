@@ -87,7 +87,7 @@ Tool "buf" {
     Repo  = "buf";
     Version = "v1.66.0";
     BinaryName = "buf.exe";
-    LocalPath = "./81000-Toolchain-External/bufbuild/buf.exe"; 
+    LocalPath = "./81000-Toolchain-External/bufbuild/bin/buf.exe"; 
 
     ReleaseDate    = "2026-02-25";
     IngestDate     = "2026-03-03";
@@ -115,7 +115,7 @@ Tool "cosign" {
     Repo  = "cosign";
     Version = "v3.0.5";
     BinaryName = "cosign.exe";
-    LocalPath = "./81000-Toolchain-External/sigstore/cosign.exe";
+    LocalPath = "./81000-Toolchain-External/sigstore/bin/cosign.exe";
 
     ReleaseDate    = "2026-02-20";
     IngestDate     = "2026-03-03";
