@@ -4,7 +4,7 @@ import (
 	"context"
 	"log/slog"
 
-	whisperv1 "olympus.fleet/00SDLC/OlympusGrammar/gen/v1/whisper/whisperv1connect"
+	whisperv1 "olympus.fleet/00SDLC/OlympusGrammar/40000-Communication-Contracts/40400-Protocol-Synthetics/connect-rpc/gen/v1/whisper/whisperv1connect"
 
 	"connectrpc.com/connect"
 )

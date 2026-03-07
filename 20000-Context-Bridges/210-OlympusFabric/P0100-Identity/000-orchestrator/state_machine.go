@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/P0900-Labs/220-Whisper"
+	"olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/90200-Logic-Libraries/220-Whisper"
 )
 
 // StateMachine manages the Sovereign Node advancement lifecycle.

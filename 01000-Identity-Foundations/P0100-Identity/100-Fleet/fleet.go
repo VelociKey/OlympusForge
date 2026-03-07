@@ -149,7 +149,7 @@ func ScaffoldModule(root, moduleName string) error {
 
 	// 1. Create Directory Taxonomy
 	dirs := []string{
-		"00000-Identity-Foundations/P0000-pkg",
+		"01000-Identity-Foundations/P0000-pkg",
 		"10000-Autonomous-Actors",
 		"20000-Context-Bridges",
 		"30000-Federated-Services",
