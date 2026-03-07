@@ -52,8 +52,6 @@ replace olympus.fleet/00SDLC/Olympus2/40000-Communication-Contracts/40400-Protoc
 
 replace olympus.fleet/00SDLC/Olympus2/50000-Intelligence-Framework/50200-Logic-Libraries => ../Olympus2/50000-Intelligence-Framework/50200-Logic-Libraries
 
-replace olympus.fleet/00SDLC/Olympus2/70000-Environmental-Harness/dagger => ../Olympus2/70000-Environmental-Harness/70700-Harness-Drivers/dagger-70000
-
 replace olympus.fleet/00SDLC/Olympus2/90000-Enablement-Labs/90200-Logic-Libraries => ../Olympus2/90000-Enablement-Labs/90200-Logic-Libraries
 
 replace olympus.fleet/00SDLC/OlympusFabric/40000-Communication-Contracts/40400-Protocol-Synthetics/connect-rpc => ../OlympusFabric/40000-Communication-Contracts/40400-Protocol-Synthetics/connect-rpc

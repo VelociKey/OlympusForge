@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"path/filepath"
-	"dagger/olympusforge/internal/dagger"
+	"dagger/olympusforge/lib/dagger"
 )
 
 type Olympusforge struct{}
