@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"path/filepath"
-	"dagger/olympusforge/lib/dagger"
+	"olympus.fleet/00SDLC/OlympusForge/70000-Environmental-Harness/dagger/lib/dagger"
 )
 
 type Olympusforge struct{}
