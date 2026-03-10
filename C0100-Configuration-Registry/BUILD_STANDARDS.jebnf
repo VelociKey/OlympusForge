@@ -1,0 +1,54 @@
+# ==============================================================================
+# 🌌 Sovereign Fleet Build Standards (Dagger v1.0)
+# ==============================================================================
+# Purpose: Govern Multi-Stack Build Pipelines (Go, Rust, Flutter)
+# Hierarchy: 00SDLC/OlympusForge/C0100-Configuration-Registry/BUILD_STANDARDS.jebnf
+# Tooling: Dagger, Podman, Kaniko, Buildah
+# ==============================================================================
+
+BuildPolicy {
+    Engine {
+        Primary = "podman"
+        MinVersion = "5.8.0"
+        DockerHost = "unix://run/user/1000/podman/podman.sock"
+        WindowsPipe = "//./pipe/podman-machine-default"
+    }
+
+    Isolation {
+        TempRoot = "@SCRATCH/dagger-tmp"
+        CacheRoot = "@SCRATCH/dagger-cache"
+        NoOSLeakage = true
+    }
+
+    Hardening {
+        Go {
+            Flags = ["-s", "-w"]
+            TrimPath = true
+            CGO = 0
+            TargetOS = "windows"
+            TargetArch = "amd64"
+        }
+        Rust {
+            Target = "x86_64-pc-windows-msvc"
+            Release = true
+        }
+        Flutter {
+            Target = "web"
+            Renderer = "canvaskit"
+            Wasm = true
+        }
+    }
+
+    Materialization {
+        BinRoot = "@BIN"
+        ArtifactRoot = "C0400-Artifact-Repository"
+        RetentionPolicy = "cycle-only"
+    }
+}
+
+# --- Standard Build Targets ---
+Targets {
+    Toolchain = ["81000-Toolchain-External", "82000-Toolchain-Fleet"]
+    Agents = ["00SDLC/AssessAgent", "00SDLC/OlympusGemAid"]
+    InteractionSurface = ["00SDLC/OlympusVision", "20POSI/George"]
+}
