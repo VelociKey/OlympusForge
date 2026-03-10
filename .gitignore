@@ -1,5 +1,5 @@
 # ==============================================================================
-# 🌌 Sovereign Fleet Workspace Standard .gitignore
+# 🌌 Sovereign Fleet Workspace Standard .gitignore (Source of Truth)
 # ==============================================================================
 # Purpose: Handle Multi-Stack Development (Flutter/Go/Firebase)
 # Toolchain: Dagger, Kaniko, Buildah, Podman, Agents, MCP, ANA
@@ -18,10 +18,10 @@ agent-binary
 
 # --- Workspace Hygiene (Wraith Structured Folders) ---
 # These folders are designated for ephemeral or generated artifacts
-C0400-Artifact-Repository/
-C0500-Agent-Intelligence-Outputs/
-C0700-System-Operations/
-C0990-Ephemeral-Scratch/
+C0400-Artifact-Repository/**
+C0500-Agent-Intelligence-Outputs/**
+C0700-System-Operations/**
+C0990-Ephemeral-Scratch/**
 tmp/
 .temp/
 .history/
@@ -49,6 +49,14 @@ dagger.log
 terraform.tfstate*
 
 # --- Provisioner Managed Tools ---
+90000-Enablement-Labs/000-Tools/000-bin/
+90000-Enablement-Labs/000-Tools/000-*/
+!90000-Enablement-Labs/000-Tools/000-*/
+!90000-Enablement-Labs/000-Tools/000-*/**/main.go
+!90000-Enablement-Labs/000-Tools/000-*/**/*.go
+!90000-Enablement-Labs/000-Tools/000-*/**/*.mod
+!90000-Enablement-Labs/000-Tools/000-*/**/*.sum
+!90000-Enablement-Labs/000-Tools/tool_symbols.jebnf
 
 # --- Labs & Enablers Bloat ---
 ZC0400-Sovereign-Source/
@@ -195,9 +203,5 @@ test_output.txt
 90000-Enablement-Labs/**/*
 930-System-Enablers/**/*
 
-!**/.gitkeep
-
-
 # Ensure structure preservation via .gitkeep
-!**/.gitkeep
 !**/.gitkeep
