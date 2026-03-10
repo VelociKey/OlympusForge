@@ -20,7 +20,6 @@ Foundation {
 }
 
 Engineering {
-    Tool buf { version = "v1.50.0"; origin = "go-install"; package = "github.com/bufbuild/buf/cmd/buf@v1.50.0"; binary = "81000-Toolchain-External/bufbuild/bin/buf.exe" }
     Tool air { version = "v1.64.5"; origin = "go-install"; package = "github.com/air-verse/air@v1.64.5"; binary = "air.exe" }
     Tool protoc_gen_go { version = "v1.36.1"; origin = "go-install"; package = "google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.1"; binary = "81000-Toolchain-External/google/bin/protoc-gen-go.exe" }
     Tool protoc_gen_connect_go { version = "v1.18.1"; origin = "go-install"; package = "connectrpc.com/connect/cmd/protoc-gen-connect-go@v1.18.1"; binary = "81000-Toolchain-External/connectrpc/bin/protoc-gen-connect-go.exe" }
@@ -66,7 +65,8 @@ Infrastructure {
 }
 
 SovereignSubstrate {
-    Tool rust { version = "1.85.1"; origin = "external"; package = "https://static.rust-lang.org/dist/rust-1.85.1-x86_64-pc-windows-msvc.tar.gz"; binary = "rustc/bin/rustc.exe" }
+    Tool rust { version = "1.85.1"; origin = "external"; package = "https://static.rust-lang.org/dist/rust-1.85.1-x86_64-pc-windows-msvc.tar.gz"; binary = "rust/bin/rustc.exe" }
+    Tool cargo { version = "1.85.1"; origin = "external"; package = "https://static.rust-lang.org/dist/rust-1.85.1-x86_64-pc-windows-msvc.tar.gz"; binary = "rust/bin/cargo.exe" }
     Tool nix { version = "2.22.1"; origin = "external"; package = "https://github.com/DeterminateSystems/nix-installer/releases/download/v0.32.0/nix-installer-x86_64-windows.exe"; binary = "nix-installer.exe" }
     Tool fluentci { version = "v0.15.4"; origin = "gh-release"; package = "https://github.com/fluentci-io/fluentci/releases/download/v0.15.4/fluentci_x86_64-pc-windows-msvc.zip"; binary = "fluentci.exe" }
 }

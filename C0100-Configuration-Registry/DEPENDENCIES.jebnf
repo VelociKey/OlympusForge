@@ -134,13 +134,24 @@ Tool "flutter" {
     IngestDate     = "2026-03-01";
 }
 
-Tool "firebase" {
-    Owner = "google";
-    Repo  = "firebase-tools";
-    Version = "13.29.1";
-    BinaryName = "firebase.exe";
-    LocalPath = "./81000-Toolchain-External/google/firebase-tools/firebase.exe";
-    
+Tool "podman" {
+    Owner = "containers";
+    Repo  = "podman";
+    Version = "v5.4.0";
+    BinaryName = "podman.exe";
+    LocalPath = "./81000-Toolchain-External/containers/podman/podman.exe";
+
+    ReleaseDate    = "2026-02-10";
+    IngestDate     = "2026-03-10";
+}
+
+Tool "podman-desktop" {
+    Owner = "containers";
+    Repo  = "podman-desktop";
+    Version = "v1.25.1";
+    BinaryName = "podman-desktop.exe";
+    LocalPath = "./81000-Toolchain-External/containers/podman-desktop/podman-desktop.exe";
+
     ReleaseDate    = "2026-02-15";
-    IngestDate     = "2026-03-01";
+    IngestDate     = "2026-03-10";
 }

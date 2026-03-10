@@ -20,10 +20,9 @@ func main() {
 	forgePkg := filepath.Join(root, "00SDLC", "OlympusForge", "90000-Enablement-Labs", "900-Forge")
 
 	fmt.Println("🔨 Building OlympusForge via Forge Pipeline...")
+	fmt.Println("⏳ This process uses the Fleet-Standard Dagger Pipeline.")
 
-	// For OlympusForge, we typically want to 'Assess' or build specific tools.
-	// For now, we default to 'native' build or assessment.
-	// We use '-workspace 00SDLC/OlympusForge' to target this workspace context.
+	// Standardized build command: -target and -workspace
 	cmd := exec.Command("go", "run", forgePkg, "-target", "native", "-workspace", "00SDLC/OlympusForge")
 	cmd.Dir = root
 	cmd.Stdout = os.Stdout
