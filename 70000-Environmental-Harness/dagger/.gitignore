@@ -205,3 +205,7 @@ test_output.txt
 
 # Ensure structure preservation via .gitkeep
 !**/.gitkeep
+/dagger.gen.go
+/internal/dagger
+/internal/querybuilder
+/internal/telemetry

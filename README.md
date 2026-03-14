@@ -1,44 +1,37 @@
 # OlympusForge
 
-**The Universal Grammar Manufacturing Plant**
+**The Authoritative Fleet Forge**
 
-OlympusFabric is the successor to the original DSLEngine, evolved for the **Plural Fabric** ecosystem. It provides a Go-native, high-performance pipeline for transforming user intent into deterministic system artifacts.
+OlympusForge is the fleet's central manufacturing and build orchestrator. It provides a Go-native, high-performance pipeline for transforming user intent into deterministic system artifacts and managing the global toolchain.
 
 ## 🚀 Key Features
 
 *   **Grammar-First Architecture**: Every workspace is defined by a formal grammar.
 *   **jeBNF Optimization**: Hard-coded support for ordered choices (`/`), eliminating ambiguity.
 *   **Go-Native Materializer**: One-click workspace bootstrapping from eBNF programs.
-*   **Multi-Target Generation**:
-    *   **PEG**: High-speed Go parsers via Pigeon.
-    *   **Data**: YAML/JSON IR exports.
-    *   **Shell**: PowerShell/Bash materialization scripts.
+*   **Sovereign Toolchain Management**: Centralized registry and provisioning for fleet-wide binaries.
 
 ## 🛠️ Getting Started
 
-### 1. Build the Tool
+### 1. Build the Forge Tooling
 ```bash
-cd 20000-MCP-Servers/OlympusFabric
-go build -o fabric.exe ./cmd/fabric
+cd 00SDLC/OlympusForge
+go build -o forge.exe ./provision.go
 ```
 
 ### 2. Validate a Grammar
 ```bash
-./fabric validate path/to/grammar.eBNF
+gemaid-run jebnf-lint path/to/grammar.jebnf
 ```
 
-### 3. Initialize a Workspace
+### 3. Register a Tool
 ```bash
-./fabric init path/to/workspace_definition.ebnf
-```
-
-### 4. Compile to PEG
-```bash
-./fabric compile my_dsl.jebnf peg
+gemaid-run gemaid-finder -root . -rebuild
 ```
 
 ## 🏗️ Workspace Structure
-OlympusFabric follows the `.wraith` workspace standard, ensuring strict parity between AI reasoning and physical file structures.
+OlympusForge follows the Sovereign Taxonomy (00000-90000), ensuring strict parity between AI reasoning and physical file structures.
+
 
 ## ⚖️ License
 Proprietary - VelociKey LLC.

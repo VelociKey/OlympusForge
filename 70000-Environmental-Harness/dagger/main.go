@@ -33,8 +33,6 @@ func (m *Olympusforge) BuildFlutter(ctx context.Context, src *dagger.Directory, 
 
 // VerifyEngine checks for Podman connectivity by executing a simple version command.
 func (m *Olympusforge) VerifyEngine(ctx context.Context) (string, error) {
-	// Instead of pulling alpine, we just check if we can initialize a container
-	// If this fails, the engine is unreachable.
 	return "Sovereign Engine Reachable", nil
 }
 
@@ -54,13 +52,6 @@ func (m *Olympusforge) BuildRust(ctx context.Context, src *dagger.Directory, pro
 		File(filepath.Join("target/x86_64-pc-windows-gnu/release", binaryName))
 }
 
-// BuildRustNative ingests a pre-built binary from the host workstation (O(1) feedback loop).
-// It assumes the user has run `cargo build --release` locally.
-func (m *Olympusforge) BuildRustNative(ctx context.Context, src *dagger.Directory, projectPath string, binaryName string) *dagger.File {
-	return dag.Host().Directory(".").
-		File(filepath.Join(projectPath, "target/release", binaryName))
-}
-
 // PromoteNative exports a file from the host filesystem to the fleet's central tool distribution directory.
 func (m *Olympusforge) PromoteNative(ctx context.Context, binary *dagger.File, name string) (string, error) {
 	dest := filepath.Join("00SDLC/OlympusForge/82000-Toolchain-Fleet/bin", name)
@@ -71,4 +62,48 @@ func (m *Olympusforge) PromoteNative(ctx context.Context, binary *dagger.File, n
 	return "Promoted " + name + " to " + dest, nil
 }
 
-func (m *Olympusforge) HelloWorld(ctx context.Context) string { return "Hello from OlympusForge!" }
+// LatentLinguaGoStudio assembles the Flutter Studio with a Go-WASM kernel.
+func (m *Olympusforge) LatentLinguaGoStudio(ctx context.Context, src *dagger.Directory) *dagger.Directory {
+	// 1. Build the Go WASM Kernel
+	wasm := dag.Container().
+		From("golang:1.26-alpine").
+		WithDirectory("/src", src).
+		WithWorkdir("/src").
+		WithEnvVariable("GOOS", "js").
+		WithEnvVariable("GOARCH", "wasm").
+		WithEnvVariable("GOWORK", "/src/go.work").
+		WithExec([]string{"go", "build", "-o", "/out/latent_lingua.wasm", "./01LOCO/LatentLingua/90000-Enablement-Labs/920-WASM-Kernel"}).
+		File("/out/latent_lingua.wasm")
+
+	// 2. Build the Flutter app (using a pinned stable image for speed/reliability)
+	flutter := dag.Container().
+		From("ghcr.io/cirruslabs/flutter:3.41.0").
+		WithDirectory("/src", src).
+		WithWorkdir("/src/01LOCO/LatentLingua/40000-Communication-Contracts/411-Interaction-Surface").
+		WithExec([]string{"flutter", "build", "web", "--wasm"}).
+		Directory("build/web")
+
+		// 3. Inject Kernel Loader and combine
+	goImg := dag.Container().From("golang:1.26-alpine")
+	wasmExec := goImg.File("/usr/local/go/lib/wasm/wasm_exec.js")
+
+	loader := dag.Container().
+		From("alpine").
+		WithNewFile("/kernel_loader.js", `
+            async function loadKernel() {
+                const go = new Go();
+                const result = await WebAssembly.instantiateStreaming(fetch("latent_lingua.wasm"), go.importObject);
+                go.run(result.instance);
+                console.log("LatentLingua Go Kernel Loaded via OlympusForge");
+            }
+            loadKernel();
+        `).File("/kernel_loader.js")
+
+	return dag.Container().
+		From("alpine").
+		WithDirectory("/", flutter).
+		WithFile("/wasm_exec.js", wasmExec).
+		WithFile("/latent_lingua.wasm", wasm).
+		WithFile("/kernel_loader.js", loader).
+		Directory("/")
+}
