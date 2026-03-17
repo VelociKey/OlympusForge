@@ -300,7 +300,7 @@ func synthesizeContent(source string, target string, transformer string) (string
 
 	if strings.Contains(source, "ui_standards.jebnf") {
 		if strings.Contains(target, "pubspec.yaml") {
-			return `name: interaction_surface
+		        return `name: interaction_surface
 description: Hardened Flutter Canvas for George
 version: 1.0.0+1
 publish_to: none
@@ -311,6 +311,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^3.10.1
+  firebase_auth: ^5.4.1
+  connectrpc: ^1.0.0
+  protobuf: ^4.2.0
+  flutter_riverpod: ^3.2.1
+  cronet_http: ^1.8.0
   web: ^1.1.0
   js: ^0.6.7
 
@@ -323,6 +329,7 @@ flutter:
   uses-material-design: true
 `, nil
 		}
+
 		if strings.Contains(target, "analysis_options.yaml") {
 			return `include: package:flutter_lints/analysis_options.yaml
 
