@@ -1,0 +1,10 @@
+::Sovereign::Fabric::Mandates::v1
+Workspace "OlympusForge"
+Owner "Any"
+
+Mandates [
+    "Strict hierarchical taxonomy (nnnnn -> nnn -> nnn)"
+    "jeBNF-native configuration and metadata"
+    "Pure Go builds (CGO_ENABLED=0)"
+    "AV Stealth build flags (-ldflags=\"-s -w\" -trimpath)"
+]

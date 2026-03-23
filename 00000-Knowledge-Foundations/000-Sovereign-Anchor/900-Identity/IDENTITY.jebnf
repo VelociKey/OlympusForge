@@ -1,0 +1,5 @@
+::Sovereign::Fabric::Identity::v1
+URI "silo://00SDLC/OlympusForge"
+Label "Olympus Forge"
+Silo "00SDLC"
+Workspace "OlympusForge"
