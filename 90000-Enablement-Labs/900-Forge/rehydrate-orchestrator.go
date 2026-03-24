@@ -24,7 +24,8 @@ func run() error {
 	}
 	defer client.Close()
 
-	src := client.Host().Directory("C:/aAntigravitySpace")
+	// Use relative context root
+	src := client.Host().Directory(".")
 
 	// Hardened Builder Container
 	builder := client.Container().
@@ -48,6 +49,6 @@ func run() error {
 		builder = builder.WithExec([]string{"go", "build", "-ldflags=-s -w", "-trimpath", "-o", "/bin/" + name + ".exe", t})
 	}
 
-	_, err = builder.Directory("/bin").Export(ctx, "C:/aAntigravitySpace/00SDLC/OlympusForge/82000-Toolchain-Fleet/bin")
+	_, err = builder.Directory("/bin").Export(ctx, "00SDLC/OlympusForge/82000-Toolchain-Fleet/bin")
 	return err
 }
