@@ -205,3 +205,7 @@ test_output.txt
 
 # Ensure structure preservation via .gitkeep
 !**/.gitkeep
+
+# Expose the Fleet's Toolchain Binaries (@BIN)
+!82000-Toolchain-Fleet/bin/
+!82000-Toolchain-Fleet/bin/**

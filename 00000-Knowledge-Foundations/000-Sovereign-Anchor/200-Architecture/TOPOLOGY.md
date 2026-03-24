@@ -18,7 +18,7 @@ The AntigravitySpace federation is organized into the following thematic zones (
 ## 2. Active Workspaces
 Key named workspaces currently active within the federation:
 
-- **00SDLC**: `Olympus2`, `OlympusMCP`, `OlympusFabric`, `OlympusForge`, `OlympusGemAid`, `AssessAgent`.
+- **00SDLC**: `Olympus2`, `OlympusMCP`, `OlympusFabric`, `OlympusForge`, `OlympusGemAid`, `OlympusAssessment`.
 - **10GNDT**: `GND-Registry`, `AgentGrounds`, `GND-Substrate`, `GND-Rails`, `GND-Customs`, `GND-Freight`, `GND-Clearinghouse`.
 - **20POSI**: `George`.
 - **30INFR**: `Pinnacle`, `PinnacleAssurance`.

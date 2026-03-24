@@ -1,0 +1,19 @@
+::mPSH::ToolRegistry::v2
+Metadata {
+  NumKeys = 0;
+  M = 0;
+}
+
+Seeds {
+}
+
+Table {
+}
+
+Values {
+}
+
+ActiveBuffer {
+}
+
+RebuildTrigger = "gemaid-finder -rebuild -root .";

@@ -49,6 +49,6 @@ BuildPolicy {
 # --- Standard Build Targets ---
 Targets {
     Toolchain = ["81000-Toolchain-External", "82000-Toolchain-Fleet"]
-    Agents = ["00SDLC/AssessAgent", "00SDLC/OlympusGemAid"]
+    Agents = ["00SDLC/OlympusAssessment", "00SDLC/OlympusGemAid"]
     InteractionSurface = ["00SDLC/OlympusVision", "20POSI/George"]
 }

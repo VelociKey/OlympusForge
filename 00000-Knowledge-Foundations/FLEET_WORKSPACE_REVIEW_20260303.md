@@ -35,7 +35,7 @@ The AntigravitySpace monorepo contains **7 domain zones** governed by a unified 
 | **Deep Taxonomy** | Every workspace follows the 5-digit taxonomy (`00000-Identity`, `10000-Actors`, …, `90000-Labs`, `C0xxx` configuration, `K0000` knowledge anchor) |
 | **Dagger integration** | Most workspaces have `70000-Environmental-Harness/dagger` directories and `dagger.json` manifests |
 | **MCP sovereign architecture** | `OlympusMCP` has a detailed 5-phase design: Protobuf → Connect RPC → jeBNF JSON-RPC Gateway → Cronet → Return Filter |
-| **AssessAgent maturity model** | 7+1 axis framework mapped to NIST SP 800-218 and AI RMF standards |
+| **Olympus Assessment maturity model** | 7+1 axis framework mapped to NIST SP 800-218 and AI RMF standards |
 
 ### 1.2 Concerns
 
