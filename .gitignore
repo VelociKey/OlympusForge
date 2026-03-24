@@ -185,9 +185,13 @@ test_output.txt
 !C0700-System-Operations/
 
 # --- Sovereign Skeletons (Visibility & Structure - FINAL OVERRIDE) ---
-!80000-System-Governance/
-!81000-Toolchain-External/
-!82000-Toolchain-Fleet/
+# Expose the Fleet's Toolchain Binaries (@BIN)
+!82000-Toolchain-Fleet/bin/
+!82000-Toolchain-Fleet/bin/**
+
+# Expose AihubForge Source & Rehydration Logic
+!90000-Enablement-Labs/900-Forge/
+!90000-Enablement-Labs/900-Forge/**
 !83000-Agent-Templates/
 !84000-Product-Plane/
 !85000-Intelligence-Plane/
@@ -202,6 +206,10 @@ test_output.txt
 85000-Intelligence-Plane/**/*
 90000-Enablement-Labs/**/*
 930-System-Enablers/**/*
+
+# Expose AihubForge Source & Rehydration Logic
+!90000-Enablement-Labs/900-Forge/
+!90000-Enablement-Labs/900-Forge/**
 
 # Ensure structure preservation via .gitkeep
 !**/.gitkeep
