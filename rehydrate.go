@@ -32,7 +32,7 @@ var Manifest = []Asset{
 	},
 	{
 		Name:     "Trivy-Windows",
-		URL:      "https://github.com/aquasecurity/trivy/releases/download/v0.69.5/trivy_0.69.5_windows-64bit.zip",
+		URL:      "https://github.com/aquasecurity/trivy/releases/download/v0.69.3/trivy_0.69.3_windows-64bit.zip",
 		Target:   "trivy-windows",
 		Base:     "81000-Toolchain-External",
 		IsZip:    true,
@@ -40,7 +40,7 @@ var Manifest = []Asset{
 	},
 	{
 		Name:     "Trivy-Linux",
-		URL:      "https://github.com/aquasecurity/trivy/releases/download/v0.69.5/trivy_0.69.5_linux-64bit.tar.gz",
+		URL:      "https://github.com/aquasecurity/trivy/releases/download/v0.69.3/trivy_0.69.3_linux-64bit.tar.gz",
 		Target:   "trivy-linux",
 		Base:     "81000-Toolchain-External",
 		IsZip:    false,

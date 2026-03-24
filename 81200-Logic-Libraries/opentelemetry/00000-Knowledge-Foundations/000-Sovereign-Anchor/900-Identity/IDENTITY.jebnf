@@ -1,0 +1,5 @@
+::Sovereign::Fabric::Identity::v1
+URI "silo://81200-Logic-Libraries/opentelemetry"
+Label "OpenTelemetry"
+Silo "81200"
+Workspace "OpenTelemetry"

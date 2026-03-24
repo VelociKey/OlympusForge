@@ -31,6 +31,6 @@ require (
 	google.golang.org/protobuf v1.36.11 // indirect
 )
 
-replace connectrpc.com/connect => ./81000-Toolchain-External/81200-Logic-Libraries/connectrpc/connect-go-1.18.1
+replace connectrpc.com/connect => ./81200-Logic-Libraries/connectrpc/connect-go-1.18.1
 
-replace github.com/mark3labs/mcp-go => ./81000-Toolchain-External/81200-Logic-Libraries/mcp/mcp-go-0.44.1
+// mcp-go replacement removed (not found in workspace)

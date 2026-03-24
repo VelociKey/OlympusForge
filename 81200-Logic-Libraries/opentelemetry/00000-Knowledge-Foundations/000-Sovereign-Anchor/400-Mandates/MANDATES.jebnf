@@ -1,0 +1,9 @@
+::Sovereign::Fabric::Mandates::v1
+Workspace "OpenTelemetry"
+Owner "Any"
+
+Mandates [
+    "Sovereign redistribution of OTEL Go SDK"
+    "Alignment with Fleet standard v1.42.0"
+    "Dagger build synchronization"
+]
