@@ -3,6 +3,7 @@ package main
 import (
 	"archive/tar"
 	"archive/zip"
+	"bufio"
 	"compress/gzip"
 	"fmt"
 	"io"
@@ -21,93 +22,71 @@ type Asset struct {
 	Hardened bool
 }
 
-var Manifest = []Asset{
-	{
-		Name:     "Podman-Windows",
-		URL:      "https://github.com/containers/podman/releases/download/v5.4.0/podman-remote-release-windows_amd64.zip",
-		Target:   "podman",
-		Base:     "81000-Toolchain-External",
-		IsZip:    true,
-		Hardened: false,
-	},
-	{
-		Name:     "Trivy-Windows",
-		URL:      "https://github.com/aquasecurity/trivy/releases/download/v0.69.3/trivy_0.69.3_windows-64bit.zip",
-		Target:   "trivy-windows",
-		Base:     "81000-Toolchain-External",
-		IsZip:    true,
-		Hardened: false,
-	},
-	{
-		Name:     "Trivy-Linux",
-		URL:      "https://github.com/aquasecurity/trivy/releases/download/v0.69.3/trivy_0.69.3_linux-64bit.tar.gz",
-		Target:   "trivy-linux",
-		Base:     "81000-Toolchain-External",
-		IsZip:    false,
-		Hardened: false,
-	},
-	{
-		Name:     "Dagger-Linux",
-		URL:      "https://github.com/dagger/dagger/releases/download/v0.20.3/dagger_v0.20.3_linux_amd64.tar.gz",
-		Target:   "dagger-linux",
-		Base:     "81000-Toolchain-External",
-		IsZip:    false,
-		Hardened: false,
-	},
-	{
-		Name:     "Dagger",
-		URL:      "https://github.com/dagger/dagger/releases/download/v0.20.3/dagger_v0.20.3_windows_amd64.zip",
-		Target:   "dagger",
-		Base:     "81000-Toolchain-External",
-		IsZip:    true,
-		Hardened: false,
-	},
-	{
-		Name:     "Go",
-		URL:      "https://go.dev/dl/go1.26.0.windows-amd64.zip",
-		Target:   "go",
-		Base:     "81000-Toolchain-External",
-		IsZip:    true,
-		Hardened: false,
-	},
-	{
-		Name:     "Buf",
-		URL:      "https://github.com/bufbuild/buf/releases/download/v1.50.0/buf-Linux-x86_64.tar.gz",
-		Target:   "buf",
-		Base:     "81000-Toolchain-External",
-		IsZip:    false,
-		Hardened: false,
-	},
-	{
-		Name:     "Gcloud",
-		URL:      "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz",
-		Target:   "gcloud",
-		Base:     "81000-Toolchain-External",
-		IsZip:    false,
-		Hardened: false,
-	},
-	{
-		Name:     "Connect-RPC",
-		URL:      "https://github.com/connectrpc/connect-go/archive/refs/tags/v1.18.1.zip",
-		Target:   "connectrpc/connect-go-1.18.1",
-		Base:     "81200-Logic-Libraries",
-		IsZip:    true,
-		Hardened: true,
-	},
-	{
-		Name:     "Go-QUIC",
-		URL:      "https://github.com/quic-go/quic-go/archive/refs/tags/v0.50.0.zip",
-		Target:   "quic-go/quic-go-0.50.0",
-		Base:     "81200-Logic-Libraries",
-		IsZip:    true,
-		Hardened: true,
-	},
+func parseManifest(path string) ([]Asset, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	var assets []Asset
+	var current *Asset
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line == "" || strings.HasPrefix(line, "#") || strings.HasPrefix(line, "::") {
+			continue
+		}
+
+		if strings.HasPrefix(line, "Asset") {
+			name := strings.Trim(strings.TrimPrefix(line, "Asset"), " {\"")
+			current = &Asset{Name: name}
+			continue
+		}
+
+		if strings.HasPrefix(line, "}") {
+			if current != nil {
+				assets = append(assets, *current)
+				current = nil
+			}
+			continue
+		}
+
+		if current != nil && strings.Contains(line, "=") {
+			parts := strings.SplitN(line, "=", 2)
+			key := strings.TrimSpace(parts[0])
+			val := strings.Trim(strings.TrimSpace(parts[1]), "\";")
+
+			switch key {
+			case "URL":
+				current.URL = val
+			case "Target":
+				current.Target = val
+			case "Base":
+				current.Base = val
+			case "IsZip":
+				current.IsZip = (val == "true")
+			case "Hardened":
+				current.Hardened = (val == "true")
+			}
+		}
+	}
+
+	return assets, scanner.Err()
 }
 
 func main() {
 	fmt.Println("🚀 Sovereign Re-Hydrator: Seeding Toolchain and Libraries")
 
-	for _, asset := range Manifest {
+	manifestPath := filepath.Join("C0100-Configuration-Registry", "REHYDRATE_MANIFEST.jebnf")
+	assets, err := parseManifest(manifestPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "❌ Failed to load manifest: %v\n", err)
+		os.Exit(1)
+	}
+
+	for _, asset := range assets {
 		targetPath := filepath.Join(asset.Base, asset.Target)
 
 		// If it's a directory, check if it's "real" (contains files)

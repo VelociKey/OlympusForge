@@ -1,0 +1,90 @@
+::Olympus::Forge::Rehydrate::v1 {
+    ExternalAssets [
+        Asset "Podman-Windows" {
+            URL = "https://github.com/containers/podman/releases/download/v5.4.0/podman-remote-release-windows_amd64.zip";
+            Target = "podman";
+            Base = "81000-Toolchain-External";
+            IsZip = true;
+            Hardened = false;
+        },
+        Asset "Trivy-Windows" {
+            URL = "https://github.com/aquasecurity/trivy/releases/download/v0.69.3/trivy_0.69.3_windows-64bit.zip";
+            Target = "trivy-windows";
+            Base = "81000-Toolchain-External";
+            IsZip = true;
+            Hardened = false;
+        },
+        Asset "Trivy-Linux" {
+            URL = "https://github.com/aquasecurity/trivy/releases/download/v0.69.3/trivy_0.69.3_linux-64bit.tar.gz";
+            Target = "trivy-linux";
+            Base = "81000-Toolchain-External";
+            IsZip = false;
+            Hardened = false;
+        },
+        Asset "Dagger-Linux" {
+            URL = "https://github.com/dagger/dagger/releases/download/v0.20.3/dagger_v0.20.3_linux_amd64.tar.gz";
+            Target = "dagger-linux";
+            Base = "81000-Toolchain-External";
+            IsZip = false;
+            Hardened = false;
+        },
+        Asset "Dagger" {
+            URL = "https://github.com/dagger/dagger/releases/download/v0.20.3/dagger_v0.20.3_windows_amd64.zip";
+            Target = "dagger";
+            Base = "81000-Toolchain-External";
+            IsZip = true;
+            Hardened = false;
+        },
+        Asset "Go" {
+            URL = "https://go.dev/dl/go1.26.0.windows-amd64.zip";
+            Target = "go";
+            Base = "81000-Toolchain-External";
+            IsZip = true;
+            Hardened = false;
+        },
+        Asset "Buf" {
+            URL = "https://github.com/bufbuild/buf/releases/download/v1.50.0/buf-Linux-x86_64.tar.gz";
+            Target = "buf";
+            Base = "81000-Toolchain-External";
+            IsZip = false;
+            Hardened = false;
+        },
+        Asset "Gcloud" {
+            URL = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz";
+            Target = "gcloud";
+            Base = "81000-Toolchain-External";
+            IsZip = false;
+            Hardened = false;
+        },
+        Asset "Git" {
+            URL = "https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/MinGit-2.47.1-64-bit.zip";
+            Target = "git";
+            Base = "81000-Toolchain-External";
+            IsZip = true;
+            Hardened = false;
+        },
+        Asset "Connect-RPC" {
+            URL = "https://github.com/connectrpc/connect-go/archive/refs/tags/v1.18.1.zip";
+            Target = "connectrpc/connect-go-1.18.1";
+            Base = "81200-Logic-Libraries";
+            IsZip = true;
+            Hardened = true;
+        },
+        Asset "Go-QUIC" {
+            URL = "https://github.com/quic-go/quic-go/archive/refs/tags/v0.50.0.zip";
+            Target = "quic-go/quic-go-0.50.0";
+            Base = "81200-Logic-Libraries";
+            IsZip = true;
+            Hardened = true;
+        }
+    ];
+
+    LocalBuilds [
+        "00SDLC/OlympusConductor/10000-Autonomous-Actors/110-devpm-relay",
+        "00SDLC/OlympusConductor/30100-Execution-Points/110-conductor-project",
+        "00SDLC/OlympusConductor/30100-Execution-Points/120-conductor-cycle",
+        "00SDLC/OlympusConductor/30100-Execution-Points/150-gemaid-harden",
+        "60PROX/GitSovereign/Backend/90100-Execution-Points/harvester",
+        "01ALPH/Hashing-Vault/90200-Logic-Libraries/110-gitsov-key"
+    ];
+}

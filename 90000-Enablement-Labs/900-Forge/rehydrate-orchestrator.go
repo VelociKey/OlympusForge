@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"dagger.io/dagger"
 )
@@ -16,8 +18,54 @@ func main() {
 	}
 }
 
+func parseLocalTargets(path string) ([]string, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	var targets []string
+	scanner := bufio.NewScanner(file)
+	inLocalBuilds := false
+
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+
+		if strings.HasPrefix(line, "LocalBuilds") {
+			inLocalBuilds = true
+			continue
+		}
+
+		if inLocalBuilds {
+			if line == "];" || line == "]" {
+				inLocalBuilds = false
+				break
+			}
+			// Extract "path"
+			target := strings.Trim(line, "\", ")
+			if target != "" {
+				targets = append(targets, target)
+			}
+		}
+	}
+
+	return targets, scanner.Err()
+}
+
 func run() error {
 	ctx := context.Background()
+
+	// Load targets from manifest
+	manifestPath := "C0100-Configuration-Registry/REHYDRATE_MANIFEST.jebnf"
+	targets, err := parseLocalTargets(manifestPath)
+	if err != nil {
+		return fmt.Errorf("failed to load local targets: %w", err)
+	}
+
 	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
 	if err != nil {
 		return err
@@ -35,13 +83,6 @@ func run() error {
 		WithEnvVariable("CGO_ENABLED", "0").
 		WithEnvVariable("GO111MODULE", "on").
 		WithEnvVariable("GOWORK", "/src/go.work")
-
-	targets := []string{
-		"00SDLC/OlympusConductor/10000-Autonomous-Actors/110-devpm-relay",
-		"00SDLC/OlympusConductor/30100-Execution-Points/110-conductor-project",
-		"00SDLC/OlympusConductor/30100-Execution-Points/120-conductor-cycle",
-		"00SDLC/OlympusConductor/30100-Execution-Points/150-gemaid-harden",
-	}
 
 	for _, t := range targets {
 		fmt.Printf("🔨 Dagger Rehydrating: %s\n", t)
