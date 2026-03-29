@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "operationv1_proto",
+    srcs = ["operation.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api/servicecontrol/v1:v1_proto",
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+go_proto_library(
+    name = "operationv1_go_proto",
+    importpath = "OlympusForge/gen/v1/operation",
+    proto = ":operationv1_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api/servicecontrol/v1:log_entry_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api/servicecontrol/v1:metric_value_proto",
+    ],
+)
+
+go_library(
+    name = "operation",
+    embed = [":operationv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/operation",
+    visibility = ["//visibility:public"],
+)

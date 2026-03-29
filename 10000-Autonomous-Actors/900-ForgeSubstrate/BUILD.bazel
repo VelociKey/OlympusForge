@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "900-ForgeSubstrate_lib",
+    srcs = ["main.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/10000-Autonomous-Actors/900-ForgeSubstrate",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "900-ForgeSubstrate",
+    embed = [":900-ForgeSubstrate_lib"],
+    visibility = ["//visibility:public"],
+)

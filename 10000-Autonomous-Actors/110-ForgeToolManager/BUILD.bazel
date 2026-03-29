@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "110-ForgeToolManager_lib",
+    srcs = ["main.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/10000-Autonomous-Actors/110-ForgeToolManager",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "110-ForgeToolManager",
+    embed = [":110-ForgeToolManager_lib"],
+    visibility = ["//visibility:public"],
+)

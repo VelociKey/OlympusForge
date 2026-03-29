@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "containerconv",
+    srcs = ["metric.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/semconv/v1.37.0/containerconv",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@io_opentelemetry_go_otel//attribute:go_default_library",
+        "@io_opentelemetry_go_otel_metric//:go_default_library",
+        "@io_opentelemetry_go_otel_metric//noop:go_default_library",
+    ],
+)

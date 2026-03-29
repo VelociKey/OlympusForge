@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "000-orchestrator",
+    srcs = [
+        "identity.go",
+        "loop.go",
+        "state_machine.go",
+        "types.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/P0100-Identity/000-orchestrator",
+    visibility = ["//visibility:public"],
+    deps = ["//00SDLC/Olympus2/90000-Enablement-Labs/90200-Logic-Libraries/220-Whisper"],
+)

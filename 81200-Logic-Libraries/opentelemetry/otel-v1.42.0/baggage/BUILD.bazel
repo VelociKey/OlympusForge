@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "baggage",
+    srcs = [
+        "baggage.go",
+        "context.go",
+        "doc.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/baggage",
+    visibility = ["//visibility:public"],
+    deps = ["@io_opentelemetry_go_otel//internal/baggage:go_default_library"],
+)
+
+go_test(
+    name = "baggage_test",
+    srcs = [
+        "baggage_test.go",
+        "context_test.go",
+    ],
+    embed = [":baggage"],
+    deps = [
+        "@com_github_stretchr_testify//assert:go_default_library",
+        "@com_github_stretchr_testify//require:go_default_library",
+        "@io_opentelemetry_go_otel//internal/baggage:go_default_library",
+    ],
+)

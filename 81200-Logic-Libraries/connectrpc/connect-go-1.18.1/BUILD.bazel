@@ -1,0 +1,38 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "connect-go-1_18_1",
+    srcs = [
+        "buffer_pool.go",
+        "client.go",
+        "client_stream.go",
+        "code.go",
+        "codec.go",
+        "compression.go",
+        "connect.go",
+        "duplex_http_call.go",
+        "envelope.go",
+        "error.go",
+        "error_writer.go",
+        "handler.go",
+        "handler_stream.go",
+        "header.go",
+        "idempotency_level.go",
+        "interceptor.go",
+        "option.go",
+        "protobuf_util.go",
+        "protocol.go",
+        "protocol_connect.go",
+        "protocol_grpc.go",
+        "recover.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_connectrpc_connect//internal/gen/connectext/grpc/status/v1:go_default_library",
+        "@org_golang_google_protobuf//encoding/protojson:go_default_library",
+        "@org_golang_google_protobuf//proto:go_default_library",
+        "@org_golang_google_protobuf//runtime/protoiface:go_default_library",
+        "@org_golang_google_protobuf//types/known/anypb:go_default_library",
+    ],
+)

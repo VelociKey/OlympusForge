@@ -4,11 +4,11 @@ import (
 	"bufio"
 	"context"
 	"fmt"
+	"io"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
-
-	"dagger.io/dagger"
 )
 
 func main() {
@@ -59,37 +59,68 @@ func parseLocalTargets(path string) ([]string, error) {
 func run() error {
 	ctx := context.Background()
 
-	// Load targets from manifest
 	manifestPath := "C0100-Configuration-Registry/REHYDRATE_MANIFEST.jebnf"
 	targets, err := parseLocalTargets(manifestPath)
 	if err != nil {
 		return fmt.Errorf("failed to load local targets: %w", err)
 	}
 
-	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
+	bazelExe := filepath.Join("00SDLC", "OlympusForge", "81000-Toolchain-External", "bazel", "bin", "bazelisk.exe")
+	outDir := filepath.Join("00SDLC", "OlympusForge", "82000-Toolchain-Fleet", "bin")
+	if err := os.MkdirAll(outDir, 0755); err != nil {
+		return err
+	}
+
+	for _, t := range targets {
+		// Convert "olympus.fleet/..." to Bazel target "//..."
+		bazelTarget := "//" + strings.TrimPrefix(t, "olympus.fleet/")
+		name := filepath.Base(t)
+		
+		fmt.Printf("🔨 Bazel Rehydrating: %s\n", bazelTarget)
+		
+		cmd := exec.CommandContext(ctx, bazelExe, "--nowindows_enable_symlinks", "build", bazelTarget)
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		if err := cmd.Run(); err != nil {
+			return fmt.Errorf("bazel build failed for %s: %w", bazelTarget, err)
+		}
+
+		// In older aspects, Go outputs were placed directly, but now they are often in `<target>_/target.exe`
+		// Let's resolve the exact generated binary
+		pkgPath := strings.ReplaceAll(strings.TrimPrefix(bazelTarget, "//"), ":", "/")
+		fastBuildOutput := filepath.Join("C:\\", "bz", "75zooped", "execroot", "_main", "bazel-out", "x64_windows-fastbuild", "bin", pkgPath, name+"_", name+".exe")
+		
+		// Fallback for different rules_go layout:
+		altOutput := filepath.Join("C:\\", "bz", "75zooped", "execroot", "_main", "bazel-out", "x64_windows-fastbuild", "bin", pkgPath, name+".exe")
+		
+		srcPath := fastBuildOutput
+		if _, err := os.Stat(altOutput); err == nil {
+			srcPath = altOutput
+		}
+		
+		dstPath := filepath.Join(outDir, name+".exe")
+		if err := copyFile(srcPath, dstPath); err != nil {
+			return fmt.Errorf("failed to extract compiled %s: %w", name, err)
+		}
+		fmt.Printf("✅ %s extracted to Fleet Binaries\n", name)
+	}
+
+	return nil
+}
+
+func copyFile(src, dst string) error {
+	in, err := os.Open(src)
 	if err != nil {
 		return err
 	}
-	defer client.Close()
-
-	// Use relative context root
-	src := client.Host().Directory(".")
-
-	// Hardened Builder Container
-	builder := client.Container().
-		From("golang:1.23-alpine").
-		WithDirectory("/src", src).
-		WithWorkdir("/src").
-		WithEnvVariable("CGO_ENABLED", "0").
-		WithEnvVariable("GO111MODULE", "on").
-		WithEnvVariable("GOWORK", "/src/go.work")
-
-	for _, t := range targets {
-		fmt.Printf("🔨 Dagger Rehydrating: %s\n", t)
-		name := filepath.Base(t)
-		builder = builder.WithExec([]string{"go", "build", "-ldflags=-s -w", "-trimpath", "-o", "/bin/" + name + ".exe", t})
+	defer in.Close()
+	
+	out, err := os.Create(dst)
+	if err != nil {
+		return err
 	}
-
-	_, err = builder.Directory("/bin").Export(ctx, "00SDLC/OlympusForge/82000-Toolchain-Fleet/bin")
+	defer out.Close()
+	
+	_, err = io.Copy(out, in)
 	return err
 }

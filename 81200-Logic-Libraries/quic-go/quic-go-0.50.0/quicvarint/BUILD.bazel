@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "quicvarint",
+    srcs = [
+        "io.go",
+        "varint.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/quic-go/quic-go-0.50.0/quicvarint",
+    visibility = ["//visibility:public"],
+)

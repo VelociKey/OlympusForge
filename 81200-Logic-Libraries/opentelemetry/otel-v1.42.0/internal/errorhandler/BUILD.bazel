@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "errorhandler",
+    srcs = ["errorhandler.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/internal/errorhandler",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0:__subpackages__"],
+)
+
+go_test(
+    name = "errorhandler_test",
+    srcs = ["errorhandler_test.go"],
+    embed = [":errorhandler"],
+    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+)

@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "protocol",
+    srcs = [
+        "connection_id.go",
+        "encryption_level.go",
+        "key_phase.go",
+        "packet_number.go",
+        "params.go",
+        "perspective.go",
+        "protocol.go",
+        "stream.go",
+        "version.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/quic-go/quic-go-0.50.0/internal/protocol",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/quic-go/quic-go-0.50.0:__subpackages__"],
+    deps = ["@org_golang_x_exp//rand:go_default_library"],
+)

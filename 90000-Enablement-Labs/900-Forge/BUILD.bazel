@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "900-Forge_lib",
+    srcs = ["rehydrate-orchestrator.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/90000-Enablement-Labs/900-Forge",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "900-Forge",
+    embed = [":900-Forge_lib"],
+    visibility = ["//visibility:public"],
+)

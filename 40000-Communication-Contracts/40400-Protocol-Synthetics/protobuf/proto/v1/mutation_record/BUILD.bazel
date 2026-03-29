@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "mutation_recordv1_proto",
+    srcs = ["mutation_record.proto"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:timestamp_proto"],
+)
+
+go_proto_library(
+    name = "mutation_recordv1_go_proto",
+    importpath = "OlympusForge/gen/v1/mutation_record",
+    proto = ":mutation_recordv1_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "mutation_record",
+    embed = [":mutation_recordv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/mutation_record",
+    visibility = ["//visibility:public"],
+)

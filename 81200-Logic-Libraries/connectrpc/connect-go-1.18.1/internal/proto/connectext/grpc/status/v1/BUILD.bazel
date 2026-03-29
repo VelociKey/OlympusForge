@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "grpc_status_v1_proto",
+    srcs = ["status.proto"],
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1:__subpackages__"],
+    deps = ["@com_google_protobuf//:any_proto"],
+)
+
+go_proto_library(
+    name = "grpc_status_v1_go_proto",
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1/internal/proto/connectext/grpc/status/v1",
+    proto = ":grpc_status_v1_proto",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1:__subpackages__"],
+)
+
+go_library(
+    name = "status",
+    embed = [":grpc_status_v1_go_proto"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1/internal/proto/connectext/grpc/status/v1",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1:__subpackages__"],
+)

@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "internal",
+    srcs = ["attribute.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/attribute/internal",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/attribute:__subpackages__"],
+)
+
+go_test(
+    name = "internal_test",
+    srcs = ["attribute_test.go"],
+    embed = [":internal"],
+)

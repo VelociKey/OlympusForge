@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "timeofdayv1_proto",
+    srcs = ["timeofday.proto"],
+    visibility = ["//visibility:public"],
+)
+
+go_proto_library(
+    name = "timeofdayv1_go_proto",
+    importpath = "OlympusForge/gen/v1/timeofday",
+    proto = ":timeofdayv1_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "timeofday",
+    embed = [":timeofdayv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/timeofday",
+    visibility = ["//visibility:public"],
+)

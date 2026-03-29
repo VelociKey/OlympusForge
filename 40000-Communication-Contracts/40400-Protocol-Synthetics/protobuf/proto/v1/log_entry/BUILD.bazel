@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "log_entryv1_proto",
+    srcs = ["log_entry.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api/servicecontrol/v1:v1_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/logging/type:type_proto",
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:struct_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+go_proto_library(
+    name = "log_entryv1_go_proto",
+    importpath = "OlympusForge/gen/v1/log_entry",
+    proto = ":log_entryv1_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api/servicecontrol/v1:http_request_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/logging/type:log_severity_proto",
+    ],
+)
+
+go_library(
+    name = "log_entry",
+    embed = [":log_entryv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/log_entry",
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "000-generator",
+    srcs = [
+        "data.go",
+        "generator.go",
+        "peg.go",
+        "powershell.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/P0100-Identity/000-generator",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/P0100-Identity/000-ir",
+        "@in_gopkg_yaml_v3//:go_default_library",
+    ],
+)

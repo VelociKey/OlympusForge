@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "collidev1connect",
+    srcs = ["collide.connect.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1/internal/gen/connect/collide/v1/collidev1connect",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1:__subpackages__"],
+    deps = [
+        "@com_connectrpc_connect//:go_default_library",
+        "@com_connectrpc_connect//internal/gen/connect/collide/v1:go_default_library",
+    ],
+)

@@ -1,0 +1,33 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "json_format_proto3v1_proto",
+    srcs = ["json_format_proto3.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/protobuf:protobuf_proto",
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:field_mask_proto",
+        "@com_google_protobuf//:struct_proto",
+        "@com_google_protobuf//:timestamp_proto",
+        "@com_google_protobuf//:wrappers_proto",
+    ],
+)
+
+go_proto_library(
+    name = "json_format_proto3v1_go_proto",
+    importpath = "OlympusForge/gen/v1/json_format_proto3",
+    proto = ":json_format_proto3v1_proto",
+    visibility = ["//visibility:public"],
+    deps = ["//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/protobuf:unittest_proto"],
+)
+
+go_library(
+    name = "json_format_proto3",
+    embed = [":json_format_proto3v1_go_proto"],
+    importpath = "OlympusForge/gen/v1/json_format_proto3",
+    visibility = ["//visibility:public"],
+)

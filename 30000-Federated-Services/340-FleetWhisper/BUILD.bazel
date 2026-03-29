@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "340-FleetWhisper",
+    srcs = ["whisper.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/30000-Federated-Services/340-FleetWhisper",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGrammar/40000-Communication-Contracts/40400-Protocol-Synthetics/connect-rpc/gen/v1/whisper/whisperv1connect",
+        "@com_connectrpc_connect//:go_default_library",
+    ],
+)

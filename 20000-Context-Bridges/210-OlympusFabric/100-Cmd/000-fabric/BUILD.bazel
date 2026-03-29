@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "000-fabric_lib",
+    srcs = ["main.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/100-Cmd/000-fabric",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/200-Internal/000-parser",
+        "//00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/P0100-Identity/000-engine",
+        "//00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/P0100-Identity/000-generator",
+        "//00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/P0100-Identity/000-llm",
+        "//00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/P0100-Identity/000-transformer",
+    ],
+)
+
+go_binary(
+    name = "000-fabric",
+    embed = [":000-fabric_lib"],
+    visibility = ["//visibility:public"],
+)

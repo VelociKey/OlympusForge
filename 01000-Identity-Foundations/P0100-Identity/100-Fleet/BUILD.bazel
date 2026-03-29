@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "100-Fleet",
+    srcs = ["fleet.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/01000-Identity-Foundations/P0100-Identity/100-Fleet",
+    visibility = ["//visibility:public"],
+)

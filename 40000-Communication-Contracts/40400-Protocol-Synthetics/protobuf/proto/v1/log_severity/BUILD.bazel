@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "log_severityv1_proto",
+    srcs = ["log_severity.proto"],
+    visibility = ["//visibility:public"],
+)
+
+go_proto_library(
+    name = "log_severityv1_go_proto",
+    importpath = "OlympusForge/gen/v1/log_severity",
+    proto = ":log_severityv1_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "log_severity",
+    embed = [":log_severityv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/log_severity",
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "datev1_proto",
+    srcs = ["date.proto"],
+    visibility = ["//visibility:public"],
+)
+
+go_proto_library(
+    name = "datev1_go_proto",
+    importpath = "OlympusForge/gen/v1/date",
+    proto = ":datev1_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "date",
+    embed = [":datev1_go_proto"],
+    importpath = "OlympusForge/gen/v1/date",
+    visibility = ["//visibility:public"],
+)

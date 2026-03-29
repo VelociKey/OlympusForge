@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "audit_datav1_proto",
+    srcs = ["audit_data.proto"],
+    visibility = ["//visibility:public"],
+    deps = ["//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/iam/v1:v1_proto"],
+)
+
+go_proto_library(
+    name = "audit_datav1_go_proto",
+    importpath = "OlympusForge/gen/v1/audit_data",
+    proto = ":audit_datav1_proto",
+    visibility = ["//visibility:public"],
+    deps = ["//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/iam/v1:policy_proto"],
+)
+
+go_library(
+    name = "audit_data",
+    embed = [":audit_datav1_go_proto"],
+    importpath = "OlympusForge/gen/v1/audit_data",
+    visibility = ["//visibility:public"],
+)

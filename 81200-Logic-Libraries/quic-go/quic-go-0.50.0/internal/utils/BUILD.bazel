@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "utils",
+    srcs = [
+        "buffered_write_closer.go",
+        "log.go",
+        "rand.go",
+        "rtt_stats.go",
+        "timer.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/quic-go/quic-go-0.50.0/internal/utils",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/quic-go/quic-go-0.50.0:__subpackages__"],
+    deps = ["@com_github_quic_go_quic_go//internal/protocol:go_default_library"],
+)

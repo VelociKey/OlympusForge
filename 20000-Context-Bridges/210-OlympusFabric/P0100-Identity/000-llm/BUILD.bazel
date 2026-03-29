@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "000-llm",
+    srcs = [
+        "client.go",
+        "prompts.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/P0100-Identity/000-llm",
+    visibility = ["//visibility:public"],
+)

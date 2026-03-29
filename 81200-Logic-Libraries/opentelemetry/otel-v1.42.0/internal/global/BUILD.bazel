@@ -1,0 +1,63 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "global",
+    srcs = [
+        "handler.go",
+        "instruments.go",
+        "internal_logging.go",
+        "meter.go",
+        "propagator.go",
+        "state.go",
+        "trace.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/internal/global",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0:__subpackages__"],
+    deps = [
+        "@com_github_go_logr_logr//:go_default_library",
+        "@com_github_go_logr_stdr//:go_default_library",
+        "@io_opentelemetry_go_auto_sdk//:go_default_library",
+        "@io_opentelemetry_go_otel//attribute:go_default_library",
+        "@io_opentelemetry_go_otel//codes:go_default_library",
+        "@io_opentelemetry_go_otel//internal/errorhandler:go_default_library",
+        "@io_opentelemetry_go_otel//propagation:go_default_library",
+        "@io_opentelemetry_go_otel_metric//:go_default_library",
+        "@io_opentelemetry_go_otel_metric//embedded:go_default_library",
+        "@io_opentelemetry_go_otel_trace//:go_default_library",
+        "@io_opentelemetry_go_otel_trace//embedded:go_default_library",
+    ],
+)
+
+go_test(
+    name = "global_test",
+    srcs = [
+        "alternate_meter_test.go",
+        "benchmark_test.go",
+        "instruments_test.go",
+        "internal_logging_test.go",
+        "meter_test.go",
+        "meter_types_test.go",
+        "propagator_test.go",
+        "state_test.go",
+        "trace_test.go",
+        "util_test.go",
+    ],
+    embed = [":global"],
+    deps = [
+        "@com_github_go_logr_logr//:go_default_library",
+        "@com_github_go_logr_logr//funcr:go_default_library",
+        "@com_github_go_logr_stdr//:go_default_library",
+        "@com_github_stretchr_testify//assert:go_default_library",
+        "@com_github_stretchr_testify//require:go_default_library",
+        "@io_opentelemetry_go_auto_sdk//:go_default_library",
+        "@io_opentelemetry_go_otel//attribute:go_default_library",
+        "@io_opentelemetry_go_otel//internal/internaltest:go_default_library",
+        "@io_opentelemetry_go_otel//propagation:go_default_library",
+        "@io_opentelemetry_go_otel_metric//:go_default_library",
+        "@io_opentelemetry_go_otel_metric//embedded:go_default_library",
+        "@io_opentelemetry_go_otel_metric//noop:go_default_library",
+        "@io_opentelemetry_go_otel_trace//:go_default_library",
+        "@io_opentelemetry_go_otel_trace//embedded:go_default_library",
+        "@io_opentelemetry_go_otel_trace//noop:go_default_library",
+    ],
+)

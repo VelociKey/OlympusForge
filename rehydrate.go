@@ -79,14 +79,16 @@ func parseManifest(path string) ([]Asset, error) {
 func main() {
 	fmt.Println("🚀 Sovereign Re-Hydrator: Seeding Toolchain and Libraries")
 
-	manifestPath := filepath.Join("C0100-Configuration-Registry", "REHYDRATE_MANIFEST.jebnf")
+	// Point to the central manifest in the Builder workspace
+	manifestPath := filepath.Join("..", "OlympusBuilder", "C0100-Configuration-Registry", "REHYDRATE_MANIFEST.jebnf")
 	assets, err := parseManifest(manifestPath)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "❌ Failed to load manifest: %v\n", err)
+		fmt.Fprintf(os.Stderr, "❌ Failed to load manifest at %s: %v\n", manifestPath, err)
 		os.Exit(1)
 	}
 
 	for _, asset := range assets {
+		// Assets are installed relative to Forge root
 		targetPath := filepath.Join(asset.Base, asset.Target)
 
 		// If it's a directory, check if it's "real" (contains files)
@@ -117,7 +119,11 @@ func main() {
 
 func AssetHydrate(asset Asset) error {
 	destDir := filepath.Join(asset.Base, asset.Target)
-	os.MkdirAll(destDir, 0755)
+	
+	// Create parent directory if it doesn't exist
+	if err := os.MkdirAll(filepath.Dir(destDir), 0755); err != nil {
+		return err
+	}
 
 	resp, err := http.Get(asset.URL)
 	if err != nil {
@@ -161,6 +167,17 @@ func AssetHydrate(asset Asset) error {
 			return err
 		}
 		os.Remove(tmpTar)
+	} else {
+		// Direct file download
+		f, err := os.Create(destDir)
+		if err != nil {
+			return err
+		}
+		_, err = io.Copy(f, resp.Body)
+		f.Close()
+		if err != nil {
+			return err
+		}
 	}
 
 	if asset.Hardened {

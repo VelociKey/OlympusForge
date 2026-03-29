@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "codes",
+    srcs = [
+        "codes.go",
+        "doc.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/codes",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "codes_test",
+    srcs = ["codes_test.go"],
+    embed = [":codes"],
+)

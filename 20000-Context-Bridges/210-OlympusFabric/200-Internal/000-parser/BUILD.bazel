@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "000-parser",
+    srcs = [
+        "audit.go",
+        "lexer.go",
+        "parser.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/200-Internal/000-parser",
+    visibility = ["//visibility:public"],
+    deps = ["//00SDLC/OlympusForge/20000-Context-Bridges/210-OlympusFabric/P0100-Identity/000-ir"],
+)

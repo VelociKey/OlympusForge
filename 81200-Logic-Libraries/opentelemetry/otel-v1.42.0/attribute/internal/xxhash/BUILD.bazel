@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "xxhash",
+    srcs = ["xxhash.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/attribute/internal/xxhash",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/attribute:__subpackages__"],
+    deps = ["@com_github_cespare_xxhash_v2//:go_default_library"],
+)
+
+go_test(
+    name = "xxhash_test",
+    srcs = ["xxhash_test.go"],
+    embed = [":xxhash"],
+    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+)

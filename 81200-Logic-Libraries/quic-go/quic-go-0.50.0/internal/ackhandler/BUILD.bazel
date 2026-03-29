@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "ackhandler",
+    srcs = [
+        "ack_eliciting.go",
+        "ackhandler.go",
+        "ecn.go",
+        "frame.go",
+        "interfaces.go",
+        "packet.go",
+        "packet_number_generator.go",
+        "received_packet_handler.go",
+        "received_packet_history.go",
+        "received_packet_tracker.go",
+        "send_mode.go",
+        "sent_packet_handler.go",
+        "sent_packet_history.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/quic-go/quic-go-0.50.0/internal/ackhandler",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/quic-go/quic-go-0.50.0:__subpackages__"],
+    deps = [
+        "@com_github_quic_go_quic_go//internal/congestion:go_default_library",
+        "@com_github_quic_go_quic_go//internal/protocol:go_default_library",
+        "@com_github_quic_go_quic_go//internal/qerr:go_default_library",
+        "@com_github_quic_go_quic_go//internal/utils:go_default_library",
+        "@com_github_quic_go_quic_go//internal/wire:go_default_library",
+    ],
+)

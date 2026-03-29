@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "v1_38_0",
+    srcs = [
+        "attribute_group.go",
+        "doc.go",
+        "error_type.go",
+        "exception.go",
+        "schema.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/semconv/v1.38.0",
+    visibility = ["//visibility:public"],
+    deps = ["@io_opentelemetry_go_otel//attribute:go_default_library"],
+)
+
+go_test(
+    name = "v1_38_0_test",
+    srcs = ["error_type_test.go"],
+    embed = [":v1_38_0"],
+)

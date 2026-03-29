@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "optionsv1_proto",
+    srcs = ["options.proto"],
+    visibility = ["//visibility:public"],
+)
+
+go_proto_library(
+    name = "optionsv1_go_proto",
+    importpath = "OlympusForge/gen/v1/options",
+    proto = ":optionsv1_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "options",
+    embed = [":optionsv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/options",
+    visibility = ["//visibility:public"],
+)

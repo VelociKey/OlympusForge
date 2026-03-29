@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "colorv1_proto",
+    srcs = ["color.proto"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:wrappers_proto"],
+)
+
+go_proto_library(
+    name = "colorv1_go_proto",
+    importpath = "OlympusForge/gen/v1/color",
+    proto = ":colorv1_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "color",
+    embed = [":colorv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/color",
+    visibility = ["//visibility:public"],
+)

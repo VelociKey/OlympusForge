@@ -1,0 +1,33 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "handshake",
+    srcs = [
+        "aead.go",
+        "cipher_suite.go",
+        "crypto_setup.go",
+        "fake_conn.go",
+        "header_protector.go",
+        "hkdf.go",
+        "initial_aead.go",
+        "interface.go",
+        "retry.go",
+        "session_ticket.go",
+        "tls_config.go",
+        "token_generator.go",
+        "token_protector.go",
+        "updatable_aead.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/quic-go/quic-go-0.50.0/internal/handshake",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/quic-go/quic-go-0.50.0:__subpackages__"],
+    deps = [
+        "@com_github_quic_go_quic_go//internal/protocol:go_default_library",
+        "@com_github_quic_go_quic_go//internal/qerr:go_default_library",
+        "@com_github_quic_go_quic_go//internal/utils:go_default_library",
+        "@com_github_quic_go_quic_go//internal/wire:go_default_library",
+        "@com_github_quic_go_quic_go//quicvarint:go_default_library",
+        "@org_golang_x_crypto//chacha20:go_default_library",
+        "@org_golang_x_crypto//chacha20poly1305:go_default_library",
+        "@org_golang_x_crypto//hkdf:go_default_library",
+    ],
+)

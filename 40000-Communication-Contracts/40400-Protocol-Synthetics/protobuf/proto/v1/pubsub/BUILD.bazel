@@ -1,0 +1,39 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "pubsubv1_proto",
+    srcs = ["pubsub.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api:api_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/pubsub/v1:v1_proto",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:empty_proto",
+        "@com_google_protobuf//:field_mask_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+go_proto_library(
+    name = "pubsubv1_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "OlympusForge/gen/v1/pubsub",
+    proto = ":pubsubv1_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api:annotations_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api:client_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api:field_behavior_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api:resource_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/pubsub/v1:schema_proto",
+    ],
+)
+
+go_library(
+    name = "pubsub",
+    embed = [":pubsubv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/pubsub",
+    visibility = ["//visibility:public"],
+)

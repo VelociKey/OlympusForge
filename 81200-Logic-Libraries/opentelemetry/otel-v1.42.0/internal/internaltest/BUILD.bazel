@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "internaltest",
+    srcs = [
+        "doc.go",
+        "text_map_carrier.go",
+        "text_map_propagator.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/internal/internaltest",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0:__subpackages__"],
+    deps = ["@io_opentelemetry_go_otel//propagation:go_default_library"],
+)
+
+go_test(
+    name = "internaltest_test",
+    srcs = [
+        "text_map_carrier_test.go",
+        "text_map_propagator_test.go",
+    ],
+    embed = [":internaltest"],
+)

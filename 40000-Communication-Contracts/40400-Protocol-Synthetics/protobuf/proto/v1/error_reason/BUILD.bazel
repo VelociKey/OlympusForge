@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "error_reasonv1_proto",
+    srcs = ["error_reason.proto"],
+    visibility = ["//visibility:public"],
+)
+
+go_proto_library(
+    name = "error_reasonv1_go_proto",
+    importpath = "OlympusForge/gen/v1/error_reason",
+    proto = ":error_reasonv1_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "error_reason",
+    embed = [":error_reasonv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/error_reason",
+    visibility = ["//visibility:public"],
+)

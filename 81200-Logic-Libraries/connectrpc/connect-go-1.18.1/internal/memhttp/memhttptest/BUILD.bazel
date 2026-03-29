@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "memhttptest",
+    srcs = ["http.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1/internal/memhttp/memhttptest",
+    visibility = ["//00SDLC/OlympusForge/81200-Logic-Libraries/connectrpc/connect-go-1.18.1:__subpackages__"],
+    deps = ["@com_connectrpc_connect//internal/memhttp:go_default_library"],
+)

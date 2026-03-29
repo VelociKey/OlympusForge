@@ -1,0 +1,35 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "quota_controllerv1_proto",
+    srcs = ["quota_controller.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api:api_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api/servicecontrol/v1:v1_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/rpc:rpc_proto",
+    ],
+)
+
+go_proto_library(
+    name = "quota_controllerv1_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "OlympusForge/gen/v1/quota_controller",
+    proto = ":quota_controllerv1_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api:annotations_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api:client_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/api/servicecontrol/v1:metric_value_proto",
+        "//00SDLC/OlympusGCP/40000-Communication-Contracts/proto/google/rpc:status_proto",
+    ],
+)
+
+go_library(
+    name = "quota_controller",
+    embed = [":quota_controllerv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/quota_controller",
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "orca_load_reportv1_proto",
+    srcs = ["orca_load_report.proto"],
+    visibility = ["//visibility:public"],
+    deps = ["//validate:validate_proto"],
+)
+
+go_proto_library(
+    name = "orca_load_reportv1_go_proto",
+    importpath = "OlympusForge/gen/v1/orca_load_report",
+    proto = ":orca_load_reportv1_proto",
+    visibility = ["//visibility:public"],
+    deps = ["//validate:validate_proto"],
+)
+
+go_library(
+    name = "orca_load_report",
+    embed = [":orca_load_reportv1_go_proto"],
+    importpath = "OlympusForge/gen/v1/orca_load_report",
+    visibility = ["//visibility:public"],
+)

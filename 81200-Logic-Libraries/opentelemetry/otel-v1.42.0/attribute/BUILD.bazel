@@ -1,0 +1,45 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "attribute",
+    srcs = [
+        "doc.go",
+        "encoder.go",
+        "filter.go",
+        "hash.go",
+        "iterator.go",
+        "key.go",
+        "kv.go",
+        "rawhelpers.go",
+        "set.go",
+        "type_string.go",
+        "value.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/attribute",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@io_opentelemetry_go_otel//attribute/internal:go_default_library",
+        "@io_opentelemetry_go_otel//attribute/internal/xxhash:go_default_library",
+    ],
+)
+
+go_test(
+    name = "attribute_test",
+    srcs = [
+        "benchmark_test.go",
+        "filter_test.go",
+        "hash_test.go",
+        "iterator_test.go",
+        "key_test.go",
+        "kv_test.go",
+        "set_test.go",
+        "value_test.go",
+    ],
+    embed = [":attribute"],
+    deps = [
+        "@com_github_google_go_cmp//cmp:go_default_library",
+        "@com_github_stretchr_testify//assert:go_default_library",
+        "@com_github_stretchr_testify//require:go_default_library",
+        "@io_opentelemetry_go_otel//attribute:go_default_library",
+    ],
+)

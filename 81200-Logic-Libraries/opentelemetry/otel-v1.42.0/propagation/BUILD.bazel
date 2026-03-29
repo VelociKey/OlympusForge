@@ -1,0 +1,40 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "propagation",
+    srcs = [
+        "baggage.go",
+        "doc.go",
+        "propagation.go",
+        "trace_context.go",
+    ],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/81200-Logic-Libraries/opentelemetry/otel-v1.42.0/propagation",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@io_opentelemetry_go_otel//baggage:go_default_library",
+        "@io_opentelemetry_go_otel//internal/errorhandler:go_default_library",
+        "@io_opentelemetry_go_otel_trace//:go_default_library",
+    ],
+)
+
+go_test(
+    name = "propagation_test",
+    srcs = [
+        "baggage_test.go",
+        "example_test.go",
+        "propagation_test.go",
+        "propagators_test.go",
+        "trace_context_benchmark_test.go",
+        "trace_context_example_test.go",
+        "trace_context_test.go",
+    ],
+    deps = [
+        "@com_github_google_go_cmp//cmp:go_default_library",
+        "@com_github_stretchr_testify//assert:go_default_library",
+        "@com_github_stretchr_testify//require:go_default_library",
+        "@io_opentelemetry_go_otel//:go_default_library",
+        "@io_opentelemetry_go_otel//baggage:go_default_library",
+        "@io_opentelemetry_go_otel//propagation:go_default_library",
+        "@io_opentelemetry_go_otel_trace//:go_default_library",
+    ],
+)
