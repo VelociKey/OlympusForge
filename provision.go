@@ -8,19 +8,20 @@ import (
 )
 
 func main() {
-	fmt.Println("Starting OlympusForge Provisioner (Dagger-Driven)...")
+        fmt.Println("Starting OlympusForge Provisioner (Bazel-Driven)...")
 
-	// Detect Fleet Root
-	wd, _ := os.Getwd()
-	root := wd
-	if filepath.Base(wd) == "OlympusForge" {
-		root = filepath.Dir(wd)
-	}
+        // Detect Fleet Root
+        wd, _ := os.Getwd()
+        root := wd
+        if filepath.Base(wd) == "OlympusForge" {
+                root = filepath.Dir(wd)
+        }
 
-	forgePkg := filepath.Join(root, "00SDLC", "OlympusForge", "90000-Enablement-Labs", "900-Forge")
+        forgePkg := filepath.Join(root, "00SDLC", "OlympusForge", "90000-Enablement-Labs", "900-Forge")
 
-	fmt.Println("🔨 Building OlympusForge via Forge Pipeline...")
-	fmt.Println("⏳ This process uses the Fleet-Standard Dagger Pipeline.")
+        fmt.Println("🔨 Building OlympusForge via Forge Pipeline...")
+        fmt.Println("⏳ This process uses the Fleet-Standard Bazel Pipeline.")
+
 
 	// Standardized build command: -target and -workspace
 	cmd := exec.Command("go", "run", forgePkg, "-target", "native", "-workspace", "00SDLC/OlympusForge")

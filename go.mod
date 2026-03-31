@@ -3,9 +3,9 @@ module olympus.fleet/00SDLC/OlympusForge
 go 1.26.0
 
 require (
-	connectrpc.com/connect v1.19.1
-	dagger.io/dagger v0.20.1
-	go.opentelemetry.io/otel v1.42.0
+        connectrpc.com/connect v1.19.1
+        go.opentelemetry.io/otel v1.42.0
+
 	gopkg.in/yaml.v3 v3.0.1
 )
 
