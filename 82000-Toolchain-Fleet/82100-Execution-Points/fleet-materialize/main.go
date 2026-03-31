@@ -250,8 +250,8 @@ func hydrate(root string, entry HydrationEntry) error {
 
 func synthesizeContent(source string, target string, transformer string) (string, error) {
 	if strings.Contains(source, "ide_standards.jebnf") {
-
-	        return `{
+		if strings.HasSuffix(target, "settings.json") {
+			return `{
 	"editor.formatOnSave": false,
 	"editor.codeActionsOnSave": {
 		"source.organizeImports": "never",
@@ -268,24 +268,41 @@ func synthesizeContent(source string, target string, transformer string) (string
 	"dart.analyzeAutomatically": false,
 	"java.configuration.updateBuildConfiguration": "disabled",
 	"files.exclude": {
-	"**/OpenClaw/**": false
+		"**/OpenClaw/**": false
 	},
 	"files.watcherExclude": {
-	"**/OpenClaw/**": true
+		"**/OpenClaw/**": true
 	},
 	"search.exclude": {
-	"**/OpenClaw/**": true
+		"**/OpenClaw/**": true
 	},
 	"java.import.exclusions": [
-	"**/OpenClaw/**",
-	"**/node_modules/**",
-	"**/.metadata/**",
-	"**/archetype-resources/**"
+		"**/OpenClaw/**",
+		"**/node_modules/**",
+		"**/.metadata/**",
+		"**/archetype-resources/**"
 	],
 	"java.server.launchMode": "LightWeight",
 	"java.import.gradle.enabled": false,
 	"java.import.gradle.wrapper.enabled": true
 	}`, nil
+		}
+
+		if strings.HasSuffix(target, "extensions.json") {
+			return `{
+	"recommendations": [
+		"google.gemini-cli-vscode-ide-companion",
+		"mermaidchart.vscode-mermaid-chart"
+	],
+	"unwantedRecommendations": [
+		"devsense.composer-php-vscode",
+		"redhat.java",
+		"vscjava.vscode-java-pack",
+		"ms-python.python",
+		"golang.go"
+	]
+}`, nil
+		}
 	}
 
 	if strings.Contains(source, "security_policy.jebnf") {
