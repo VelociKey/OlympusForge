@@ -254,9 +254,18 @@ func synthesizeContent(source string, target string, transformer string) (string
 	        return `{
 	"editor.formatOnSave": false,
 	"editor.codeActionsOnSave": {
-	"source.organizeImports": "never",
-	"source.fixAll": "never"
+		"source.organizeImports": "never",
+		"source.fixAll": "never"
 	},
+	"go.useLanguageServer": false,
+	"go.formatOnSave": false,
+	"go.buildOnSave": "off",
+	"go.lintOnSave": "off",
+	"go.vetOnSave": "off",
+	"go.testOnSave": false,
+	"go.coverOnSave": false,
+	"dart.enableSdkFormatter": false,
+	"dart.analyzeAutomatically": false,
 	"java.configuration.updateBuildConfiguration": "disabled",
 	"files.exclude": {
 	"**/OpenClaw/**": false
