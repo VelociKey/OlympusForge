@@ -59,45 +59,60 @@ func parseLocalTargets(path string) ([]string, error) {
 func run() error {
 	ctx := context.Background()
 
-	manifestPath := "C0100-Configuration-Registry/REHYDRATE_MANIFEST.jebnf"
+	manifestPath := filepath.Join("00SDLC", "OlympusBuilder", "C0100-Configuration-Registry", "REHYDRATE_MANIFEST.jebnf")
 	targets, err := parseLocalTargets(manifestPath)
 	if err != nil {
 		return fmt.Errorf("failed to load local targets: %w", err)
 	}
 
-	bazelExe := filepath.Join("00SDLC", "OlympusForge", "81000-Toolchain-External", "bazel", "bin", "bazelisk.exe")
+	bazelExe := filepath.Join("00SDLC", "OlympusForge", "81000-Toolchain-External", "bazel", "bazel.exe")
+
 	outDir := filepath.Join("00SDLC", "OlympusForge", "82000-Toolchain-Fleet", "bin")
 	if err := os.MkdirAll(outDir, 0755); err != nil {
-		return err
+	        return err
 	}
 
+	wd, _ := os.Getwd()
+
 	for _, t := range targets {
+
 		// Convert "olympus.fleet/..." to Bazel target "//..."
 		bazelTarget := "//" + strings.TrimPrefix(t, "olympus.fleet/")
 		name := filepath.Base(t)
 		
 		fmt.Printf("🔨 Bazel Rehydrating: %s\n", bazelTarget)
 		
-		cmd := exec.CommandContext(ctx, bazelExe, "--nowindows_enable_symlinks", "build", bazelTarget)
+		cmd := exec.CommandContext(ctx, bazelExe, "--nowindows_enable_symlinks", "build", "--incompatible_stop_exporting_language_modules=false", bazelTarget)    
+
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		if err := cmd.Run(); err != nil {
 			return fmt.Errorf("bazel build failed for %s: %w", bazelTarget, err)
 		}
 
-		// In older aspects, Go outputs were placed directly, but now they are often in `<target>_/target.exe`
-		// Let's resolve the exact generated binary
+		// Bazel root is in 00SDLC/OlympusBuilder/@CACHE/bazel-root
+		// The hash (75zooped) is based on the output_user_root configuration
+		bazelRoot := filepath.Join(wd, "00SDLC", "OlympusBuilder", "@CACHE", "bazel-root")
 		pkgPath := strings.ReplaceAll(strings.TrimPrefix(bazelTarget, "//"), ":", "/")
-		fastBuildOutput := filepath.Join("C:\\", "bz", "75zooped", "execroot", "_main", "bazel-out", "x64_windows-fastbuild", "bin", pkgPath, name+"_", name+".exe")
-		
-		// Fallback for different rules_go layout:
-		altOutput := filepath.Join("C:\\", "bz", "75zooped", "execroot", "_main", "bazel-out", "x64_windows-fastbuild", "bin", pkgPath, name+".exe")
-		
-		srcPath := fastBuildOutput
-		if _, err := os.Stat(altOutput); err == nil {
-			srcPath = altOutput
+
+		binRoot := filepath.Join(bazelRoot, "75zooped", "execroot", "_main", "bazel-out", "x64_windows-fastbuild", "bin", pkgPath)
+
+		candidates := []string{
+		        filepath.Join(binRoot, name+"_", name+".exe"),
+		        filepath.Join(binRoot, name+".exe"),
 		}
-		
+
+		var srcPath string
+		for _, c := range candidates {
+		        if _, err := os.Stat(c); err == nil {
+		                srcPath = c
+		                break
+		        }
+		}
+
+		if srcPath == "" {
+		        return fmt.Errorf("could not find compiled binary for %s in any of %v", name, candidates)
+		}
 		dstPath := filepath.Join(outDir, name+".exe")
 		if err := copyFile(srcPath, dstPath); err != nil {
 			return fmt.Errorf("failed to extract compiled %s: %w", name, err)
