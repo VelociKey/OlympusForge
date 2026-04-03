@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "guts",
+    srcs = [
+        "compress_amd64.go",
+        "compress_amd64.s",
+        "compress_generic.go",
+        "compress_noasm.go",
+        "cpu.go",
+        "cpu_darwin.go",
+        "node.go",
+    ],
+    importpath = "lukechampine.com/blake3/guts",
+    visibility = ["//visibility:public"],
+)

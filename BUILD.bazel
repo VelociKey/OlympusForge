@@ -2,12 +2,27 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
     name = "OlympusForge_lib",
-    srcs = [
-        "provision.go",
-        "rehydrate.go",
-    ],
+    srcs = ["provision.go"],
     importpath = "olympus.fleet/00SDLC/OlympusForge",
     visibility = ["//visibility:private"],
+)
+
+go_library(
+    name = "rehydrate_lib",
+    srcs = ["rehydrate.go"],
+    importpath = "olympus.fleet/00SDLC/OlympusForge/rehydrate",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//00SDLC/OlympusLogicLibrary/90200-Logic-Libraries/200-Hashing/110-gitsov-key:gitsov-key",
+        "//00SDLC/OlympusLogicLibrary/90200-Logic-Libraries/400-Assurance/120-gitsov-notary:gitsov-notary",
+        "@com_lukechampine_blake3//:blake3",
+    ],
+)
+
+go_binary(
+    name = "rehydrate",
+    embed = [":rehydrate_lib"],
+    visibility = ["//visibility:public"],
 )
 
 go_binary(

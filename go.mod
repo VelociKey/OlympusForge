@@ -3,10 +3,11 @@ module olympus.fleet/00SDLC/OlympusForge
 go 1.26.0
 
 require (
-	connectrpc.com/connect v1.19.1
-	gopkg.in/yaml.v3 v3.0.1
+        connectrpc.com/connect v1.19.1
+        gopkg.in/yaml.v3 v3.0.1
+        lukechampine.com/blake3 v1.4.0
+        olympus.fleet/00SDLC/OlympusLogicLibrary v0.0.0
 )
-
 require (
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect

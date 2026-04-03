@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "blake3",
+    srcs = ["blake3.go"],
+    importpath = "lukechampine.com/blake3",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//00SDLC/OlympusForge/81200-Logic-Libraries/blake3/lukechampine.com-blake3/guts:guts",
+        "//00SDLC/OlympusForge/81200-Logic-Libraries/cpuid:cpuid",
+    ],
+)
