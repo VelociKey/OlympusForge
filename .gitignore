@@ -213,3 +213,8 @@ test_output.txt
 
 # Ensure structure preservation via .gitkeep
 !**/.gitkeep
+
+# --- Large Artifacts Excluded by Audit ---
+81000-Toolchain-External/
+82000-Toolchain-Fleet/bin/docker.exe
+82000-Toolchain-Fleet/bin/conductor-cycle.exe
